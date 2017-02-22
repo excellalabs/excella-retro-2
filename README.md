@@ -1,8 +1,14 @@
-# Excella Retro 2
+# Excella Retro 2.0
 
-This project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.0.0-beta.14.
+This project was generated with [angular-cli](https://github.com/angular/angular-cli).
 
-To get up-and-running:
+## Versions
+
+- Angular 2.3.1
+- Angular-CLI version 1.0.0-beta.28.3
+- TypeScript 2.0.3
+
+## Instructions
 
 1) Clone repository.
 
@@ -13,11 +19,12 @@ To get up-and-running:
 4) To start server, run `ng serve`. Navigate to `http://localhost:4200/`.
 
 ## Development server
+
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
 ## Code scaffolding
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive/pipe/service/class`.
+Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive/pipe/service/class/interface/enum/module`.
 
 ## Build
 
