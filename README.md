@@ -4,9 +4,14 @@ This project was generated with [angular-cli](https://github.com/angular/angular
 
 ## Versions
 
+### Angular 2
 - Angular 2.3.1
-- Angular-CLI version 1.0.0-beta.28.3
+- Angular-CLI 1.0.0-beta.28.3
 - TypeScript 2.0.3
+
+### Firebase
+- Firebase 3.6.10
+- AngularFire2 2.0.0-beta.8
 
 ## Instructions
 
