@@ -1,5 +1,7 @@
 # Excella Retro 2.0
 
+[ ![Codeship Status for excellalabs/excella-retro-2](https://app.codeship.com/projects/4f739a60-e025-0134-8f7a-5ecc5558b622/status?branch=master)](https://app.codeship.com/projects/205166)
+
 This project was generated with [angular-cli](https://github.com/angular/angular-cli).
 
 ## Versions
