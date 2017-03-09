@@ -1,14 +1,13 @@
-import { Message } from './message';
-import { Group } from './group';
+import { Index } from './shared/index';
 
 export class Phase {
   id: number;
   name: string;
-  messages: Message[];
-  groups: Group[];
+  messages: Index[];
+  groups: Index[];
   sessionId: number;
 
-  constructor(id: number, name: string, messages: Message[], groups: Group[], sessionId: number) {
+  constructor(id: number, name: string, messages: Index[], groups: Index[], sessionId: number) {
     this.id = id;
     this.name = name;
     this.messages = messages;

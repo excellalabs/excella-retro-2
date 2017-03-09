@@ -1,15 +1,13 @@
-import { Group } from './group';
-
 export class Message {
   id: number;
   text: string;
-  group: Group[];
+  groupId: number;
   sessionId: number;
 
-  constructor(id: number, text: string, group: Group[], sessionId: number) {
+  constructor(id: number, text: string, groupId: number, sessionId: number) {
     this.id = id;
     this.text = text;
-    this.group = group;
+    this.groupId = groupId;
     this.sessionId = sessionId;
   }
 }
