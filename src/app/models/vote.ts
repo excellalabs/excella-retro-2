@@ -2,12 +2,12 @@ import { Index } from './shared/index';
 
 export class Vote {
   id: number;
-  user: Index;
   group: Index;
+  user: string;
 
-  constructor(id: number, user: Index, group: Index) {
+  constructor(id: number, group: Index, user: string) {
     this.id = id;
-    this.user = user;
     this.group = group;
+    this.user = user;
   }
 }
