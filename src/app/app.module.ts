@@ -1,10 +1,14 @@
+// External imports
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-
-import { AppComponent } from './app.component';
 import { AngularFireModule } from 'angularfire2';
+import { MaterialModule } from '@angular/material';
+
+// Internal imports
+import { AppComponent } from './app.component';
+import { AppRoutingModule } from './app-routing/app-routing.module';
 
 // TODO: Update with actual Firebase config
 export const firebaseConfig = {
@@ -23,7 +27,9 @@ export const firebaseConfig = {
     BrowserModule,
     FormsModule,
     HttpModule,
-    AngularFireModule.initializeApp(firebaseConfig)
+    AppRoutingModule,
+    AngularFireModule.initializeApp(firebaseConfig),
+    MaterialModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
