@@ -5,13 +5,13 @@ export class Group {
   name: string;
   messages: Index[];
   votes: number;
-  sessionId: number;
+  session: Index;
 
-  constructor(id: number, name: string, messages: Index[], votes: number, sessionId: number) {
+  constructor(id: number, name: string, messages: Index[], votes: number, session: Index) {
     this.id = id;
     this.name = name;
     this.messages = messages;
     this.votes = votes;
-    this.sessionId = sessionId;
+    this.session = session;
   }
 }

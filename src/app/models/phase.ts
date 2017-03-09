@@ -5,13 +5,13 @@ export class Phase {
   name: string;
   messages: Index[];
   groups: Index[];
-  sessionId: number;
+  session: Index;
 
-  constructor(id: number, name: string, messages: Index[], groups: Index[], sessionId: number) {
+  constructor(id: number, name: string, messages: Index[], groups: Index[], session: Index) {
     this.id = id;
     this.name = name;
     this.messages = messages;
     this.groups = groups;
-    this.sessionId = sessionId;
+    this.session = session;
   }
 }
