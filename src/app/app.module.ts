@@ -5,12 +5,12 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { AngularFireModule } from 'angularfire2';
 import { MaterialModule } from '@angular/material';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 // Internal imports
 import { AppComponent } from './app.component';
-import { AppRoutingModule } from './routing/app-routing.module';
+import { AppRoutingModule } from './app-routing.module';
 
-// TODO: Update with actual Firebase config
 export const firebaseConfig = {
   apiKey: 'AIzaSyAjMVQvUS9_E_ckc_yT7siUhQKOnEgD8bs',
   authDomain: 'excella-retro-2.firebaseapp.com',
@@ -29,7 +29,8 @@ export const firebaseConfig = {
     HttpModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(firebaseConfig),
-    MaterialModule.forRoot()
+    MaterialModule.forRoot(),
+    FlexLayoutModule
   ],
   providers: [],
   bootstrap: [AppComponent]
