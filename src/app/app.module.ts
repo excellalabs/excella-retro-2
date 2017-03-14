@@ -8,7 +8,7 @@ import { MaterialModule } from '@angular/material';
 
 // Internal imports
 import { AppComponent } from './app.component';
-import { AppRoutingModule } from './app-routing/app-routing.module';
+import { AppRoutingModule } from './routing/app-routing.module';
 
 // TODO: Update with actual Firebase config
 export const firebaseConfig = {
