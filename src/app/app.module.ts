@@ -12,6 +12,7 @@ import 'hammerjs';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './routing/app-routing.module';
 import { ToolbarComponent } from './components/shared/toolbar/toolbar.component';
+import { HomeComponent } from './components/home/home.component';
 
 export const firebaseConfig = {
   apiKey: 'AIzaSyAjMVQvUS9_E_ckc_yT7siUhQKOnEgD8bs',
@@ -24,7 +25,8 @@ export const firebaseConfig = {
 @NgModule({
   declarations: [
     AppComponent,
-    ToolbarComponent
+    ToolbarComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
