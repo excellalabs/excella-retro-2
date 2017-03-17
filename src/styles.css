@@ -1,3 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~https://fonts.googleapis.com/icon?family=Material+Icons';
+@import '~https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic';
 @import '~@angular/material/core/theming/prebuilt/deeppurple-amber.css';
+
+.spacer {
+    -webkit-box-flex: 1;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+}
