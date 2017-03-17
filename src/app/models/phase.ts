@@ -1,17 +1,11 @@
-import { Index } from './shared/index';
-
 export class Phase {
   id: number;
   name: string;
-  messages: Index[];
-  groups: Index[];
-  session: Index;
+  sessionId: string;
 
-  constructor(id: number, name: string, messages: Index[], groups: Index[], session: Index) {
+  constructor(id: number, name: string, sessionId: string) {
     this.id = id;
     this.name = name;
-    this.messages = messages;
-    this.groups = groups;
-    this.session = session;
+    this.sessionId = sessionId;
   }
 }
