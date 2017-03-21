@@ -1,17 +1,13 @@
-import { Index } from './shared/index';
-
 export class Group {
   id: number;
   name: string;
-  messages: Index[];
-  votes: Index[];
-  session: Index;
+  phaseId: number;
+  sessionId: string;
 
-  constructor(id: number, name: string, messages: Index[], votes: Index[], session: Index) {
+  constructor(id: number, name: string, phaseId: number, sessionId: string) {
     this.id = id;
     this.name = name;
-    this.messages = messages;
-    this.votes = votes;
-    this.session = session;
+    this.phaseId = phaseId;
+    this.sessionId = sessionId;
   }
 }
