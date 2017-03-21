@@ -1,10 +1,8 @@
 export class Vote {
-  id: number;
-  groupId: number;
+  groupId: string;
   userId: string;
 
-  constructor(id: number, groupId: number, userId: string) {
-    this.id = id;
+  constructor(groupId: string, userId: string) {
     this.groupId = groupId;
     this.userId = userId;
   }

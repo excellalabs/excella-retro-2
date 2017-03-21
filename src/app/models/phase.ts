@@ -1,11 +1,9 @@
 export class Phase {
-  id: number;
   name: string;
-  sessionId: string;
+  retroId: string;
 
-  constructor(id: number, name: string, sessionId: string) {
-    this.id = id;
+  constructor(name: string, retroId: string) {
     this.name = name;
-    this.sessionId = sessionId;
+    this.retroId = retroId;
   }
 }

@@ -1,12 +1,10 @@
-export class Session {
-  id: number;
+export class Retro {
   name: string;
   isActive: boolean;
   currentStep: number;
   votesPerParticipant: number;
 
-  constructor(id: number, name: string, isActive: boolean, currentStep: number, votesPerParticipant: number) {
-    this.id = id;
+  constructor(name: string, isActive: boolean, currentStep: number, votesPerParticipant: number) {
     this.name = name;
     this.isActive = isActive;
     this.currentStep = currentStep;
