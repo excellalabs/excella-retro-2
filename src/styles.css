@@ -8,3 +8,9 @@
     -ms-flex: 1 1 auto;
     flex: 1 1 auto;
 }
+.app-content {
+  padding: 20px;
+}
+.app-content md-card {
+  margin: 20px;
+}
