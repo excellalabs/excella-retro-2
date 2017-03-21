@@ -1,8 +1,6 @@
-<h1>
-  {{title}}
-</h1>
-
-<button md-raised-button>
-  Angular Material works!
-  <md-icon>done</md-icon>
-</button>
+<div fxLayout fxLayoutAlign="center">
+  <div fxFlex="60%">
+    <app-toolbar></app-toolbar>
+    <router-outlet class="app-content"></router-outlet>
+  </div>
+</div>
