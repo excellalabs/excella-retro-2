@@ -1,13 +1,11 @@
 export class Group {
-  id: number;
   name: string;
-  phaseId: number;
-  sessionId: string;
+  phaseId: string;
+  retroId: string;
 
-  constructor(id: number, name: string, phaseId: number, sessionId: string) {
-    this.id = id;
+  constructor(name: string, phaseId: string, retroId: string) {
     this.name = name;
     this.phaseId = phaseId;
-    this.sessionId = sessionId;
+    this.retroId = retroId;
   }
 }
