@@ -13,6 +13,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './routing/app-routing.module';
 import { ToolbarComponent } from './components/shared/toolbar/toolbar.component';
 import { HomeComponent } from './components/home/home.component';
+import { RetroComponent } from './components/retro/retro.component';
 
 export const firebaseConfig = {
   apiKey: 'AIzaSyAjMVQvUS9_E_ckc_yT7siUhQKOnEgD8bs',
@@ -26,7 +27,8 @@ export const firebaseConfig = {
   declarations: [
     AppComponent,
     ToolbarComponent,
-    HomeComponent
+    HomeComponent,
+    RetroComponent
   ],
   imports: [
     BrowserModule,
