@@ -14,6 +14,8 @@ import { AppRoutingModule } from './routing/app-routing.module';
 import { ToolbarComponent } from './components/shared/toolbar/toolbar.component';
 import { HomeComponent } from './components/home/home.component';
 import { RetroComponent } from './components/retro/retro.component';
+import { SubmitFeedbackComponent } from './components/submit-feedback/submit-feedback.component';
+import { ChildComponentDirective } from './directives/child-component-directive';
 
 export const firebaseConfig = {
   apiKey: 'AIzaSyAjMVQvUS9_E_ckc_yT7siUhQKOnEgD8bs',
@@ -28,7 +30,12 @@ export const firebaseConfig = {
     AppComponent,
     ToolbarComponent,
     HomeComponent,
-    RetroComponent
+    RetroComponent,
+    SubmitFeedbackComponent,
+    ChildComponentDirective
+  ],
+  entryComponents: [
+    SubmitFeedbackComponent
   ],
   imports: [
     BrowserModule,
