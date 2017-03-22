@@ -1,13 +1,13 @@
 export class Retro {
   name: string;
   isActive: boolean;
-  currentStep: number;
+  currentPhaseId: string;
   votesPerParticipant: number;
 
-  constructor(name: string, isActive: boolean, currentStep: number, votesPerParticipant: number) {
+  constructor(name: string, isActive: boolean, currentPhaseId: string, votesPerParticipant: number) {
     this.name = name;
     this.isActive = isActive;
-    this.currentStep = currentStep;
+    this.currentPhaseId = currentPhaseId;
     this.votesPerParticipant = votesPerParticipant;
   }
 }
