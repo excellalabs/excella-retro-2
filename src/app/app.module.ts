@@ -43,11 +43,6 @@ export const firebaseConfig = {
     GroupFeedbackComponent,
     VoteFeedbackComponent
   ],
-  entryComponents: [
-    SubmitFeedbackComponent,
-    GroupFeedbackComponent,
-    VoteFeedbackComponent
-  ],
   imports: [
     BrowserModule,
     FormsModule,
