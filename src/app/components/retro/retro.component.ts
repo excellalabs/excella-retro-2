@@ -7,7 +7,9 @@ import { Retro } from '../../models/retro';
 import { Phase } from '../../models/phase';
 import { ChildComponent } from '../../models/child-component';
 import { ChildComponentDirective } from '../../directives/child-component-directive';
-import { SubmitFeedbackComponent } from '../submit-feedback/submit-feedback.component';
+import { SubmitFeedbackComponent } from '../phaseSteps/submit-feedback/submit-feedback.component';
+import { GroupFeedbackComponent } from '../phaseSteps/group-feedback/group-feedback.component';
+import { VoteFeedbackComponent } from '../phaseSteps/vote-feedback/vote-feedback.component';
 
 @Component({
   selector: 'app-retro',
@@ -20,7 +22,8 @@ export class RetroComponent implements OnInit {
   retroId: string;
   retro: FirebaseObjectObservable<Retro>;
   private subscription: any;
-  private currentPhase: number;
+  private currentPhase: string;
+  private currentPhaseId: string;
   private currentPhaseStep: number;
   @Input() childComponent: ChildComponent;
   @ViewChild(ChildComponentDirective) childComponentHost: ChildComponentDirective;
@@ -37,20 +40,29 @@ export class RetroComponent implements OnInit {
 
     this.subscription = this.route.params.subscribe(params => self.retroId = params['retroId']);
     this.retro = this.af.database.object('retro/' + self.retroId);
-    this.retro.subscribe(val => {
-      if (self.currentPhase !== val.currentPhase) {
-        self.currentPhase = val.currentPhase;
-        this.renderPhaseStep();
+    this.retro.subscribe(retroVal => {
+      if (self.currentPhaseId !== retroVal.currentPhaseId) {
+        self.currentPhaseId = retroVal.currentPhaseId;
+        this.af.database.object('phases/' + self.currentPhaseId).subscribe(phaseVal => {
+          self.currentPhaseStep = phaseVal.currentPhaseStep;
+          this.renderPhaseStep();
+        });
       }
     });
   }
 
   renderPhaseStep() {
-    this.childComponent = new ChildComponent(SubmitFeedbackComponent, this.retro);
-    let componentFactory = this.componentFactoryResolver.resolveComponentFactory(this.childComponent.component);
-    let viewContainerRef = this.childComponentHost.viewContainerRef;
+    if (this.currentPhaseStep === 1) {
+      this.childComponent = new ChildComponent(SubmitFeedbackComponent, this.retro);
+    } else if (this.currentPhaseStep === 2) {
+      this.childComponent = new ChildComponent(GroupFeedbackComponent, this.retro);
+    }
+
+    const componentFactory = this.componentFactoryResolver.resolveComponentFactory(this.childComponent.component);
+    const viewContainerRef = this.childComponentHost.viewContainerRef;
     viewContainerRef.clear();
-    let componentRef = viewContainerRef.createComponent(componentFactory);
+
+    const componentRef = viewContainerRef.createComponent(componentFactory);
     (<ChildComponent>componentRef.instance).data = this.childComponent.data;
   }
 }
