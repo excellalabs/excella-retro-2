@@ -18,6 +18,7 @@ import { SubmitFeedbackComponent } from './components/phaseSteps/submit-feedback
 import { ChildComponentDirective } from './directives/child-component-directive';
 import { GroupFeedbackComponent } from './components/phaseSteps/group-feedback/group-feedback.component';
 import { VoteFeedbackComponent } from './components/phaseSteps/vote-feedback/vote-feedback.component';
+import { AdminToolbarComponent } from './components/shared/admin-toolbar/admin-toolbar.component';
 
 export const firebaseConfig = {
   apiKey: 'AIzaSyAjMVQvUS9_E_ckc_yT7siUhQKOnEgD8bs',
@@ -36,7 +37,8 @@ export const firebaseConfig = {
     SubmitFeedbackComponent,
     ChildComponentDirective,
     GroupFeedbackComponent,
-    VoteFeedbackComponent
+    VoteFeedbackComponent,
+    AdminToolbarComponent
   ],
   entryComponents: [
     SubmitFeedbackComponent,
