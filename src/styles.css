@@ -14,8 +14,18 @@
 .app-content md-card {
   margin: 20px;
 }
-.floating-fab {
-  position: absolute !important;
-  right: 20px;
-  bottom: 10px;
+
+@media screen and (min-width: 1280px) {
+  .floating-fab {
+    position: absolute !important;
+    right: 19%;
+    bottom: 10px;
+  }
+}
+@media screen and (max-width: 1279px) {
+  .floating-fab {
+    position: absolute !important;
+    right: 20px;
+    bottom: 10px;
+  }
 }
