@@ -14,11 +14,11 @@ import { AppRoutingModule } from './routing/app-routing.module';
 import { ToolbarComponent } from './components/shared/toolbar/toolbar.component';
 import { HomeComponent } from './components/home/home.component';
 import { RetroComponent } from './components/retro/retro.component';
-import { JoinRetroFormComponent } from './components/join-retro-form/join-retro-form.component'
+import { JoinRetroFormComponent } from './components/join-retro-form/join-retro-form.component';
 import { SubmitFeedbackComponent } from './components/phaseSteps/submit-feedback/submit-feedback.component';
-import { ChildComponentDirective } from './directives/child-component-directive';
 import { GroupFeedbackComponent } from './components/phaseSteps/group-feedback/group-feedback.component';
 import { VoteFeedbackComponent } from './components/phaseSteps/vote-feedback/vote-feedback.component';
+import { ChildComponentDirective } from './directives/child-component-directive';
 
 export const firebaseConfig = {
   apiKey: 'AIzaSyAjMVQvUS9_E_ckc_yT7siUhQKOnEgD8bs',
@@ -34,12 +34,15 @@ export const firebaseConfig = {
     ToolbarComponent,
     HomeComponent,
     RetroComponent,
-    JoinRetroFormComponent
+    JoinRetroFormComponent,
+    SubmitFeedbackComponent,
+    GroupFeedbackComponent,
+    VoteFeedbackComponent,
+    ChildComponentDirective
   ],
   entryComponents: [
-    JoinRetroFormComponent
+    JoinRetroFormComponent,
     SubmitFeedbackComponent,
-    ChildComponentDirective,
     GroupFeedbackComponent,
     VoteFeedbackComponent
   ],
