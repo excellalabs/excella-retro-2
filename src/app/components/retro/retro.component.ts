@@ -7,9 +7,9 @@ import { Retro } from '../../models/retro';
 import { Phase } from '../../models/phase';
 import { ChildComponent } from '../../models/child-component';
 import { ChildComponentDirective } from '../../directives/child-component-directive';
-import { SubmitFeedbackComponent } from '../phaseSteps/submit-feedback/submit-feedback.component';
-import { GroupFeedbackComponent } from '../phaseSteps/group-feedback/group-feedback.component';
-import { VoteFeedbackComponent } from '../phaseSteps/vote-feedback/vote-feedback.component';
+import { SubmitFeedbackComponent } from '../phase-steps/submit-feedback/submit-feedback.component';
+import { GroupFeedbackComponent } from '../phase-steps/group-feedback/group-feedback.component';
+import { VoteFeedbackComponent } from '../phase-steps/vote-feedback/vote-feedback.component';
 
 @Component({
   selector: 'app-retro',
@@ -33,7 +33,8 @@ export class RetroComponent implements OnInit {
     private location: Location,
     private router: Router,
     private af: AngularFire,
-    private componentFactoryResolver: ComponentFactoryResolver) { }
+    private componentFactoryResolver: ComponentFactoryResolver
+  ) { }
 
   ngOnInit() {
     let self = this;
@@ -56,6 +57,8 @@ export class RetroComponent implements OnInit {
       this.childComponent = new ChildComponent(SubmitFeedbackComponent, this.retro);
     } else if (this.currentPhaseStep === 2) {
       this.childComponent = new ChildComponent(GroupFeedbackComponent, this.retro);
+    } else if (this.currentPhaseStep === 3) {
+      this.childComponent = new ChildComponent(VoteFeedbackComponent, this.retro);
     }
 
     const componentFactory = this.componentFactoryResolver.resolveComponentFactory(this.childComponent.component);
