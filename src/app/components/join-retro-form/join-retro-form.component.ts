@@ -1,13 +1,13 @@
-import { Component } from '@angular/core'
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { MdDialogRef } from '@angular/material'
+import { MdDialogRef } from '@angular/material';
 
 @Component({
-  selector: 'join-retro-form',
-  templateUrl: './join-retro-form.component.html',
+  selector: 'app-join-retro-form',
+  templateUrl: './join-retro-form.component.html'
 })
 export class JoinRetroFormComponent {
-    private retroId: string
+    private retroId: string;
 
   constructor(
       private router: Router,
