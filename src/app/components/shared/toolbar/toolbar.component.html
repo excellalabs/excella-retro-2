@@ -1,7 +1,9 @@
-<md-toolbar color="primary">
-  <span>Excella Retro</span>
-  
+<md-toolbar color="primary" class="mat-elevation-z4">
+  <span>Excella Retro</span>  
   <span class="spacer"></span>
+  <button md-icon-button (click)="toggleDarkMode()">
+    <md-icon>lightbulb_outline</md-icon>
+  </button>
   <button md-icon-button [mdMenuTriggerFor]="menu">
     <md-icon>more_vert</md-icon>
   </button>

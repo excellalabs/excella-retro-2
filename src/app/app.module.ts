@@ -6,6 +6,7 @@ import { HttpModule } from '@angular/http';
 import { AngularFireModule } from 'angularfire2';
 import { MaterialModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { LocalStorageModule } from 'angular-2-local-storage';
 import 'hammerjs';
 
 // Internal imports
@@ -15,9 +16,9 @@ import { ToolbarComponent } from './components/shared/toolbar/toolbar.component'
 import { HomeComponent } from './components/home/home.component';
 import { RetroComponent } from './components/retro/retro.component';
 import { SubmitFeedbackComponent } from './components/phaseSteps/submit-feedback/submit-feedback.component';
-import { ChildComponentDirective } from './directives/child-component-directive';
 import { GroupFeedbackComponent } from './components/phaseSteps/group-feedback/group-feedback.component';
 import { VoteFeedbackComponent } from './components/phaseSteps/vote-feedback/vote-feedback.component';
+import { ChildComponentDirective } from './directives/child-component-directive';
 
 export const firebaseConfig = {
   apiKey: 'AIzaSyAjMVQvUS9_E_ckc_yT7siUhQKOnEgD8bs',
@@ -50,7 +51,11 @@ export const firebaseConfig = {
     AppRoutingModule,
     AngularFireModule.initializeApp(firebaseConfig),
     MaterialModule.forRoot(),
-    FlexLayoutModule
+    FlexLayoutModule,
+    LocalStorageModule.withConfig({
+      prefix: 'excella-retro-2',
+      storageType: 'localStorage'
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
