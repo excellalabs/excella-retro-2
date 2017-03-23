@@ -7,9 +7,9 @@ import { Retro } from '../../models/retro';
 import { Phase } from '../../models/phase';
 import { ChildComponent } from '../../models/child-component';
 import { ChildComponentDirective } from '../../directives/child-component-directive';
-import { SubmitFeedbackComponent } from '../phaseSteps/submit-feedback/submit-feedback.component';
-import { GroupFeedbackComponent } from '../phaseSteps/group-feedback/group-feedback.component';
-import { VoteFeedbackComponent } from '../phaseSteps/vote-feedback/vote-feedback.component';
+import { SubmitFeedbackComponent } from '../phase-steps/submit-feedback/submit-feedback.component';
+import { GroupFeedbackComponent } from '../phase-steps/group-feedback/group-feedback.component';
+import { VoteFeedbackComponent } from '../phase-steps/vote-feedback/vote-feedback.component';
 
 @Component({
   selector: 'app-retro',
