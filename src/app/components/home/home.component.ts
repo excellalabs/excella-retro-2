@@ -11,13 +11,9 @@ import { JoinRetroFormComponent } from '../join-retro-form/join-retro-form.compo
 })
 export class HomeComponent implements OnInit {
 
-  constructor(
-    public dialog: MdDialog
-  ) {}
+  constructor(public dialog: MdDialog) {}
 
-  ngOnInit() {
-    
-  }
+  ngOnInit() { }
 
   openJoinRetroFormDialog() {
     this.dialog.open(JoinRetroFormComponent);
