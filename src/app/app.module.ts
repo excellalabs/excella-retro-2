@@ -15,6 +15,7 @@ import { AppRoutingModule } from './routing/app-routing.module';
 import { ToolbarComponent } from './components/shared/toolbar/toolbar.component';
 import { HomeComponent } from './components/home/home.component';
 import { RetroComponent } from './components/retro/retro.component';
+import { JoinRetroFormComponent } from './components/join-retro-form/join-retro-form.component';
 import { SubmitFeedbackComponent } from './components/phaseSteps/submit-feedback/submit-feedback.component';
 import { GroupFeedbackComponent } from './components/phaseSteps/group-feedback/group-feedback.component';
 import { VoteFeedbackComponent } from './components/phaseSteps/vote-feedback/vote-feedback.component';
@@ -34,12 +35,14 @@ export const firebaseConfig = {
     ToolbarComponent,
     HomeComponent,
     RetroComponent,
+    JoinRetroFormComponent,
     SubmitFeedbackComponent,
-    ChildComponentDirective,
     GroupFeedbackComponent,
-    VoteFeedbackComponent
+    VoteFeedbackComponent,
+    ChildComponentDirective
   ],
   entryComponents: [
+    JoinRetroFormComponent,
     SubmitFeedbackComponent,
     GroupFeedbackComponent,
     VoteFeedbackComponent
