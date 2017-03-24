@@ -1,4 +1,6 @@
-import { Component, OnInit, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, ChangeDetectionStrategy, Input } from '@angular/core';
+import { FirebaseObjectObservable } from 'angularfire2';
+import { Retro } from '../../../models/retro';
 
 @Component({
   selector: 'app-admin-toolbar',
@@ -8,6 +10,7 @@ import { Component, OnInit, ViewEncapsulation, ChangeDetectionStrategy } from '@
   changeDetection: ChangeDetectionStrategy.Default
 })
 export class AdminToolbarComponent implements OnInit {
+  @Input() retroObservable: FirebaseObjectObservable<Retro>;
 
   constructor() { }
 

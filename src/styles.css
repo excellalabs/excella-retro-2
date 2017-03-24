@@ -2,6 +2,9 @@
 @import '~https://fonts.googleapis.com/icon?family=Material+Icons';
 @import '~https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic';
 
+body {
+  font-family: Roboto;
+}
 md-card {
   margin: 20px;
 }
@@ -11,7 +14,7 @@ md-card {
   flex: 1 1 auto;
 }
 .app-content {
-  /*padding: 20px;*/
+  /*  padding: 20px;*/
 }
 .mat-sidenav-content {
   width: 100%;
