@@ -7,6 +7,7 @@ import { AngularFireModule } from 'angularfire2';
 import { MaterialModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { LocalStorageModule } from 'angular-2-local-storage';
+import { ClipboardModule } from 'ngx-clipboard';
 import 'hammerjs';
 
 // Internal imports
@@ -60,7 +61,8 @@ export const firebaseConfig = {
     LocalStorageModule.withConfig({
       prefix: 'excella-retro-2',
       storageType: 'localStorage'
-    })
+    }),
+    ClipboardModule
   ],
   providers: [],
   bootstrap: [AppComponent]
