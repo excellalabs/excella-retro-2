@@ -13,9 +13,6 @@ md-card {
   -ms-flex: 1 1 auto;
   flex: 1 1 auto;
 }
-.app-content {
-  /*  padding: 20px;*/
-}
 .mat-sidenav-content {
   width: 100%;
   min-height: 600px;
@@ -24,7 +21,4 @@ md-card {
   position: absolute !important;
   right: 20px;
   bottom: 10px;
-}
-.admin-toolbar {
-  padding: 10px;
 }

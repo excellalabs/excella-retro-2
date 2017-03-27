@@ -1,5 +1,6 @@
-.ebutton-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
+.facilitate-button {
+  margin-top: 16px;
+}
+.section {
+  margin-top: 32px;
 }
