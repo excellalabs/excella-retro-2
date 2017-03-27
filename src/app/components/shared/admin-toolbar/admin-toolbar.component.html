@@ -1,9 +1,21 @@
-<h3>Admin</h3>
-<md-input-container>
-  <input mdInput placeholder="Retro ID" disabled value="{{(retroObservable | async)?.$key}}">
-</md-input-container>
-<div class="button-row">
-  <button md-mini-fab><md-icon>email</md-icon></button>
-  <button md-mini-fab><md-icon>link</md-icon></button>
-  <button md-mini-fab><md-icon>content_copy</md-icon></button>
+<div>
+  <h3>ADMIN</h3>
+  <md-input-container>
+    <input mdInput placeholder="Retro ID" readonly value="{{(retroObservable | async)?.$key}}" #retroIdInput>
+  </md-input-container>
+  <div>
+    <span mdTooltip="Email Retro ID">
+      <button md-mini-fab><md-icon>email</md-icon></button>
+    </span>
+    <span mdTooltip="Share Retro Link">
+      <button md-mini-fab><md-icon>link</md-icon></button>
+    </span>
+    <span mdTooltip="Copy Retro ID">
+      <button md-mini-fab [ngxClipboard]="retroIdInput" (click)="copyTextSuccessful()"><md-icon>content_copy</md-icon></button>
+    </span>
+  </div>
+  <div class="section">
+    <button md-raised-button color="primary" (click)="endPhase()">END PHASE</button>
+    <button md-raised-button color="warn" (click)="endRetro()">END RETRO</button>
+  </div>
 </div>
