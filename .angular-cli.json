@@ -1,6 +1,6 @@
 {
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "project": {
-    "version": "1.0.0-beta.28.3",
     "name": "excella-retro"
   },
   "apps": [
@@ -14,16 +14,16 @@
       "index": "index.html",
       "main": "main.ts",
       "polyfills": "polyfills.ts",
-      "test": "test.ts",
-      "tsconfig": "tsconfig.json",
+      "tsconfig": "tsconfig.app.json",
+      "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
         "styles.css",
         "custom_theme.scss"
       ],
       "scripts": [],
+      "environmentSource": "environments/environment.ts",
       "environments": {
-        "source": "environments/environment.ts",
         "dev": "environments/environment.ts",
         "prod": "environments/environment.prod.ts"
       }
@@ -51,20 +51,29 @@
   },
   "defaults": {
     "styleExt": "css",
-    "prefixInterfaces": false,
-    "inline": {
-      "style": false,
-      "template": false
+    "component": {
+      "inlineTemplate": false,
+      "spec": true
     },
-    "spec": {
-      "class": false,
-      "component": true,
-      "directive": true,
-      "module": false,
-      "pipe": true,
-      "service": true
+    "class": {
+      "inlineTemplate": false,
+      "spec": false
     },
-    "viewEncapsulation": "Emulated",
-    "changeDetection": "Default"
+    "directive": {
+      "inlineTemplate": false,
+      "spec": true
+    },
+    "module": {
+      "inlineTemplate": false,
+      "spec": false
+    },
+    "pipe": {
+      "inlineTemplate": false,
+      "spec": true
+    },
+    "service": {
+      "inlineTemplate": false,
+      "spec": true
+    }
   }
 }
