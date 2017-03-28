@@ -15,7 +15,9 @@
     </span>
   </div>
   <div class="section">
-    <button md-raised-button color="primary" (click)="endPhase()">END PHASE</button>
+    <span mdTooltip="{{endPhaseStepButtonTooltipText}}">
+      <button md-raised-button color="primary" (click)="endPhase()">END STEP</button>
+    </span>
     <button md-raised-button color="warn" (click)="endRetro()">END RETRO</button>
   </div>
 </div>

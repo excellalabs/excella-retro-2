@@ -14,16 +14,35 @@ import { Phase } from '../../../models/phase';
 export class AdminToolbarComponent implements OnInit {
   @Input() retroObservable: FirebaseObjectObservable<Retro>;
   phaseObservable: FirebaseObjectObservable<Phase>;
+  endPhaseStepButtonTooltipText: string;
 
   constructor(public snackbar: MdSnackBar, private af: AngularFire) { }
 
   ngOnInit() {
+    const self = this;
+
+    this.retroObservable.subscribe(retroVal => {
+      self.phaseObservable = this.af.database.object('phases/' + retroVal.currentPhaseId);
+      const phaseSubscription = self.phaseObservable.subscribe(phaseVal => {
+        this.setCurrentPhaseStepButtonText(phaseVal.currentPhaseStep);
+      });
+    });
+  }
+
+  setCurrentPhaseStepButtonText(currentPhaseStep: number) {
+    if (currentPhaseStep === 1) {
+      this.endPhaseStepButtonTooltipText = 'Finish "Submit Feedback" Step';
+    } else if (currentPhaseStep === 2) {
+      this.endPhaseStepButtonTooltipText = 'Finish "Group Feedback" Step';
+    } else if (currentPhaseStep === 3) {
+      this.endPhaseStepButtonTooltipText = 'Finish "Vote on Feedback" Step';
+    }
   }
 
   copyTextSuccessful() {
     this.snackbar.open('Text copied to clipboard!', 'OK', {
       duration: 1000
-    })
+    });
   }
 
   endPhase() {
@@ -33,8 +52,8 @@ export class AdminToolbarComponent implements OnInit {
 
     this.retroObservable.subscribe(retroVal => {
       self.phaseObservable = this.af.database.object('phases/' + retroVal.currentPhaseId);
-      let phaseSubscription = self.phaseObservable.subscribe(phaseVal => {
-        let nextPhaseStep = phaseVal.currentPhaseStep += 1;
+      const phaseSubscription = self.phaseObservable.subscribe(phaseVal => {
+        const nextPhaseStep = phaseVal.currentPhaseStep += 1;
         self.phaseObservable.update({ currentPhaseStep: nextPhaseStep });
         phaseSubscription.unsubscribe();
       });
