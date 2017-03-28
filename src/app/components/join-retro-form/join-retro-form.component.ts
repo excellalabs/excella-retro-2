@@ -7,7 +7,7 @@ import { MdDialogRef } from '@angular/material';
   templateUrl: './join-retro-form.component.html'
 })
 export class JoinRetroFormComponent {
-    private retroId: string;
+  retroId: string;
 
   constructor(
       private router: Router,
@@ -18,5 +18,4 @@ export class JoinRetroFormComponent {
     this.router.navigate(['/retro/' + retroId]);
     this.dialogRef.close();
   }
-
 }
