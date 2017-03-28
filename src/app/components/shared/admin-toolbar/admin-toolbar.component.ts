@@ -31,7 +31,7 @@ export class AdminToolbarComponent implements OnInit {
 
   setCurrentPhaseStepButtonText(currentPhaseStep: number) {
     if (currentPhaseStep === 1) {
-      this.endPhaseStepButtonTooltipText = 'Finish "Add Feedback" Step';
+      this.endPhaseStepButtonTooltipText = 'Finish "Submit Feedback" Step';
     } else if (currentPhaseStep === 2) {
       this.endPhaseStepButtonTooltipText = 'Finish "Group Feedback" Step';
     } else if (currentPhaseStep === 3) {
