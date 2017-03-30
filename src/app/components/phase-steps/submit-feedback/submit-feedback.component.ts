@@ -8,6 +8,11 @@ import { Component, OnInit, ViewEncapsulation, ChangeDetectionStrategy } from '@
   changeDetection: ChangeDetectionStrategy.Default
 })
 export class SubmitFeedbackComponent implements OnInit {
+  feedbackList: {}[] = [
+    { message: "Test message 1 for the feedback list." },
+    { message: "Test message 2 for the feedback list." },
+    { message: "Test message 3 for the feedback list." }
+  ];
 
   constructor() { }
 
