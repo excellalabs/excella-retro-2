@@ -2,14 +2,25 @@
 @import '~https://fonts.googleapis.com/icon?family=Material+Icons';
 @import '~https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic';
 
-.spacer {
-    -webkit-box-flex: 1;
-    -ms-flex: 1 1 auto;
-    flex: 1 1 auto;
-}
-.app-content {
-  padding: 20px;
+body {
+  font-family: Roboto;
 }
 md-card {
   margin: 20px;
+}
+.spacer {
+  -webkit-box-flex: 1;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+}
+.mat-sidenav-content {
+  width: 100%;
+
+  /* TODO: Set this to min-height needed for admin-toolbar controls */
+  min-height: 600px;
+}
+.floating-fab {
+  position: absolute !important;
+  right: 20px;
+  bottom: 10px;
 }

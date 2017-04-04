@@ -20,7 +20,7 @@ import { VoteFeedbackComponent } from '../phase-steps/vote-feedback/vote-feedbac
 })
 export class RetroComponent implements OnInit {
   retroId: string;
-  retro: FirebaseObjectObservable<Retro>;
+  retroObservable: FirebaseObjectObservable<Retro>;
   private subscription: any;
   private currentPhase: string;
   private currentPhaseId: string;
@@ -37,11 +37,11 @@ export class RetroComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    let self = this;
+    const self = this;
 
     this.subscription = this.route.params.subscribe(params => self.retroId = params['retroId']);
-    this.retro = this.af.database.object('retro/' + self.retroId);
-    this.retro.subscribe(retroVal => {
+    this.retroObservable = this.af.database.object('retro/' + self.retroId);
+    this.retroObservable.subscribe(retroVal => {
       if (self.currentPhaseId !== retroVal.currentPhaseId) {
         self.currentPhaseId = retroVal.currentPhaseId;
         this.af.database.object('phases/' + self.currentPhaseId).subscribe(phaseVal => {
@@ -54,11 +54,11 @@ export class RetroComponent implements OnInit {
 
   renderPhaseStep() {
     if (this.currentPhaseStep === 1) {
-      this.childComponent = new ChildComponent(SubmitFeedbackComponent, this.retro);
+      this.childComponent = new ChildComponent(SubmitFeedbackComponent, this.retroObservable);
     } else if (this.currentPhaseStep === 2) {
-      this.childComponent = new ChildComponent(GroupFeedbackComponent, this.retro);
+      this.childComponent = new ChildComponent(GroupFeedbackComponent, this.retroObservable);
     } else if (this.currentPhaseStep === 3) {
-      this.childComponent = new ChildComponent(VoteFeedbackComponent, this.retro);
+      this.childComponent = new ChildComponent(VoteFeedbackComponent, this.retroObservable);
     }
 
     const componentFactory = this.componentFactoryResolver.resolveComponentFactory(this.childComponent.component);

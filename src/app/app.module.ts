@@ -1,5 +1,6 @@
 // External imports
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
@@ -7,6 +8,7 @@ import { AngularFireModule } from 'angularfire2';
 import { MaterialModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { LocalStorageModule } from 'angular-2-local-storage';
+import { ClipboardModule } from 'ngx-clipboard';
 import 'hammerjs';
 
 // Internal imports
@@ -20,6 +22,7 @@ import { SubmitFeedbackComponent } from './components/phase-steps/submit-feedbac
 import { GroupFeedbackComponent } from './components/phase-steps/group-feedback/group-feedback.component';
 import { VoteFeedbackComponent } from './components/phase-steps/vote-feedback/vote-feedback.component';
 import { ChildComponentDirective } from './directives/child-component-directive';
+import { AdminToolbarComponent } from './components/shared/admin-toolbar/admin-toolbar.component';
 
 export const firebaseConfig = {
   apiKey: 'AIzaSyAjMVQvUS9_E_ckc_yT7siUhQKOnEgD8bs',
@@ -39,7 +42,8 @@ export const firebaseConfig = {
     SubmitFeedbackComponent,
     GroupFeedbackComponent,
     VoteFeedbackComponent,
-    ChildComponentDirective
+    ChildComponentDirective,
+    AdminToolbarComponent
   ],
   entryComponents: [
     JoinRetroFormComponent,
@@ -49,6 +53,7 @@ export const firebaseConfig = {
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
     HttpModule,
     AppRoutingModule,
@@ -58,7 +63,8 @@ export const firebaseConfig = {
     LocalStorageModule.withConfig({
       prefix: 'excella-retro-2',
       storageType: 'localStorage'
-    })
+    }),
+    ClipboardModule
   ],
   providers: [],
   bootstrap: [AppComponent]
