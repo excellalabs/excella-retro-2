@@ -3,6 +3,7 @@ export class Retro {
   isActive: boolean;
   currentPhaseId: string;
   votesPerParticipant: number;
+  $key: string;
 
   constructor(name: string, isActive: boolean, currentPhaseId: string, votesPerParticipant: number) {
     this.name = name;
