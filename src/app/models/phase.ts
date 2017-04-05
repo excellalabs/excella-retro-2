@@ -3,6 +3,7 @@ export class Phase {
   currentPhaseStep: number;
   retroId: string;
   order: number;
+  $key: string;
 
   constructor(name: string, currentPhaseStep: number, retroId: string, order: number) {
     this.name = name;
