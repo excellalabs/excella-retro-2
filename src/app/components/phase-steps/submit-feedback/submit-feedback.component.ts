@@ -23,7 +23,7 @@ export class SubmitFeedbackComponent implements OnInit {
   }
 
   submitFeedback() {
-    let messageToSubmit = this.message;
+    const messageToSubmit = this.message;
     if (messageToSubmit.text !== '') {
       this.feedbackList.push(messageToSubmit);
       this.message = this.blankMessage();
