@@ -27,20 +27,25 @@ export class SubmitFeedbackComponent implements OnInit {
     this.retroObservable = this.data;
     this.retroObservable.subscribe(retroVal => {
       self.retroVal = retroVal;
+      self.retroId = retroVal.$key;
+      self.phaseId = null;
       self.existingFeedbackObservable = self.af.database.list('messages');
       self.existingFeedbackObservable.subscribe(existingFeedbackVal => {
         self.existingFeedbackVal = existingFeedbackVal;
         self.existingFeedbackVal = self.existingFeedbackVal.filter((feedback) => {
-          return feedback.retroId === self.retroVal.$key;
-        })
+          return feedback.retroId === self.retroId
+            /*&& feedback.phaseId === self.phaseVal.$key*/;
+        });
       });
     });
   }
 
   submitFeedback() {
-    const feedbackToSubmit = this.feedbackToSubmit;
-    if (feedbackToSubmit.text !== '') {
-      this.existingFeedbackObservable.push(feedbackToSubmit);
+    if (this.feedbackToSubmit.text !== '') {
+      this.feedbackToSubmit.retroId = this.retroId;
+      this.feedbackToSubmit.phaseId = this.phaseId;
+      this.existingFeedbackObservable.push(this.feedbackToSubmit);
+
       this.feedbackToSubmit = this.blankFeedback();
     }
   }
