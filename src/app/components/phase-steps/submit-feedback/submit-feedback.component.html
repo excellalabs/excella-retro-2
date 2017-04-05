@@ -7,7 +7,7 @@
       <div fxFlex="50%">
         <h4>Add Feedback</h4>
         <md-input-container>
-          <textarea mdInput placeholder="Feedback" [(ngModel)]="message.text"></textarea>
+          <textarea mdInput placeholder="Feedback" [(ngModel)]="feedbackToSubmit.text"></textarea>
         </md-input-container>
         <div>
           <button md-raised-button color="primary" (click)="submitFeedback()">SUBMIT</button>
@@ -16,7 +16,7 @@
       <div fxFlex="50%">
         <h4>Live Feedback</h4>
         <div fxLayout="column">
-          <md-card fxFlex class="feedback-card" *ngFor="let feedback of feedbackList">
+          <md-card fxFlex class="feedback-card" *ngFor="let feedback of existingFeedbackVal">
             <p>{{feedback.text}}</p>
           </md-card>
         </div>
