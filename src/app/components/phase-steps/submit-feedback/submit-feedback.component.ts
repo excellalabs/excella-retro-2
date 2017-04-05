@@ -1,4 +1,6 @@
 import { Component, OnInit, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
+import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
+import { Message } from '../../../models/message';
 
 @Component({
   selector: 'app-submit-feedback',
@@ -8,15 +10,28 @@ import { Component, OnInit, ViewEncapsulation, ChangeDetectionStrategy } from '@
   changeDetection: ChangeDetectionStrategy.Default
 })
 export class SubmitFeedbackComponent implements OnInit {
+  message = this.blankMessage();
   feedbackList: {}[] = [
-    { message: "Test message 1 for the feedback list." },
-    { message: "Test message 2 for the feedback list." },
-    { message: "Test message 3 for the feedback list." }
+    { text: 'Test message 1 for the feedback list.' },
+    { text: 'Test message 2 for the feedback list.' },
+    { text: 'Test message 3 for the feedback list.' }
   ];
 
-  constructor() { }
+  constructor(private af: AngularFire) { }
 
   ngOnInit() {
+  }
+
+  submitFeedback() {
+    let messageToSubmit = this.message;
+    if (messageToSubmit.text !== '') {
+      this.feedbackList.push(messageToSubmit);
+      this.message = this.blankMessage();
+    }
+  }
+
+  blankMessage(): Message {
+    return new Message('', '1', '1', '123abc');
   }
 
 }
