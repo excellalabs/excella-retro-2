@@ -1,3 +1,26 @@
-<p>
-  submit-feedback works!
-</p>
+<md-card style="padding:0px">
+  <md-toolbar color="accent">
+    <span>Submit Feedback</span>
+  </md-toolbar>
+  <md-card-content style="padding:0 24px 8px">
+    <div fxLayout>
+      <div fxFlex="50%">
+        <h4>Add Feedback</h4>
+        <md-input-container style="width:75%">
+          <textarea mdInput placeholder="Feedback" [(ngModel)]="feedbackToSubmit.text"></textarea>
+        </md-input-container>
+        <div>
+          <button md-raised-button color="primary" (click)="submitFeedback()">SUBMIT</button>
+        </div>
+      </div>
+      <div fxFlex="50%">
+        <h4>Live Feedback</h4>
+        <div fxLayout="column">
+          <md-card fxFlex class="feedback-card" *ngFor="let feedback of existingFeedbackVal">
+            <p>{{feedback.text}}</p>
+          </md-card>
+        </div>
+      </div>
+    </div>
+  </md-card-content>
+</md-card>

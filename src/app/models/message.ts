@@ -3,6 +3,7 @@ export class Message {
   groupId: string;
   phaseId: string;
   retroId: string;
+  $key: string;
 
   constructor(text: string, groupId: string, phaseId: string, retroId: string) {
     this.text = text;

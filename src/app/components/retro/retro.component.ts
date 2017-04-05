@@ -40,7 +40,7 @@ export class RetroComponent implements OnInit {
     const self = this;
 
     this.subscription = this.route.params.subscribe(params => self.retroId = params['retroId']);
-    this.retroObservable = this.af.database.object('retro/' + self.retroId);
+    this.retroObservable = this.af.database.object('retros/' + self.retroId);
     this.retroObservable.subscribe(retroVal => {
       if (self.currentPhaseId !== retroVal.currentPhaseId) {
         self.currentPhaseId = retroVal.currentPhaseId;

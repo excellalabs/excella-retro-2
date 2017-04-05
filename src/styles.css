@@ -5,6 +5,9 @@
 body {
   font-family: Roboto;
 }
+p { 
+  word-break: break-all
+}
 md-card {
   margin: 20px;
 }
@@ -17,10 +20,14 @@ md-card {
   width: 100%;
 
   /* TODO: Set this to min-height needed for admin-toolbar controls */
-  min-height: 600px;
+  min-height: 400px;
 }
 .floating-fab {
   position: absolute !important;
-  right: 20px;
+  right: 10px;
   bottom: 10px;
+  z-index: 9999;
+}
+.phase-step-title {
+  color: rgba(0, 0, 0, 0.54)
 }

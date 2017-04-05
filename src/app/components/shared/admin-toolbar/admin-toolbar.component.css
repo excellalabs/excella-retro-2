@@ -4,3 +4,9 @@
 .section {
   margin-top: 32px;
 }
+.end-button {
+  width: 100%;
+}
+.end-retro {
+  margin: 10px 0;
+}
