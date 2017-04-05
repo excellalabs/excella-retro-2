@@ -23,6 +23,7 @@ import { GroupFeedbackComponent } from './components/phase-steps/group-feedback/
 import { VoteFeedbackComponent } from './components/phase-steps/vote-feedback/vote-feedback.component';
 import { ChildComponentDirective } from './directives/child-component-directive';
 import { AdminToolbarComponent } from './components/shared/admin-toolbar/admin-toolbar.component';
+import { CreateRetroFormComponent } from './components/create-retro-form/create-retro-form.component';
 
 export const firebaseConfig = {
   apiKey: 'AIzaSyAjMVQvUS9_E_ckc_yT7siUhQKOnEgD8bs',
@@ -43,10 +44,12 @@ export const firebaseConfig = {
     GroupFeedbackComponent,
     VoteFeedbackComponent,
     ChildComponentDirective,
-    AdminToolbarComponent
+    AdminToolbarComponent,
+    CreateRetroFormComponent
   ],
   entryComponents: [
     JoinRetroFormComponent,
+    CreateRetroFormComponent,
     SubmitFeedbackComponent,
     GroupFeedbackComponent,
     VoteFeedbackComponent
