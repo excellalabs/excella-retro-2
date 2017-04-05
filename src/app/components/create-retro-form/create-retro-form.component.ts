@@ -35,7 +35,7 @@ export class CreateRetroFormComponent {
 
   createRetro(retroName: string) {
     var that = this;
-    var retro = new Retro(retroName, true, '1', this.numberOfVotes);
+    var retro = new Retro(retroName, true, 1, this.numberOfVotes);
     var retrosList = this.af.database.list('retros');
     var phasesList = this.af.database.list('phases');
     var retroId = retrosList.push(retro).then((pushedRetro) => {
