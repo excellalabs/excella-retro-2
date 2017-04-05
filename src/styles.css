@@ -28,3 +28,6 @@ md-card {
   bottom: 10px;
   z-index: 9999;
 }
+.phase-step-title {
+  color: rgba(0, 0, 0, 0.54)
+}
