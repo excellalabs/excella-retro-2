@@ -12,26 +12,26 @@ import { AngularFire, FirebaseListObservable } from 'angularfire2';
 
 export class CreateRetroFormComponent {
   retroName: string;
-  numberOfVotes;
-  numberOfPhases = 3;
+  numberOfVotes = 2;
   phases = [];
   af;
 
   constructor(af: AngularFire, private router: Router, private dialogRef: MdDialogRef<CreateRetroFormComponent>)
   {
     this.af = af;
-    this.changeNumberOfPhases(this.numberOfPhases);
-  }
-
-  changeNumberOfPhases($event){
-    if($event > this.phases.length){
-      for(var x = this.phases.length; x < $event; x++){
-        this.phases.push(new Phase("", 1, "", this.phases.length + 1))
-      }
-    } else if($event < this.phases.length ){
-      this.phases.splice($event-this.phases.length);
+    while(this.phases.length < 3){
+      this.addPhase();
     }
   }
+
+  addPhase(){
+    this.phases.push(new Phase("", 1, "", this.phases.length + 1));
+  }
+
+  removePhase(){
+    this.phases.splice(-1);
+  }
+
 
   createRetro(retroName: string) {
     var that = this;
