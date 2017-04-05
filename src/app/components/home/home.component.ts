@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
 import { MdDialog } from '@angular/material';
-import { JoinRetroFormComponent } from '../join-retro-form/join-retro-form.component'
+import { JoinRetroFormComponent } from '../join-retro-form/join-retro-form.component';
+import { CreateRetroFormComponent } from '../create-retro-form/create-retro-form.component';
+
 
 @Component({
   selector: 'app-home',
@@ -17,6 +19,10 @@ export class HomeComponent implements OnInit {
 
   openJoinRetroFormDialog() {
     this.dialog.open(JoinRetroFormComponent);
+  }
+
+  openCreateRetroFormDialog(){
+    this.dialog.open(CreateRetroFormComponent);
   }
 
 }
