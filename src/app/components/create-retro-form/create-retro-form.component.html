@@ -7,12 +7,12 @@
         </p>
         <p>
             <md-input-container>
-                <input mdInput placeholder="Retro ID" [(ngModel)]="retroId" name="retroIdInput" required/>
+                <input mdInput placeholder="Retro Name" [(ngModel)]="retroName" name="retroNameInput" required/>
             </md-input-container>
         </p>
 
         <div style="text-align: center">
-            <button type="submit" md-raised-button color="primary" style="width: 100%" (click)="createRetro(retroId)" [disabled]="!createRetroForm.form.valid">CREATE</button>
+            <button type="submit" md-raised-button color="primary" style="width: 100%" (click)="createRetro(retroName)" [disabled]="!createRetroForm.form.valid">CREATE</button>
         </div>
     </form>
 </div>

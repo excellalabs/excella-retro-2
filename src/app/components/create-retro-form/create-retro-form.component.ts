@@ -10,7 +10,7 @@ import { AngularFire, FirebaseListObservable } from 'angularfire2';
 })
 
 export class CreateRetroFormComponent {
-  retroId: string;
+  retroName: string;
   af;
 
   constructor(af: AngularFire, private router: Router, private dialogRef: MdDialogRef<CreateRetroFormComponent>)
@@ -18,11 +18,13 @@ export class CreateRetroFormComponent {
     this.af = af;
   }
 
-  createRetro(retroId: string) {
-    var retro = new Retro(retroId, true, '1', 2);
+  createRetro(retroName: string) {
+    var that = this;
+    var retro = new Retro(retroName, true, '1', 2);
     var retros = this.af.database.list('retro');
-    retros.push(retro);
-    this.router.navigate(['/retro/' + retroId]);
-    this.dialogRef.close();
+    var retroId = retros.push(retro).then((item) => {
+       that.router.navigate(['/retro/' + item.key]);
+       that.dialogRef.close();
+    });
   }
 }
