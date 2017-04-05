@@ -10,7 +10,29 @@
                 <input mdInput placeholder="Retro Name" [(ngModel)]="retroName" name="retroNameInput" required/>
             </md-input-container>
         </p>
+        <p>
+            <md-select placeholder="Number of Votes" [(ngModel)]="numberOfVotes" name="numberOfVotesInput" required>
+                <md-option [value]="1">1</md-option>
+                <md-option [value]="2">2</md-option>
+                <md-option [value]="3">3</md-option>
+                <md-option [value]="4">4</md-option>
+            </md-select>
+        </p>
+        <p>
+            <md-select placeholder="Number of Phases" (ngModelChange)="changeNumberOfPhases($event)" [(ngModel)]="numberOfPhases" name="numberOfPhasesInput" required>
+                <md-option [value]="1">1</md-option>
+                <md-option [value]="2">2</md-option>
+                <md-option [value]="3">3</md-option>
+                <md-option [value]="4">4</md-option>
+                <md-option [value]="5">5</md-option>
 
+            </md-select>
+        </p>
+        <p *ngFor="let phase of phases">
+            <md-input-container>
+                <input mdInput placeholder = "Phase {{phase.order}} Name" [(ngModel)]="phase.name" name="phaseName" required>
+            </md-input-container>
+        </p>
         <div style="text-align: center">
             <button type="submit" md-raised-button color="primary" style="width: 100%" (click)="createRetro(retroName)" [disabled]="!createRetroForm.form.valid">CREATE</button>
         </div>
