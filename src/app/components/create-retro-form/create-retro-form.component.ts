@@ -16,35 +16,45 @@ export class CreateRetroFormComponent {
   phases = [];
   af;
 
-  constructor(af: AngularFire, private router: Router, private dialogRef: MdDialogRef<CreateRetroFormComponent>)
-  {
+  constructor(af: AngularFire, private router: Router, private dialogRef: MdDialogRef<CreateRetroFormComponent>) {
     this.af = af;
-    while(this.phases.length < 3){
+    while (this.phases.length < 3) {
       this.addPhase();
     }
   }
 
-  addPhase(){
-    this.phases.push(new Phase("", 1, "", this.phases.length + 1));
+  addPhase() {
+    this.phases.push(new Phase('', 1, 1, '', this.phases.length + 1));
   }
 
-  removePhase(){
+  removePhase() {
     this.phases.splice(-1);
   }
 
-
   createRetro(retroName: string) {
-    var that = this;
-    var retro = new Retro(retroName, true, 1, this.numberOfVotes);
-    var retrosList = this.af.database.list('retros');
-    var phasesList = this.af.database.list('phases');
-    var retroId = retrosList.push(retro).then((pushedRetro) => {
-      for(var x = 0; x < that.phases.length; x++){
+    let that = this;
+    let retro = new Retro(retroName, true, null, 1, this.numberOfVotes);
+    let retrosList = this.af.database.list('retros');
+    let allPhasesList = this.af.database.list('phases');
+
+    retrosList.push(retro).then((pushedRetro) => {
+      for (let x = 0; x < that.phases.length; x++) {
         that.phases[x].retroId = pushedRetro.key;
-        phasesList.push(that.phases[x])
+        allPhasesList.push(that.phases[x]);
       }
-       that.router.navigate(['/retro/' + pushedRetro.key]);
-       that.dialogRef.close();
+
+      this.af.database.list('phases', {
+        query: {
+          orderByChild: 'retroId',
+          equalTo: pushedRetro.key
+        }
+      }).subscribe(orderedPhases => {
+          let firstPhaseId = orderedPhases[0].$key;
+          pushedRetro.update({ currentPhaseId: firstPhaseId });
+        });
+
+      that.router.navigate(['/retro/' + pushedRetro.key]);
+      that.dialogRef.close();
     });
   }
 }
