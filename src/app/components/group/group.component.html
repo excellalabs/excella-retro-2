@@ -1,8 +1,6 @@
 <div>
   <h3>{{groupName}}</h3>
-  <ul>
-    <li *ngFor="let message of messages | groupedMessagesPipe: groupId">
-      {{message.text}}
-    </li>
-  </ul>
+  <app-feedback-container>
+      <app-feedback-card *ngFor="let feedback of messages | groupedMessagesPipe: groupId" [feedback]="feedback"></app-feedback-card>
+    </app-feedback-container>
 </div>
