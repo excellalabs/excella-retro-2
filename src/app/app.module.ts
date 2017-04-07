@@ -52,13 +52,12 @@ export const firebaseConfig = {
     VoteFeedbackComponent,
     ChildComponentDirective,
     AdminToolbarComponent,
-    Phase-Steps-Refactor
     CreateRetroFormComponent,
     PhaseStepCardComponent,
     PhaseStepHeaderComponent,
     PhaseStepContentComponent,
     FeedbackCardComponent,
-    FeedbackContainerComponent
+    FeedbackContainerComponent,
     GroupedMessagesPipe,
     GroupComponent,
     CreateRetroFormComponent
