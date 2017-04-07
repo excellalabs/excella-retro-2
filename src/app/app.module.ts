@@ -23,6 +23,8 @@ import { GroupFeedbackComponent } from './components/phase-steps/group-feedback/
 import { VoteFeedbackComponent } from './components/phase-steps/vote-feedback/vote-feedback.component';
 import { ChildComponentDirective } from './directives/child-component-directive';
 import { AdminToolbarComponent } from './components/shared/admin-toolbar/admin-toolbar.component';
+import { GroupedMessagesPipe } from './directives/grouped-messages.pipe';
+import { GroupComponent } from './components/group/group.component'
 
 export const firebaseConfig = {
   apiKey: 'AIzaSyAjMVQvUS9_E_ckc_yT7siUhQKOnEgD8bs',
@@ -43,7 +45,9 @@ export const firebaseConfig = {
     GroupFeedbackComponent,
     VoteFeedbackComponent,
     ChildComponentDirective,
-    AdminToolbarComponent
+    AdminToolbarComponent,
+    GroupedMessagesPipe,
+    GroupComponent
   ],
   entryComponents: [
     JoinRetroFormComponent,

@@ -1,8 +1,10 @@
-<p>
-  group-feedback works!
-</p>
+<h2>Ungrouped Feedback</h2>
 <ul>
-  <li *ngFor="let message of feedbackMessages">
+  <li *ngFor="let message of ungroupedFeedbackMessages">
     {{ message.text }}
   </li>
 </ul>
+<h2>Groups</h2>
+<div *ngFor="let groupItem of groups">
+  <group [groupName]="groupItem.name" [groupId]="groupItem.$key" [messages]="feedbackMessages"></group>
+</div>
