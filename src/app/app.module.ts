@@ -24,6 +24,9 @@ import { VoteFeedbackComponent } from './components/phase-steps/vote-feedback/vo
 import { ChildComponentDirective } from './directives/child-component-directive';
 import { AdminToolbarComponent } from './components/shared/admin-toolbar/admin-toolbar.component';
 import { CreateRetroFormComponent } from './components/create-retro-form/create-retro-form.component';
+import { PhaseStepCardComponent } from './components/shared/phase-step/phase-step-card/phase-step-card.component';
+import { PhaseStepHeaderComponent } from './components/shared/phase-step/phase-step-header/phase-step-header.component';
+import { PhaseStepContentComponent } from './components/shared/phase-step/phase-step-content/phase-step-content.component';
 
 export const firebaseConfig = {
   apiKey: 'AIzaSyAjMVQvUS9_E_ckc_yT7siUhQKOnEgD8bs',
@@ -45,7 +48,10 @@ export const firebaseConfig = {
     VoteFeedbackComponent,
     ChildComponentDirective,
     AdminToolbarComponent,
-    CreateRetroFormComponent
+    CreateRetroFormComponent,
+    PhaseStepCardComponent,
+    PhaseStepHeaderComponent,
+    PhaseStepContentComponent
   ],
   entryComponents: [
     JoinRetroFormComponent,
