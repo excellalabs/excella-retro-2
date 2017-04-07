@@ -1,8 +1,6 @@
-<md-card style="padding:0px">
-  <md-toolbar color="accent">
-    <span>Submit Feedback</span>
-  </md-toolbar>
-  <md-card-content style="padding:0 24px 8px">
+<app-phase-step-card>
+  <app-phase-step-header>Submit Feedback</app-phase-step-header>
+  <app-phase-step-content>
     <div fxLayout>
       <div fxFlex="50%">
         <h4>Add Feedback</h4>
@@ -15,12 +13,10 @@
       </div>
       <div fxFlex="50%">
         <h4>Live Feedback</h4>
-        <div fxLayout="column">
-          <md-card fxFlex class="feedback-card" *ngFor="let feedback of existingFeedbackVal">
-            <p>{{feedback.text}}</p>
-          </md-card>
-        </div>
+        <app-feedback-container>
+          <app-feedback-card *ngFor="let feedback of existingFeedbackVal" [feedback]="feedback"></app-feedback-card>
+        </app-feedback-container>
       </div>
     </div>
-  </md-card-content>
-</md-card>
+  </app-phase-step-content>
+</app-phase-step-card>
