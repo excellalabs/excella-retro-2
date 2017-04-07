@@ -26,6 +26,11 @@ import { AdminToolbarComponent } from './components/shared/admin-toolbar/admin-t
 import { GroupedMessagesPipe } from './directives/grouped-messages.pipe';
 import { GroupComponent } from './components/group/group.component';
 import { CreateRetroFormComponent } from './components/create-retro-form/create-retro-form.component';
+import { PhaseStepCardComponent } from './components/shared/phase-step/phase-step-card/phase-step-card.component';
+import { PhaseStepHeaderComponent } from './components/shared/phase-step/phase-step-header/phase-step-header.component';
+import { PhaseStepContentComponent } from './components/shared/phase-step/phase-step-content/phase-step-content.component';
+import { FeedbackCardComponent } from './components/shared/feedback/feedback-card/feedback-card.component';
+import { FeedbackContainerComponent } from './components/shared/feedback/feedback-container/feedback-container.component';
 
 export const firebaseConfig = {
   apiKey: 'AIzaSyAjMVQvUS9_E_ckc_yT7siUhQKOnEgD8bs',
@@ -53,6 +58,12 @@ const firebaseAuthConfig = {
     VoteFeedbackComponent,
     ChildComponentDirective,
     AdminToolbarComponent,
+    CreateRetroFormComponent,
+    PhaseStepCardComponent,
+    PhaseStepHeaderComponent,
+    PhaseStepContentComponent,
+    FeedbackCardComponent,
+    FeedbackContainerComponent,
     GroupedMessagesPipe,
     GroupComponent,
     CreateRetroFormComponent
