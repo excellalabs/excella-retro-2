@@ -10,6 +10,7 @@ import { ChildComponentDirective } from '../../directives/child-component-direct
 import { SubmitFeedbackComponent } from '../phase-steps/submit-feedback/submit-feedback.component';
 import { GroupFeedbackComponent } from '../phase-steps/group-feedback/group-feedback.component';
 import { VoteFeedbackComponent } from '../phase-steps/vote-feedback/vote-feedback.component';
+import { RetroSummaryComponent } from '../retro-summary/retro-summary.component';
 
 @Component({
   selector: 'app-retro',
@@ -42,12 +43,16 @@ export class RetroComponent implements OnInit {
     this.subscription = this.route.params.subscribe(params => self.retroId = params['retroId']);
     this.retroObservable = this.af.database.object('retros/' + self.retroId);
     this.retroObservable.subscribe(retroVal => {
-      if (self.currentPhaseId !== retroVal.currentPhaseId) {
-        self.currentPhaseId = retroVal.currentPhaseId;
-        this.af.database.object('phases/' + self.currentPhaseId).subscribe(phaseVal => {
-          self.currentPhaseStep = phaseVal.currentPhaseStep;
-          this.renderPhaseStep();
-        });
+      if (retroVal.isActive === true) {
+        if (self.currentPhaseId !== retroVal.currentPhaseId) {
+          self.currentPhaseId = retroVal.currentPhaseId;
+          this.af.database.object('phases/' + self.currentPhaseId).subscribe(phaseVal => {
+            self.currentPhaseStep = phaseVal.currentPhaseStep;
+            this.renderPhaseStep();
+          });
+        }
+      } else {
+        this.showRetroSummary();
       }
     });
   }
@@ -61,6 +66,15 @@ export class RetroComponent implements OnInit {
       this.childComponent = new ChildComponent(VoteFeedbackComponent, this.retroObservable);
     }
 
+    this.renderChildComponent();
+  }
+
+  showRetroSummary() {
+    this.childComponent = new ChildComponent(RetroSummaryComponent, this.retroObservable);
+    this.renderChildComponent();
+  }
+
+  renderChildComponent() {
     const componentFactory = this.componentFactoryResolver.resolveComponentFactory(this.childComponent.component);
     const viewContainerRef = this.childComponentHost.viewContainerRef;
     viewContainerRef.clear();

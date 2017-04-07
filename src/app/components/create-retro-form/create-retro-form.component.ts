@@ -49,9 +49,9 @@ export class CreateRetroFormComponent {
           equalTo: pushedRetro.key
         }
       }).subscribe(orderedPhases => {
-          let firstPhaseId = orderedPhases[0].$key;
-          pushedRetro.update({ currentPhaseId: firstPhaseId });
-        });
+        let firstPhaseId = orderedPhases[0].$key;
+        pushedRetro.update({ currentPhaseId: firstPhaseId });
+      });
 
       that.router.navigate(['/retro/' + pushedRetro.key]);
       that.dialogRef.close();
