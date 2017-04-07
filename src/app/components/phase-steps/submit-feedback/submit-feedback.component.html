@@ -13,11 +13,9 @@
       </div>
       <div fxFlex="50%">
         <h4>Live Feedback</h4>
-        <div fxLayout="column">
-          <md-card fxFlex class="feedback-card" *ngFor="let feedback of existingFeedbackVal">
-            <p>{{feedback.text}}</p>
-          </md-card>
-        </div>
+        <app-feedback-container>
+          <app-feedback-card *ngFor="let feedback of existingFeedbackVal" [feedback]="feedback"></app-feedback-card>
+        </app-feedback-container>
       </div>
     </div>
   </app-phase-step-content>

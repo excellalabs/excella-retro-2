@@ -27,6 +27,8 @@ import { CreateRetroFormComponent } from './components/create-retro-form/create-
 import { PhaseStepCardComponent } from './components/shared/phase-step/phase-step-card/phase-step-card.component';
 import { PhaseStepHeaderComponent } from './components/shared/phase-step/phase-step-header/phase-step-header.component';
 import { PhaseStepContentComponent } from './components/shared/phase-step/phase-step-content/phase-step-content.component';
+import { FeedbackCardComponent } from './components/shared/feedback/feedback-card/feedback-card.component';
+import { FeedbackContainerComponent } from './components/shared/feedback/feedback-container/feedback-container.component';
 
 export const firebaseConfig = {
   apiKey: 'AIzaSyAjMVQvUS9_E_ckc_yT7siUhQKOnEgD8bs',
@@ -51,7 +53,9 @@ export const firebaseConfig = {
     CreateRetroFormComponent,
     PhaseStepCardComponent,
     PhaseStepHeaderComponent,
-    PhaseStepContentComponent
+    PhaseStepContentComponent,
+    FeedbackCardComponent,
+    FeedbackContainerComponent
   ],
   entryComponents: [
     JoinRetroFormComponent,
