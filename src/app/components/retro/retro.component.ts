@@ -5,11 +5,13 @@ import { Router } from '@angular/router';
 import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
 import { Retro } from '../../models/retro';
 import { Phase } from '../../models/phase';
+import { JoinRetroFormComponent } from '../join-retro-form/join-retro-form.component';
 import { ChildComponent } from '../../models/child-component';
 import { ChildComponentDirective } from '../../directives/child-component-directive';
 import { SubmitFeedbackComponent } from '../phase-steps/submit-feedback/submit-feedback.component';
 import { GroupFeedbackComponent } from '../phase-steps/group-feedback/group-feedback.component';
 import { VoteFeedbackComponent } from '../phase-steps/vote-feedback/vote-feedback.component';
+import { LocalStorageService } from 'angular-2-local-storage';
 
 @Component({
   selector: 'app-retro',
@@ -25,6 +27,7 @@ export class RetroComponent implements OnInit {
   private currentPhase: string;
   private currentPhaseId: string;
   private currentPhaseStep: number;
+  private currentUserId: string;
   @Input() childComponent: ChildComponent;
   @ViewChild(ChildComponentDirective) childComponentHost: ChildComponentDirective;
 
@@ -33,11 +36,13 @@ export class RetroComponent implements OnInit {
     private location: Location,
     private router: Router,
     private af: AngularFire,
-    private componentFactoryResolver: ComponentFactoryResolver
+    private componentFactoryResolver: ComponentFactoryResolver,
+    private localStorageService: LocalStorageService
   ) { }
 
   ngOnInit() {
     const self = this;
+    this.validateUser();
 
     this.subscription = this.route.params.subscribe(params => self.retroId = params['retroId']);
     this.retroObservable = this.af.database.object('retros/' + self.retroId);
@@ -67,5 +72,12 @@ export class RetroComponent implements OnInit {
 
     const componentRef = viewContainerRef.createComponent(componentFactory);
     (<ChildComponent>componentRef.instance).data = this.childComponent.data;
+  }
+
+  validateUser() {
+    this.currentUserId = localStorage.getItem('currentUserId');
+    if (this.currentUserId == null) {
+      this.router.navigate(['/']);
+    }
   }
 }

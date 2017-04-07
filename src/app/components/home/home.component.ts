@@ -3,7 +3,6 @@ import { MdDialog } from '@angular/material';
 import { JoinRetroFormComponent } from '../join-retro-form/join-retro-form.component';
 import { CreateRetroFormComponent } from '../create-retro-form/create-retro-form.component';
 
-
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
