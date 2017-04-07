@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MdDialogRef, MdSelect } from '@angular/material';
 import { Retro } from '../../models/retro';
@@ -10,7 +10,7 @@ import { AngularFire, FirebaseListObservable } from 'angularfire2';
   templateUrl: './create-retro-form.component.html',
 })
 
-export class CreateRetroFormComponent {
+export class CreateRetroFormComponent implements OnInit {
   retroName: string;
   numberOfVotes = 2;
   phases = [];
@@ -18,16 +18,15 @@ export class CreateRetroFormComponent {
 
   constructor(private af: AngularFire, private router: Router, private dialogRef: MdDialogRef<CreateRetroFormComponent>) {  }
 
-  ngOnInit(){
+  ngOnInit() {
     while (this.phases.length < 3) {
       this.addPhase();
     }
 
     this.af.auth.subscribe(user => {
-      if(user) {
+      if (user) {
         this.user = user;
-      }
-      else {
+      } else {
         this.user = null;
       }
     });
