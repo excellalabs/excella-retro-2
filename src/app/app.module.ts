@@ -23,6 +23,8 @@ import { GroupFeedbackComponent } from './components/phase-steps/group-feedback/
 import { VoteFeedbackComponent } from './components/phase-steps/vote-feedback/vote-feedback.component';
 import { ChildComponentDirective } from './directives/child-component-directive';
 import { AdminToolbarComponent } from './components/shared/admin-toolbar/admin-toolbar.component';
+import { GroupedMessagesPipe } from './directives/grouped-messages.pipe';
+import { GroupComponent } from './components/group/group.component';
 import { CreateRetroFormComponent } from './components/create-retro-form/create-retro-form.component';
 import { PhaseStepCardComponent } from './components/shared/phase-step/phase-step-card/phase-step-card.component';
 import { PhaseStepHeaderComponent } from './components/shared/phase-step/phase-step-header/phase-step-header.component';
@@ -50,12 +52,16 @@ export const firebaseConfig = {
     VoteFeedbackComponent,
     ChildComponentDirective,
     AdminToolbarComponent,
+    Phase-Steps-Refactor
     CreateRetroFormComponent,
     PhaseStepCardComponent,
     PhaseStepHeaderComponent,
     PhaseStepContentComponent,
     FeedbackCardComponent,
     FeedbackContainerComponent
+    GroupedMessagesPipe,
+    GroupComponent,
+    CreateRetroFormComponent
   ],
   entryComponents: [
     JoinRetroFormComponent,

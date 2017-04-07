@@ -1,0 +1,8 @@
+<div>
+  <h3>{{groupName}}</h3>
+  <ul>
+    <li *ngFor="let message of messages | groupedMessagesPipe: groupId">
+      {{message.text}}
+    </li>
+  </ul>
+</div>
