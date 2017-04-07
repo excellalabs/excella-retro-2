@@ -3,6 +3,7 @@ import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
 import { MdSnackBar } from '@angular/material';
 import { Retro } from '../../../models/retro';
 import { Phase } from '../../../models/phase';
+import { LocalStorageService } from 'angular-2-local-storage';
 
 @Component({
   selector: 'app-admin-toolbar',
@@ -16,7 +17,11 @@ export class AdminToolbarComponent implements OnInit {
   phaseObservable: FirebaseObjectObservable<Phase>;
   endPhaseStepButtonTooltipText: string;
 
-  constructor(public snackbar: MdSnackBar, private af: AngularFire) { }
+  constructor(
+    public snackbar: MdSnackBar, 
+    private af: AngularFire,
+    private localStorageService: LocalStorageService
+    ) { }
 
   ngOnInit() {
     const self = this;
@@ -63,5 +68,7 @@ export class AdminToolbarComponent implements OnInit {
   endRetro() {
     // TODO: Add modal to confirm End Retro
     this.retroObservable.update({ isActive: false });
+
+    localStorage.removeItem('currentUserId');
   }
 }
