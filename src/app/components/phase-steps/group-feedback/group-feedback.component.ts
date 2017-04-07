@@ -21,6 +21,7 @@ export class GroupFeedbackComponent implements OnInit {
   feedbackMessages: Message[];
   ungroupedFeedbackMessages: Message[];
   groups: Group[];
+  newGroupName: string;
   
   constructor(private af: AngularFire) { }
 
@@ -28,7 +29,7 @@ export class GroupFeedbackComponent implements OnInit {
     const self = this;
     this.data.subscribe(retroVal => {
       self.retroId = retroVal.$key;
-
+      self.retro = retroVal;
       self.feedbackMessagesObservable = self.af.database.list('/messages', {
         query: {
           orderByChild: 'retroId',
@@ -51,9 +52,13 @@ export class GroupFeedbackComponent implements OnInit {
       self.groupsObservable.subscribe(groups => {
         self.groups = groups;
       });
+    });
+  }
 
-    }
-    );
+  createNewGroup(newGroupName: string) {
+    let group = new Group(newGroupName, this.retro.currentPhaseId, this.retro.$key);
+    this.groupsObservable.push(group);
+    this.newGroupName = "";
   }
 
 }
