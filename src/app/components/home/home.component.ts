@@ -5,7 +5,6 @@ import { CreateRetroFormComponent } from '../create-retro-form/create-retro-form
 import { AngularFire } from 'angularfire2';
 
 
-
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
