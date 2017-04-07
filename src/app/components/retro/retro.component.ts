@@ -25,7 +25,7 @@ export class RetroComponent implements OnInit {
   private currentPhase: string;
   private currentPhaseId: string;
   private currentPhaseStep: number;
-  private user: any;
+  public user: any;
   private retroSnapshot: any;
   @Input() childComponent: ChildComponent;
   @ViewChild(ChildComponentDirective) childComponentHost: ChildComponentDirective;
