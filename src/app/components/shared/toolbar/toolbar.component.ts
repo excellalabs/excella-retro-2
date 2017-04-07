@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
 import { LocalStorageService } from 'angular-2-local-storage';
+import { AngularFire } from 'angularfire2';
 
 @Component({
   selector: 'app-toolbar',
@@ -10,13 +11,30 @@ import { LocalStorageService } from 'angular-2-local-storage';
 })
 export class ToolbarComponent implements OnInit {
   isDarkMode: boolean;
+  user;
   body = document.getElementsByTagName('body')[0];
   darkModeClass = 'app-dark-theme';
 
-  constructor(private localStorageService: LocalStorageService) { }
+  constructor(private localStorageService: LocalStorageService, private af: AngularFire) { }
+
+  login() {
+      this.af.auth.login();
+    }
+
+    logout() {
+      this.af.auth.logout();
+    }
 
   ngOnInit() {
     this.checkDarkMode();
+    this.af.auth.subscribe(user => {
+        if(user) {
+          this.user = user;
+        }
+        else {
+          this.user = null;
+        }
+    });
   }
 
   checkDarkMode() {

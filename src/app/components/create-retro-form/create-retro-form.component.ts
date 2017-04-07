@@ -14,13 +14,23 @@ export class CreateRetroFormComponent {
   retroName: string;
   numberOfVotes = 2;
   phases = [];
-  af;
+  user;
 
-  constructor(af: AngularFire, private router: Router, private dialogRef: MdDialogRef<CreateRetroFormComponent>) {
-    this.af = af;
+  constructor(private af: AngularFire, private router: Router, private dialogRef: MdDialogRef<CreateRetroFormComponent>) {  }
+
+  ngOnInit(){
     while (this.phases.length < 3) {
       this.addPhase();
     }
+
+    this.af.auth.subscribe(user => {
+      if(user) {
+        this.user = user;
+      }
+      else {
+        this.user = null;
+      }
+    });
   }
 
   addPhase() {
@@ -33,7 +43,7 @@ export class CreateRetroFormComponent {
 
   createRetro(retroName: string) {
     let that = this;
-    let retro = new Retro(retroName, true, null, 1, this.numberOfVotes);
+    let retro = new Retro(retroName, true, null, 1, this.numberOfVotes, this.user.auth.uid);
     let retrosList = this.af.database.list('retros');
     let allPhasesList = this.af.database.list('phases');
 
