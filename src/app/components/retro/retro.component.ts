@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
 import { Retro } from '../../models/retro';
 import { Phase } from '../../models/phase';
+import { ChildComponentData } from '../../models/child-component-data';
 import { JoinRetroFormComponent } from '../join-retro-form/join-retro-form.component';
 import { ChildComponent } from '../../models/child-component';
 import { ChildComponentDirective } from '../../directives/child-component-directive';
@@ -24,7 +25,7 @@ export class RetroComponent implements OnInit {
   retroId: string;
   retroObservable: FirebaseObjectObservable<Retro>;
   private subscription: any;
-  private currentPhase: string;
+  private currentPhaseObservable: FirebaseObjectObservable<Phase>;
   private currentPhaseId: string;
   private currentPhaseStep: number;
   public user: any;
@@ -59,21 +60,24 @@ export class RetroComponent implements OnInit {
       self.retroSnapshot = retroVal;
       if (self.currentPhaseId !== retroVal.currentPhaseId) {
         self.currentPhaseId = retroVal.currentPhaseId;
-        this.af.database.object('phases/' + self.currentPhaseId).subscribe(phaseVal => {
+        self.currentPhaseObservable = self.af.database.object('phases/' + self.currentPhaseId);
+        self.currentPhaseObservable.subscribe(phaseVal => {
           self.currentPhaseStep = phaseVal.currentPhaseStep;
-          this.renderPhaseStep();
+          self.renderPhaseStep();
         });
       }
     });
   }
 
   renderPhaseStep() {
+    let data = new ChildComponentData(this.retroObservable, this.currentPhaseObservable);
+
     if (this.currentPhaseStep === 1) {
-      this.childComponent = new ChildComponent(SubmitFeedbackComponent, this.retroObservable);
+      this.childComponent = new ChildComponent(SubmitFeedbackComponent, data);
     } else if (this.currentPhaseStep === 2) {
-      this.childComponent = new ChildComponent(GroupFeedbackComponent, this.retroObservable);
+      this.childComponent = new ChildComponent(GroupFeedbackComponent, data);
     } else if (this.currentPhaseStep === 3) {
-      this.childComponent = new ChildComponent(VoteFeedbackComponent, this.retroObservable);
+      this.childComponent = new ChildComponent(VoteFeedbackComponent, data);
     }
 
     const componentFactory = this.componentFactoryResolver.resolveComponentFactory(this.childComponent.component);

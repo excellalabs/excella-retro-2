@@ -3,6 +3,7 @@ import { AngularFire, FirebaseObjectObservable, FirebaseListObservable } from 'a
 import { Retro } from '../../../models/retro';
 import { Group } from '../../../models/group';
 import { Message } from '../../../models/message';
+import { ChildComponentData } from '../../../models/child-component-data';
 
 @Component({
   selector: 'app-group-feedback',
@@ -12,7 +13,7 @@ import { Message } from '../../../models/message';
   changeDetection: ChangeDetectionStrategy.Default
 })
 export class GroupFeedbackComponent implements OnInit {
-  @Input() data: FirebaseObjectObservable<Retro>;
+  @Input() data: ChildComponentData;
   retroObservable: FirebaseObjectObservable<Retro>;
   retro: Retro;
   retroId: string;
@@ -21,12 +22,12 @@ export class GroupFeedbackComponent implements OnInit {
   feedbackMessages: Message[];
   ungroupedFeedbackMessages: Message[];
   groups: Group[];
-  
+
   constructor(private af: AngularFire) { }
 
   ngOnInit() {
     const self = this;
-    this.data.subscribe(retroVal => {
+    this.data.retroObservable.subscribe(retroVal => {
       self.retroId = retroVal.$key;
 
       self.feedbackMessagesObservable = self.af.database.list('/messages', {
