@@ -25,6 +25,8 @@ export class RetroComponent implements OnInit {
   private currentPhase: string;
   private currentPhaseId: string;
   private currentPhaseStep: number;
+  private user: any;
+  private retroSnapshot: any;
   @Input() childComponent: ChildComponent;
   @ViewChild(ChildComponentDirective) childComponentHost: ChildComponentDirective;
 
@@ -39,9 +41,19 @@ export class RetroComponent implements OnInit {
   ngOnInit() {
     const self = this;
 
+    this.af.auth.subscribe(user => {
+      if(user) {
+        self.user = user;
+      }
+      else {
+        self.user = null;
+      }
+    });
+
     this.subscription = this.route.params.subscribe(params => self.retroId = params['retroId']);
     this.retroObservable = this.af.database.object('retros/' + self.retroId);
     this.retroObservable.subscribe(retroVal => {
+      self.retroSnapshot = retroVal;
       if (self.currentPhaseId !== retroVal.currentPhaseId) {
         self.currentPhaseId = retroVal.currentPhaseId;
         this.af.database.object('phases/' + self.currentPhaseId).subscribe(phaseVal => {

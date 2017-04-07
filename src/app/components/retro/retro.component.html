@@ -1,12 +1,12 @@
 <md-sidenav-container fxLayout>
   <div class="floating-fab">
-    <span mdTooltip="Open Admin Toolbar">
+    <span *ngIf="user?.auth.uid === retroSnapshot?.adminId" mdTooltip="Open Admin Toolbar">
       <button md-fab (click)="sidenav.toggle()">
         <md-icon>add</md-icon>
       </button>
     </span>
   </div>
-  <md-sidenav #sidenav mode="over" opened="false" fxFlex="250px">
+  <md-sidenav  #sidenav mode="over" opened="false" fxFlex="250px">
     <div class="admin-toolbar">
       <app-admin-toolbar [retroObservable]="retroObservable"></app-admin-toolbar>
     </div>

@@ -4,7 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { AngularFireModule } from 'angularfire2';
+import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
 import { MaterialModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { LocalStorageModule } from 'angular-2-local-storage';
@@ -31,6 +31,12 @@ export const firebaseConfig = {
   databaseURL: 'https://excella-retro-2.firebaseio.com',
   storageBucket: 'excella-retro-2.appspot.com',
   messagingSenderId: '419643079193'
+};
+
+const firebaseAuthConfig = {
+  provider: AuthProviders.Google,
+  method: AuthMethods.Redirect,
+  remember: 'default', 
 };
 
 @NgModule({
@@ -60,7 +66,7 @@ export const firebaseConfig = {
     FormsModule,
     HttpModule,
     AppRoutingModule,
-    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireModule.initializeApp(firebaseConfig, firebaseAuthConfig),
     MaterialModule.forRoot(),
     FlexLayoutModule,
     LocalStorageModule.withConfig({
