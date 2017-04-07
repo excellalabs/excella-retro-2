@@ -42,7 +42,7 @@ export class RetroComponent implements OnInit {
 
   ngOnInit() {
     const self = this;
-    this.validateUser();
+    // this.validateUser();
 
     this.subscription = this.route.params.subscribe(params => self.retroId = params['retroId']);
     this.retroObservable = this.af.database.object('retros/' + self.retroId);
@@ -75,6 +75,7 @@ export class RetroComponent implements OnInit {
   }
 
   validateUser() {
+    // this validate a participant, does not account for admin
     this.currentUserId = localStorage.getItem('currentUserId');
     if (this.currentUserId == null) {
       this.router.navigate(['/']);
