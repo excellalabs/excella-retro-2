@@ -63,6 +63,14 @@ export class CreateRetroFormComponent {
           pushedRetro.update({ currentPhaseId: firstPhaseId });
         });
 
+      var currentUserId = localStorage.getItem('currentUserId');
+      if (currentUserId == null) {
+        var newUser = this.af.database.list('users').push({
+          retroId: pushedRetro.key
+        });
+        localStorage.setItem('currentUserId', newUser.key);
+      }
+
       that.router.navigate(['/retro/' + pushedRetro.key]);
       that.dialogRef.close();
     });
