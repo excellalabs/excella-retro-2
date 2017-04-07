@@ -23,6 +23,8 @@ import { GroupFeedbackComponent } from './components/phase-steps/group-feedback/
 import { VoteFeedbackComponent } from './components/phase-steps/vote-feedback/vote-feedback.component';
 import { ChildComponentDirective } from './directives/child-component-directive';
 import { AdminToolbarComponent } from './components/shared/admin-toolbar/admin-toolbar.component';
+import { GroupedMessagesPipe } from './directives/grouped-messages.pipe';
+import { GroupComponent } from './components/group/group.component';
 import { CreateRetroFormComponent } from './components/create-retro-form/create-retro-form.component';
 
 export const firebaseConfig = {
@@ -45,6 +47,8 @@ export const firebaseConfig = {
     VoteFeedbackComponent,
     ChildComponentDirective,
     AdminToolbarComponent,
+    GroupedMessagesPipe,
+    GroupComponent,
     CreateRetroFormComponent
   ],
   entryComponents: [
