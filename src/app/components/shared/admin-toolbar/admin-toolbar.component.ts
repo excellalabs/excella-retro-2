@@ -15,6 +15,7 @@ import { LocalStorageService } from 'angular-2-local-storage';
 export class AdminToolbarComponent implements OnInit {
   @Input() retroObservable: FirebaseObjectObservable<Retro>;
   currentPhaseObservable: FirebaseObjectObservable<Phase>;
+  retroVal: Retro;
   endPhaseStepButtonTooltipText: string;
   readonly phaseStepCount = 3;
 
@@ -28,6 +29,7 @@ export class AdminToolbarComponent implements OnInit {
     const self = this;
 
     this.retroObservable.subscribe(retroVal => {
+      self.retroVal = retroVal;
       self.currentPhaseObservable = this.af.database.object('phases/' + retroVal.currentPhaseId);
       const phaseSubscription = self.currentPhaseObservable.subscribe(phaseVal => {
         this.setCurrentPhaseStepButtonText(phaseVal.currentPhaseStep);
@@ -51,36 +53,34 @@ export class AdminToolbarComponent implements OnInit {
     });
   }
 
-  endPhase() {
+  endStep() {
     const self = this;
 
     // TODO: Add modal to confirm End Phase
 
-    this.retroObservable.subscribe(retroVal => {
-      const phases = this.af.database.list('phases/', {
-        query: {
-          orderByChild: 'retroId',
-          equalTo: retroVal.$key
-        }
-      });
+    const phases = self.af.database.list('phases/', {
+      query: {
+        orderByChild: 'retroId',
+        equalTo: self.retroVal.$key
+      }
+    });
 
-      phases.subscribe(phasesVal => {
-        const phaseCount = phasesVal.length;
-        self.currentPhaseObservable = this.af.database.object('phases/' + retroVal.currentPhaseId);
-        const phaseSubscription = self.currentPhaseObservable.subscribe(phaseVal => {
-          const currentPhaseStep = phaseVal.currentPhaseStep;
-          if (currentPhaseStep < self.phaseStepCount) {
-            self.goToNextPhaseStep(currentPhaseStep);
+    phases.subscribe(phasesVal => {
+      const phaseCount = phasesVal.length;
+      self.currentPhaseObservable = self.af.database.object('phases/' + self.retroVal.currentPhaseId);
+      const currentPhaseSubscription = self.currentPhaseObservable.subscribe(currentPhaseVal => {
+        const currentPhaseStep = currentPhaseVal.currentPhaseStep;
+        if (currentPhaseStep < self.phaseStepCount) {
+          self.goToNextPhaseStep(currentPhaseStep);
+        } else {
+          const currentPhaseNumber = self.retroVal.currentPhaseNumber;
+          if (currentPhaseNumber < phaseCount) {
+            self.startNextPhase(currentPhaseNumber);
           } else {
-            const currentPhaseNumber = retroVal.currentPhaseNumber;
-            if (currentPhaseNumber < phaseCount) {
-              self.startNextPhase(currentPhaseNumber);
-            } else {
-              self.endRetro();
-            }
+            self.endRetro();
           }
-          phaseSubscription.unsubscribe();
-        });
+        }
+        currentPhaseSubscription.unsubscribe();
       });
     });
   }

@@ -34,6 +34,7 @@ export class RetroComponent implements OnInit {
   public retroSnapshot: Retro;
   @Input() childComponent: ChildComponent;
   @ViewChild(ChildComponentDirective) childComponentHost: ChildComponentDirective;
+  showAdminToolbar: boolean;
 
   constructor(
     private route: ActivatedRoute,
@@ -60,6 +61,7 @@ export class RetroComponent implements OnInit {
     this.retroObservable.subscribe(retroVal => {
       self.retroSnapshot = retroVal;
       self.retroIsActive = self.retroSnapshot.isActive;
+      this.toggleAdminToolbar();
       if (self.currentPhaseId !== retroVal.currentPhaseId) {
         self.currentPhaseId = retroVal.currentPhaseId;
         self.currentPhaseObservable = self.af.database.object('phases/' + self.currentPhaseId);
@@ -95,9 +97,13 @@ export class RetroComponent implements OnInit {
   }
 
   validateUser() {
-    var currentUserId = localStorage.getItem('currentUserId');
+    const currentUserId = localStorage.getItem('currentUserId');
     if (currentUserId == null) {
       this.router.navigate(['/']);
     }
+  }
+
+  toggleAdminToolbar() {
+    this.showAdminToolbar = this.retroSnapshot.isActive && this.user.auth.uid === this.retroSnapshot.adminId;
   }
 }
