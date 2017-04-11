@@ -1,28 +1,30 @@
-import { Component, OnInit, ViewEncapsulation, ChangeDetectionStrategy, Input, Pipe, PipeTransform } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, Pipe, PipeTransform } from '@angular/core';
+import { Subscription } from 'rxjs/subscription';
 import { Message } from '../../../models/message';
 import { Retro } from '../../../models/retro';
 import { Group } from '../../../models/group';
 import { Vote } from '../../../models/vote';
+import { ChildComponentData } from '../../../models/child-component-data';
 import { AngularFire, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2';
 import { LocalStorageService } from 'angular-2-local-storage';
 
 @Component({
-  selector: 'vote-feedback-component',
+  selector: 'app-vote-feedback-component',
   templateUrl: './vote-feedback.component.html',
-  styleUrls: ['./vote-feedback.component.css'],
-  encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.Default
+  styleUrls: ['./vote-feedback.component.css']
 })
-export class VoteFeedbackComponent implements OnInit {
+export class VoteFeedbackComponent implements OnInit, OnDestroy {
   votesObservable: FirebaseListObservable<Vote[]>;
   groupsObservable: FirebaseListObservable<Group[]>;
+  dataSubscription: Subscription;
+  votesSubscription: Subscription;
   groups: Group[];
   private votes: Vote[];
   retroName: string;
   currentPhaseId: string;
   votesRemaining: number;
   currentUserId: string; // Temporary
-  @Input() data: FirebaseObjectObservable<Retro>;
+  @Input() data: ChildComponentData;
 
   constructor(
     private af: AngularFire,
@@ -33,38 +35,43 @@ export class VoteFeedbackComponent implements OnInit {
       const self = this;
       this.currentUserId = localStorage.getItem('currentUserId');
 
-      this.data.subscribe(retro => {
-          this.retroName = retro.name;
-          this.currentPhaseId = retro.currentPhaseId;
+      this.dataSubscription = this.data.retroObservable.subscribe(retro => {
+        self.retroName = retro.name;
+        self.currentPhaseId = retro.currentPhaseId;
 
-          this.votesObservable = this.af.database.list('votes', 
-            { query: {orderByChild: "userId",equalTo: this.currentUserId }});
+        self.votesObservable = self.af.database.list('votes',
+          { query: { orderByChild: 'userId', equalTo: self.currentUserId } });
 
-          this.votesObservable.subscribe(votesList => {
-            this.votes = votesList;
-            var currentPhaseVotes = this.votes.filter(vote => vote.phaseId === retro.currentPhaseId);
-            this.votesRemaining = retro.votesPerParticipant - currentPhaseVotes.length
-          })
+        self.votesSubscription = self.votesObservable.subscribe(votesList => {
+          self.votes = votesList;
+          const currentPhaseVotes = self.votes.filter(vote => vote.phaseId === retro.currentPhaseId);
+          self.votesRemaining = retro.votesPerParticipant - currentPhaseVotes.length;
+        });
 
-          this.af.database.list('groups', { query: { orderByChild: "phaseId", equalTo: retro.currentPhaseId}})
-            .subscribe(groupList => { this.groups = groupList; })
-      })
+        self.af.database.list('groups', { query: { orderByChild: 'phaseId', equalTo: retro.currentPhaseId } })
+          .subscribe(groupList => { self.groups = groupList; });
+      });
+  }
+
+  ngOnDestroy() {
+    this.dataSubscription.unsubscribe();
+    this.votesSubscription.unsubscribe();
   }
 
   addVote(group: Group) {
     if (this.votesRemaining > 0) {
-      var newVote = {
+      const newVote = {
         groupId: group.$key,
         userId: this.currentUserId,
         phaseId: this.currentPhaseId
-      }
+      };
       this.votesObservable.push(newVote);
     }
   }
 
   getVoteCount(group: Group) {
     if (this.votes != null) {
-      return this.votes.filter(vote => vote.groupId == group.$key).length;
+      return this.votes.filter(vote => vote.groupId === group.$key).length;
     }
     return 0;
   }

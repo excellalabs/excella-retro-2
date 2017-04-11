@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
 import { MdSnackBar } from '@angular/material';
 import { Retro } from '../../../models/retro';
@@ -8,9 +8,7 @@ import { LocalStorageService } from 'angular-2-local-storage';
 @Component({
   selector: 'app-admin-toolbar',
   templateUrl: './admin-toolbar.component.html',
-  styleUrls: ['./admin-toolbar.component.css'],
-  encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.Default
+  styleUrls: ['./admin-toolbar.component.css']
 })
 export class AdminToolbarComponent implements OnInit {
   @Input() retroObservable: FirebaseObjectObservable<Retro>;
@@ -58,15 +56,16 @@ export class AdminToolbarComponent implements OnInit {
 
     // TODO: Add modal to confirm End Phase
 
-    const phases = self.af.database.list('phases/', {
+    const phasesObservable = self.af.database.list('phases/', {
       query: {
         orderByChild: 'retroId',
         equalTo: self.retroVal.$key
       }
     });
 
-    phases.subscribe(phasesVal => {
+    const phasesSubscription = phasesObservable.subscribe(phasesVal => {
       const phaseCount = phasesVal.length;
+
       self.currentPhaseObservable = self.af.database.object('phases/' + self.retroVal.currentPhaseId);
       const currentPhaseSubscription = self.currentPhaseObservable.subscribe(currentPhaseVal => {
         const currentPhaseStep = currentPhaseVal.currentPhaseStep;
@@ -82,6 +81,7 @@ export class AdminToolbarComponent implements OnInit {
         }
         currentPhaseSubscription.unsubscribe();
       });
+      phasesSubscription.unsubscribe();
     });
   }
 

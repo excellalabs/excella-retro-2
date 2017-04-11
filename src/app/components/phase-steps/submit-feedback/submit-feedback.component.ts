@@ -1,5 +1,6 @@
-import { Component, OnInit, ViewEncapsulation, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { AngularFire, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2';
+import { Subscription } from 'rxjs/subscription';
 import { Retro } from '../../../models/retro';
 import { Phase } from '../../../models/phase';
 import { Message } from '../../../models/message';
@@ -8,15 +9,16 @@ import { ChildComponentData } from '../../../models/child-component-data';
 @Component({
   selector: 'app-submit-feedback',
   templateUrl: './submit-feedback.component.html',
-  styleUrls: ['./submit-feedback.component.css'],
-  encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.Default
+  styleUrls: ['./submit-feedback.component.css']
 })
-export class SubmitFeedbackComponent implements OnInit {
+export class SubmitFeedbackComponent implements OnInit, OnDestroy {
   @Input() data: ChildComponentData;
   retroObservable: FirebaseObjectObservable<Retro>;
   currentPhaseObservable: FirebaseObjectObservable<Phase>;
   existingFeedbackObservable: FirebaseListObservable<Message[]>;
+  retroSubscription: Subscription;
+  currentPhaseSubscription: Subscription;
+  existingFeedbackSubscription: Subscription;
   retroVal: Retro;
   currentPhaseVal: Phase;
   existingFeedbackVal: Message[];
@@ -32,16 +34,16 @@ export class SubmitFeedbackComponent implements OnInit {
     this.retroObservable = this.data.retroObservable;
     this.currentPhaseObservable = this.data.currentPhaseObservable;
 
-    this.retroObservable.subscribe(retroVal => {
+    this.retroSubscription = this.retroObservable.subscribe(retroVal => {
       self.retroVal = retroVal;
       self.retroId = retroVal.$key;
-      self.currentPhaseObservable.subscribe(currentPhaseVal => {
+      this.currentPhaseSubscription = self.currentPhaseObservable.subscribe(currentPhaseVal => {
         self.currentPhaseVal = currentPhaseVal;
         self.phaseId = currentPhaseVal.$key;
       });
 
       self.existingFeedbackObservable = self.af.database.list('messages');
-      self.existingFeedbackObservable.subscribe(existingFeedbackVal => {
+      this.existingFeedbackSubscription = self.existingFeedbackObservable.subscribe(existingFeedbackVal => {
         self.existingFeedbackVal = existingFeedbackVal;
         self.existingFeedbackVal = self.existingFeedbackVal.filter((feedback) => {
           return feedback.retroId === self.retroId && feedback.phaseId === self.phaseId;
@@ -50,6 +52,12 @@ export class SubmitFeedbackComponent implements OnInit {
         self.hasExistingMessages = self.existingFeedbackVal.length > 0;
       });
     });
+  }
+
+  ngOnDestroy() {
+    this.retroSubscription.unsubscribe();
+    this.currentPhaseSubscription.unsubscribe();
+    this.existingFeedbackSubscription.unsubscribe();
   }
 
   submitFeedback() {

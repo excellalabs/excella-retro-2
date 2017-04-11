@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation, ChangeDetectionStrategy, Input, ViewChild, ComponentFactoryResolver } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ComponentFactoryResolver } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
@@ -18,9 +18,7 @@ import { LocalStorageService } from 'angular-2-local-storage';
 @Component({
   selector: 'app-retro',
   templateUrl: './retro.component.html',
-  styleUrls: ['./retro.component.css'],
-  encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.Default
+  styleUrls: ['./retro.component.css']
 })
 export class RetroComponent implements OnInit {
   retroId: string;
@@ -61,7 +59,7 @@ export class RetroComponent implements OnInit {
     this.retroObservable.subscribe(retroVal => {
       self.retroSnapshot = retroVal;
       self.retroIsActive = self.retroSnapshot.isActive;
-      this.toggleAdminToolbar();
+      self.toggleAdminToolbar();
       if (self.currentPhaseId !== retroVal.currentPhaseId) {
         self.currentPhaseId = retroVal.currentPhaseId;
         self.currentPhaseObservable = self.af.database.object('phases/' + self.currentPhaseId);
@@ -74,7 +72,7 @@ export class RetroComponent implements OnInit {
   }
 
   renderPhaseStep() {
-    let data = new ChildComponentData(this.retroObservable, this.currentPhaseObservable);
+    const data = new ChildComponentData(this.retroObservable, this.currentPhaseObservable);
 
     if (this.retroIsActive) {
       if (this.currentPhaseStep === 1) {
