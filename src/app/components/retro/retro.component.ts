@@ -60,7 +60,7 @@ export class RetroComponent implements OnInit {
       self.retroSnapshot = retroVal;
       self.retroIsActive = self.retroSnapshot.isActive;
       self.toggleAdminToolbar();
-      if (self.currentPhaseId !== retroVal.currentPhaseId) {
+      if (self.currentPhaseId !== retroVal.currentPhaseId || !self.retroIsActive) {
         self.currentPhaseId = retroVal.currentPhaseId;
         self.currentPhaseObservable = self.af.database.object('phases/' + self.currentPhaseId);
         self.currentPhaseObservable.subscribe(phaseVal => {
