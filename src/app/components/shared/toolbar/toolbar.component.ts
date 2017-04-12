@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LocalStorageService } from 'angular-2-local-storage';
 import { AngularFire } from 'angularfire2';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-toolbar',
@@ -13,7 +14,9 @@ export class ToolbarComponent implements OnInit {
   body = document.getElementsByTagName('body')[0];
   darkModeClass = 'app-dark-theme';
 
-  constructor(private localStorageService: LocalStorageService, private af: AngularFire) { }
+  constructor(private localStorageService: LocalStorageService,
+    private af: AngularFire,
+    private router: Router) { }
 
   login() {
       this.af.auth.login();
@@ -21,6 +24,7 @@ export class ToolbarComponent implements OnInit {
 
     logout() {
       this.af.auth.logout();
+      this.router.navigateByUrl('');
     }
 
   ngOnInit() {
