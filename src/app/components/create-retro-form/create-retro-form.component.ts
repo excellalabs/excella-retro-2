@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { MdDialogRef, MdSelect } from '@angular/material';
-import { Subscription } from 'rxjs/subscription';
+import { Subscription } from 'rxjs/Subscription';
 import { Retro } from '../../models/retro';
 import { Phase } from '../../models/phase';
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
