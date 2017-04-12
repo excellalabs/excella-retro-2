@@ -38,8 +38,12 @@ export class CreateRetroFormComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.userSubscription.unsubscribe();
-    this.phasesSubscription.unsubscribe();
+    if (this.userSubscription) {
+      this.userSubscription.unsubscribe();
+    }
+    if (this.phasesSubscription) {
+      this.phasesSubscription.unsubscribe();
+    };
   }
 
   addPhase() {
