@@ -74,7 +74,7 @@ export class AdminToolbarComponent implements OnInit {
         } else {
           const currentPhaseNumber = self.retroVal.currentPhaseNumber;
           if (currentPhaseNumber < phaseCount) {
-            self.startNextPhase(currentPhaseNumber);
+            self.startNextPhase(currentPhaseNumber, phasesVal);
           } else {
             self.endRetro();
           }
@@ -90,9 +90,13 @@ export class AdminToolbarComponent implements OnInit {
     this.currentPhaseObservable.update({ currentPhaseStep: nextPhaseStep });
   }
 
-  startNextPhase(currentPhaseNumber) {
-    const nextPhase = currentPhaseNumber + 1;
-    this.retroObservable.update({ currentPhaseNumber: nextPhase });
+  startNextPhase(currentPhaseNumber, phasesVal) {
+    const nextPhaseNumber = currentPhaseNumber + 1;
+    const nextPhaseId = phasesVal.filter(x => x.order === nextPhaseNumber)[0].$key;
+    this.retroObservable.update({
+      currentPhaseNumber: nextPhaseNumber,
+      currentPhaseId: nextPhaseId
+    });
     this.currentPhaseObservable.update({ currentPhaseStep: 1 });
   }
 

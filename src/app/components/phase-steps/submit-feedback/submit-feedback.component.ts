@@ -40,6 +40,7 @@ export class SubmitFeedbackComponent implements OnInit, OnDestroy {
       this.currentPhaseSubscription = self.currentPhaseObservable.subscribe(currentPhaseVal => {
         self.currentPhaseVal = currentPhaseVal;
         self.phaseId = currentPhaseVal.$key;
+        self.currentPhaseSubscription.unsubscribe();
       });
 
       self.existingFeedbackObservable = self.af.database.list('messages');
@@ -56,7 +57,6 @@ export class SubmitFeedbackComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.retroSubscription.unsubscribe();
-    this.currentPhaseSubscription.unsubscribe();
     this.existingFeedbackSubscription.unsubscribe();
   }
 
