@@ -31,6 +31,7 @@ import { PhaseStepHeaderComponent } from './components/shared/phase-step/phase-s
 import { PhaseStepContentComponent } from './components/shared/phase-step/phase-step-content/phase-step-content.component';
 import { FeedbackCardComponent } from './components/shared/feedback/feedback-card/feedback-card.component';
 import { FeedbackContainerComponent } from './components/shared/feedback/feedback-container/feedback-container.component';
+import { RetroCompleteComponent } from './components/retro-complete/retro-complete.component';
 
 export const firebaseConfig = {
   apiKey: 'AIzaSyAjMVQvUS9_E_ckc_yT7siUhQKOnEgD8bs',
@@ -43,7 +44,7 @@ export const firebaseConfig = {
 const firebaseAuthConfig = {
   provider: AuthProviders.Google,
   method: AuthMethods.Redirect,
-  remember: 'default', 
+  remember: 'default'
 };
 
 @NgModule({
@@ -56,6 +57,7 @@ const firebaseAuthConfig = {
     SubmitFeedbackComponent,
     GroupFeedbackComponent,
     VoteFeedbackComponent,
+    RetroCompleteComponent,
     ChildComponentDirective,
     AdminToolbarComponent,
     CreateRetroFormComponent,
@@ -73,7 +75,8 @@ const firebaseAuthConfig = {
     CreateRetroFormComponent,
     SubmitFeedbackComponent,
     GroupFeedbackComponent,
-    VoteFeedbackComponent
+    VoteFeedbackComponent,
+    RetroCompleteComponent
   ],
   imports: [
     BrowserModule,
