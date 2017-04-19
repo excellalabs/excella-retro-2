@@ -4,7 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { AngularFireModule } from 'angularfire2';
+import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
 import { MaterialModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { LocalStorageModule } from 'angular-2-local-storage';
@@ -31,6 +31,7 @@ import { PhaseStepHeaderComponent } from './components/shared/phase-step/phase-s
 import { PhaseStepContentComponent } from './components/shared/phase-step/phase-step-content/phase-step-content.component';
 import { FeedbackCardComponent } from './components/shared/feedback/feedback-card/feedback-card.component';
 import { FeedbackContainerComponent } from './components/shared/feedback/feedback-container/feedback-container.component';
+import { RetroCompleteComponent } from './components/retro-complete/retro-complete.component';
 
 export const firebaseConfig = {
   apiKey: 'AIzaSyAjMVQvUS9_E_ckc_yT7siUhQKOnEgD8bs',
@@ -38,6 +39,12 @@ export const firebaseConfig = {
   databaseURL: 'https://excella-retro-2.firebaseio.com',
   storageBucket: 'excella-retro-2.appspot.com',
   messagingSenderId: '419643079193'
+};
+
+const firebaseAuthConfig = {
+  provider: AuthProviders.Google,
+  method: AuthMethods.Redirect,
+  remember: 'default'
 };
 
 @NgModule({
@@ -50,6 +57,7 @@ export const firebaseConfig = {
     SubmitFeedbackComponent,
     GroupFeedbackComponent,
     VoteFeedbackComponent,
+    RetroCompleteComponent,
     ChildComponentDirective,
     AdminToolbarComponent,
     CreateRetroFormComponent,
@@ -67,7 +75,8 @@ export const firebaseConfig = {
     CreateRetroFormComponent,
     SubmitFeedbackComponent,
     GroupFeedbackComponent,
-    VoteFeedbackComponent
+    VoteFeedbackComponent,
+    RetroCompleteComponent
   ],
   imports: [
     BrowserModule,
@@ -75,7 +84,7 @@ export const firebaseConfig = {
     FormsModule,
     HttpModule,
     AppRoutingModule,
-    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireModule.initializeApp(firebaseConfig, firebaseAuthConfig),
     MaterialModule.forRoot(),
     FlexLayoutModule,
     LocalStorageModule.withConfig({

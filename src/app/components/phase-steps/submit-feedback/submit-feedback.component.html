@@ -1,5 +1,5 @@
 <app-phase-step-card>
-  <app-phase-step-header>Submit Feedback</app-phase-step-header>
+  <app-phase-step-header><b>{{(currentPhaseObservable | async)?.name}}:</b> Submit Feedback</app-phase-step-header>
   <app-phase-step-content>
     <div fxLayout>
       <div fxFlex="50%">
@@ -14,7 +14,12 @@
       <div fxFlex="50%">
         <h4>Live Feedback</h4>
         <app-feedback-container>
-          <app-feedback-card *ngFor="let feedback of existingFeedbackVal" [feedback]="feedback"></app-feedback-card>
+          <div *ngIf="hasExistingMessages">
+            <app-feedback-card *ngFor="let feedback of existingFeedbackVal" [feedback]="feedback"></app-feedback-card>
+          </div>
+          <div *ngIf="!hasExistingMessages">
+            <p><i style="color:rgba(0, 0, 0, 0.38)">No feedback has been entered.</i></p>
+          </div>
         </app-feedback-container>
       </div>
     </div>
