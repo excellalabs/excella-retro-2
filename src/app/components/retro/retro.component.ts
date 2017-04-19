@@ -102,6 +102,9 @@ export class RetroComponent implements OnInit {
   }
 
   toggleAdminToolbar() {
-    this.showAdminToolbar = this.retroSnapshot.isActive && this.user.auth.uid === this.retroSnapshot.adminId;
+    this.showAdminToolbar =
+      this.retroSnapshot.isActive
+      && this.user
+      && this.user.auth.uid === this.retroSnapshot.adminId;
   }
 }
