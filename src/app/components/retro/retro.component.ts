@@ -76,12 +76,16 @@ export class RetroComponent implements OnInit {
   renderPhaseStep() {
     const data = new ChildComponentData(this.retroObservable, this.currentPhaseObservable);
 
-    if (this.currentPhaseStep === 1) {
-      this.childComponent = new ChildComponent(SubmitFeedbackComponent, data);
-    } else if (this.currentPhaseStep === 2) {
-      this.childComponent = new ChildComponent(GroupFeedbackComponent, data);
-    } else if (this.currentPhaseStep === 3) {
-      this.childComponent = new ChildComponent(VoteFeedbackComponent, data);
+    if (this.retroIsActive) {
+      if (this.currentPhaseStep === 1) {
+        this.childComponent = new ChildComponent(SubmitFeedbackComponent, data);
+      } else if (this.currentPhaseStep === 2) {
+        this.childComponent = new ChildComponent(GroupFeedbackComponent, data);
+      } else if (this.currentPhaseStep === 3) {
+        this.childComponent = new ChildComponent(VoteFeedbackComponent, data);
+      }
+    } else {
+      this.childComponent = new ChildComponent(RetroCompleteComponent, data);
     }
 
     this.renderChildComponent();
