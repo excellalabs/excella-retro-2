@@ -4,7 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { AngularFireModule } from 'angularfire2';
+import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
 import { MaterialModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { LocalStorageModule } from 'angular-2-local-storage';
@@ -23,7 +23,15 @@ import { GroupFeedbackComponent } from './components/phase-steps/group-feedback/
 import { VoteFeedbackComponent } from './components/phase-steps/vote-feedback/vote-feedback.component';
 import { ChildComponentDirective } from './directives/child-component-directive';
 import { AdminToolbarComponent } from './components/shared/admin-toolbar/admin-toolbar.component';
+import { GroupedMessagesPipe } from './directives/grouped-messages.pipe';
+import { GroupComponent } from './components/group/group.component';
 import { CreateRetroFormComponent } from './components/create-retro-form/create-retro-form.component';
+import { PhaseStepCardComponent } from './components/shared/phase-step/phase-step-card/phase-step-card.component';
+import { PhaseStepHeaderComponent } from './components/shared/phase-step/phase-step-header/phase-step-header.component';
+import { PhaseStepContentComponent } from './components/shared/phase-step/phase-step-content/phase-step-content.component';
+import { FeedbackCardComponent } from './components/shared/feedback/feedback-card/feedback-card.component';
+import { FeedbackContainerComponent } from './components/shared/feedback/feedback-container/feedback-container.component';
+import { RetroCompleteComponent } from './components/retro-complete/retro-complete.component';
 import { RetroSummaryComponent } from './components/retro-summary/retro-summary.component';
 
 export const firebaseConfig = {
@@ -32,6 +40,12 @@ export const firebaseConfig = {
   databaseURL: 'https://excella-retro-2.firebaseio.com',
   storageBucket: 'excella-retro-2.appspot.com',
   messagingSenderId: '419643079193'
+};
+
+const firebaseAuthConfig = {
+  provider: AuthProviders.Google,
+  method: AuthMethods.Redirect,
+  remember: 'default'
 };
 
 @NgModule({
@@ -44,9 +58,18 @@ export const firebaseConfig = {
     SubmitFeedbackComponent,
     GroupFeedbackComponent,
     VoteFeedbackComponent,
+    RetroCompleteComponent,
     RetroSummaryComponent,
     ChildComponentDirective,
     AdminToolbarComponent,
+    CreateRetroFormComponent,
+    PhaseStepCardComponent,
+    PhaseStepHeaderComponent,
+    PhaseStepContentComponent,
+    FeedbackCardComponent,
+    FeedbackContainerComponent,
+    GroupedMessagesPipe,
+    GroupComponent,
     CreateRetroFormComponent
   ],
   entryComponents: [
@@ -55,6 +78,7 @@ export const firebaseConfig = {
     SubmitFeedbackComponent,
     GroupFeedbackComponent,
     VoteFeedbackComponent,
+    RetroCompleteComponent,
     RetroSummaryComponent
   ],
   imports: [
@@ -63,7 +87,7 @@ export const firebaseConfig = {
     FormsModule,
     HttpModule,
     AppRoutingModule,
-    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireModule.initializeApp(firebaseConfig, firebaseAuthConfig),
     MaterialModule.forRoot(),
     FlexLayoutModule,
     LocalStorageModule.withConfig({

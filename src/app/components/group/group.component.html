@@ -1,0 +1,18 @@
+<div>
+  <md-card>
+    <md-card-title>
+      <span *ngIf="!editMode">{{groupName}}</span>
+      <md-input-container *ngIf="editMode">
+        <input mdInput [(ngModel)]="groupName" name="groupNameInput" (keyup.enter)="editGroupName(groupName)"/>
+      </md-input-container>
+      <button md-icon-button (click)="enableEditing()">
+        <md-icon>edit</md-icon>
+      </button>
+    </md-card-title>
+    <md-card-content>
+      <app-feedback-container>
+        <app-feedback-card *ngFor="let feedback of messages | groupedMessagesPipe: groupId" [feedback]="feedback"></app-feedback-card>
+      </app-feedback-container>
+    </md-card-content>
+  </md-card>
+</div>

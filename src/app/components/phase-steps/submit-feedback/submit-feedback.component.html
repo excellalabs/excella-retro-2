@@ -1,8 +1,6 @@
-<md-card class="card-no-padding">
-  <md-toolbar color="accent">
-    <span>Submit Feedback</span>
-  </md-toolbar>
-  <md-card-content class="card-content-padding">
+<app-phase-step-card>
+  <app-phase-step-header><b>{{(currentPhaseObservable | async)?.name}}:</b> Submit Feedback</app-phase-step-header>
+  <app-phase-step-content>
     <div fxLayout>
       <div fxFlex="50%">
         <h4>Add Feedback</h4>
@@ -15,12 +13,15 @@
       </div>
       <div fxFlex="50%">
         <h4>Live Feedback</h4>
-        <div fxLayout="column">
-          <md-card fxFlex class="feedback-card" *ngFor="let feedback of existingFeedbackVal">
-            <p>{{feedback.text}}</p>
-          </md-card>
-        </div>
+        <app-feedback-container>
+          <div *ngIf="hasExistingMessages">
+            <app-feedback-card *ngFor="let feedback of existingFeedbackVal" [feedback]="feedback"></app-feedback-card>
+          </div>
+          <div *ngIf="!hasExistingMessages">
+            <p><i style="color:rgba(0, 0, 0, 0.38)">No feedback has been entered.</i></p>
+          </div>
+        </app-feedback-container>
       </div>
     </div>
-  </md-card-content>
-</md-card>
+  </app-phase-step-content>
+</app-phase-step-card>
