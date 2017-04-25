@@ -33,6 +33,7 @@ import { FeedbackCardComponent } from './components/shared/feedback/feedback-car
 import { FeedbackContainerComponent } from './components/shared/feedback/feedback-container/feedback-container.component';
 import { RetroCompleteComponent } from './components/retro-complete/retro-complete.component';
 import { RetroSummaryComponent } from './components/retro-summary/retro-summary.component';
+import { ChildComponentService } from './services/child-component.service';
 
 export const firebaseConfig = {
   apiKey: 'AIzaSyAjMVQvUS9_E_ckc_yT7siUhQKOnEgD8bs',
@@ -96,7 +97,9 @@ const firebaseAuthConfig = {
     }),
     ClipboardModule
   ],
-  providers: [],
+  providers: [
+    ChildComponentService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
