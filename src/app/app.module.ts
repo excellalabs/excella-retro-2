@@ -34,6 +34,7 @@ import { FeedbackContainerComponent } from './components/shared/feedback/feedbac
 import { RetroCompleteComponent } from './components/retro-complete/retro-complete.component';
 import { RetroSummaryComponent } from './components/retro-summary/retro-summary.component';
 import { ChildComponentService } from './services/child-component.service';
+import { RetroArchiveService } from './services/retro-archive.service';
 
 export const firebaseConfig = {
   apiKey: 'AIzaSyAjMVQvUS9_E_ckc_yT7siUhQKOnEgD8bs',
@@ -98,7 +99,8 @@ const firebaseAuthConfig = {
     ClipboardModule
   ],
   providers: [
-    ChildComponentService
+    ChildComponentService,
+    RetroArchiveService
   ],
   bootstrap: [AppComponent]
 })
