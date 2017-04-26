@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFire, FirebaseObjectObservable , FirebaseListObservable } from 'angularfire2';
-import { ArchivedRetro } from '../models/archived-retro';
+import { ArchivedRetro } from '../models/archive/archived-retro';
 import { Phase } from '../models/phase';
 import { Message } from '../models/message';
 import { Group } from '../models/group';
@@ -37,4 +37,6 @@ export class RetroArchiveService {
       }
     });
   }
+
+  
 }
