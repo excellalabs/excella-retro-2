@@ -8,18 +8,15 @@ import { Location } from '@angular/common';
   styleUrls: ['./retro-complete.component.css']
 })
 export class RetroCompleteComponent implements OnInit {
-  retroId: string;
 
   constructor(private router: Router,
     private route: ActivatedRoute,
     private location: Location) { }
 
   ngOnInit() {
-    const self = this;
-    this.route.params.subscribe(params => self.retroId = params['retroId']);
   }
 
   showRetroSummary() {
-    this.router.navigateByUrl('retro/${self.retroId}/summary');
+    this.router.navigate(['summary'], { relativeTo: this.route });
   }
 }
