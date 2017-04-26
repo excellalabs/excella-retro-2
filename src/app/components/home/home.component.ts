@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MdDialog, MdSnackBar } from '@angular/material';
 import { JoinRetroFormComponent } from '../join-retro-form/join-retro-form.component';
 import { CreateRetroFormComponent } from '../create-retro-form/create-retro-form.component';
@@ -8,9 +8,7 @@ import { AngularFire } from 'angularfire2';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css'],
-  encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.Default
+  styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
   user;

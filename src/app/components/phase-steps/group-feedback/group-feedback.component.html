@@ -1,10 +1,22 @@
-<h2>Ungrouped Feedback</h2>
-<ul>
-  <li *ngFor="let message of ungroupedFeedbackMessages">
-    {{ message.text }}
-  </li>
-</ul>
-<h2>Groups</h2>
-<div *ngFor="let groupItem of groups">
-  <group [groupName]="groupItem.name" [groupId]="groupItem.$key" [messages]="feedbackMessages"></group>
-</div>
+<app-phase-step-card>
+  <app-phase-step-header>Group Feedback</app-phase-step-header>
+  <app-phase-step-content>
+    <div fxLayout>
+      <div fxFlex="50%">
+        <h2>Groups</h2>
+        <md-input-container>
+          <input mdInput placeholder="Enter a new group name" [(ngModel)]="newGroupName" name="newGroupNameInput" (keyup.enter)="createNewGroup(newGroupName)"/>
+        </md-input-container>
+        <div *ngFor="let groupItem of groups">
+          <group [groupName]="groupItem.name" [groupId]="groupItem.$key" [messages]="feedbackMessages"></group>
+        </div>
+      </div>
+      <div fxFlex="50%">
+        <h2>Ungrouped Feedback</h2>
+        <app-feedback-container>
+          <app-feedback-card *ngFor="let feedback of ungroupedFeedbackMessages" [feedback]="feedback"></app-feedback-card>
+        </app-feedback-container>
+      </div>
+    </div>
+  </app-phase-step-content>
+</app-phase-step-card>
