@@ -4,5 +4,5 @@ export class User {
 
     constructor(retroId: string) {
         this.retroId = retroId;
-    } 
+    }
 }
