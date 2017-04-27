@@ -44,7 +44,8 @@ export class GroupFeedbackComponent implements OnInit, OnDestroy {
       self.feedbackSubscription = self.feedbackMessagesObservable.subscribe(feedbackMessages => {
         self.feedbackMessages = feedbackMessages;
         self.ungroupedFeedbackMessages = feedbackMessages.filter(feedback => {
-          return feedback.groupId === null || feedback.groupId === undefined || feedback.groupId === '';
+          return feedback.phaseId === self.retro.currentPhaseId 
+            && (feedback.groupId === null || feedback.groupId === undefined || feedback.groupId === '');
         });
       });
 
@@ -55,7 +56,9 @@ export class GroupFeedbackComponent implements OnInit, OnDestroy {
         }
       });
       this.groupsSubscription = self.groupsObservable.subscribe(groups => {
-        self.groups = groups;
+        self.groups = groups.filter(group => {
+          return group.phaseId === self.retro.currentPhaseId
+        });
       });
     });
   }
