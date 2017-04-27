@@ -1,8 +1,18 @@
 <md-card class="card-no-padding">
   <md-toolbar color="accent">
-    <span>Retro Summary</span>
+    <span>Retro Summary: {{archivedRetro.retroId}}</span>
   </md-toolbar>
-  <md-card-content class="card-content-padding">
-    content
-  </md-card-content>
+  <md-card *ngFor="let archivedPhase of archivedRetro.archivedPhases" class="card-no-padding">
+    <md-toolbar color="primary">
+     <span>Phase: {{archivedPhase.name}}</span>
+    </md-toolbar>
+    <md-card *ngFor="let archivedGroup of archivedPhase.archivedGroups" class="card-no-padding">
+      <md-toolbar>
+        <span>{{archivedGroup.name}} (Votes: {{archivedGroup.numOfVotes}})</span>
+      </md-toolbar>
+      <md-card *ngFor="let archivedMessage of archivedGroup.archivedMessages" class="card-content-padding">
+        <span>{{archivedMessage.text}}</span>
+      </md-card>
+    </md-card>
+  </md-card>
 </md-card>
