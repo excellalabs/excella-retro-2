@@ -20,6 +20,7 @@ export class VoteFeedbackComponent implements OnInit, OnDestroy {
   votesSubscription: Subscription;
   groups: Group[];
   private votes: Vote[];
+  retroId: string;
   retroName: string;
   currentPhaseId: string;
   votesRemaining: number;
@@ -37,6 +38,7 @@ export class VoteFeedbackComponent implements OnInit, OnDestroy {
 
       this.dataSubscription = this.data.retroObservable.subscribe(retro => {
         self.retroName = retro.name;
+        self.retroId = retro.$key;
         self.currentPhaseId = retro.currentPhaseId;
 
         self.votesObservable = self.af.database.list('votes',
@@ -63,7 +65,8 @@ export class VoteFeedbackComponent implements OnInit, OnDestroy {
       const newVote = {
         groupId: group.$key,
         userId: this.currentUserId,
-        phaseId: this.currentPhaseId
+        phaseId: this.currentPhaseId,
+        retroId: this.retroId
       };
       this.votesObservable.push(newVote);
     }
