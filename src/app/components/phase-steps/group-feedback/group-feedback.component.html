@@ -8,13 +8,13 @@
           <input mdInput placeholder="Enter a new group name" [(ngModel)]="newGroupName" name="newGroupNameInput" (keyup.enter)="createNewGroup(newGroupName)"/>
         </md-input-container>
         <div *ngFor="let groupItem of groups">
-          <group [groupName]="groupItem.name" [groupId]="groupItem.$key" [messages]="feedbackMessages"></group>
+          <group (editingNotifier)="onNotify($event)"[groupName]="groupItem.name" [groupId]="groupItem.$key" [messages]="feedbackMessages" [enabledGroup]="enabledGroup"></group>
         </div>
       </div>
       <div fxFlex="50%">
         <h2>Ungrouped Feedback</h2>
         <app-feedback-container>
-          <app-feedback-card *ngFor="let feedback of ungroupedFeedbackMessages" [feedback]="feedback"></app-feedback-card>
+          <app-feedback-card *ngFor="let feedback of ungroupedFeedbackMessages" [feedback]="feedback" [enabledGroup]="enabledGroup"></app-feedback-card>
         </app-feedback-container>
       </div>
     </div>

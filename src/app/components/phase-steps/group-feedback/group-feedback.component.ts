@@ -25,12 +25,13 @@ export class GroupFeedbackComponent implements OnInit, OnDestroy {
   ungroupedFeedbackMessages: Message[];
   groups: Group[];
   newGroupName: string;
+  enabledGroup: string;
   
   constructor(private af: AngularFire) { }
 
   ngOnInit() {
     const self = this;
-
+    this.enabledGroup = '';
     this.retroSubscription = this.data.retroObservable.subscribe(retroVal => {
       self.retroId = retroVal.$key;
       self.retro = retroVal;
@@ -43,7 +44,8 @@ export class GroupFeedbackComponent implements OnInit, OnDestroy {
       self.feedbackSubscription = self.feedbackMessagesObservable.subscribe(feedbackMessages => {
         self.feedbackMessages = feedbackMessages;
         self.ungroupedFeedbackMessages = feedbackMessages.filter(feedback => {
-          return feedback.groupId === null || feedback.groupId === undefined;
+          return feedback.phaseId === self.retro.currentPhaseId 
+            && (feedback.groupId === null || feedback.groupId === undefined || feedback.groupId === '');
         });
       });
 
@@ -54,7 +56,9 @@ export class GroupFeedbackComponent implements OnInit, OnDestroy {
         }
       });
       this.groupsSubscription = self.groupsObservable.subscribe(groups => {
-        self.groups = groups;
+        self.groups = groups.filter(group => {
+          return group.phaseId === self.retro.currentPhaseId
+        });
       });
     });
   }
@@ -62,7 +66,11 @@ export class GroupFeedbackComponent implements OnInit, OnDestroy {
   createNewGroup(newGroupName: string) {
     let group = new Group(newGroupName, this.retro.currentPhaseId, this.retro.$key);
     this.groupsObservable.push(group);
-    this.newGroupName = "";
+    this.newGroupName = '';
+  }
+
+  onNotify(groupId: string) {
+    this.enabledGroup = groupId;
   }
 
   ngOnDestroy() {
