@@ -10,14 +10,16 @@
                 <input mdInput type="number" placeholder="Number of Votes" [(ngModel)]="numberOfVotes" name="numberOfVotesInput" required>
             </md-input-container>
         </p>
-        <p *ngFor="let phase of phases">
+        <p *ngFor="let phase of phases; let i = index">
             <md-input-container>
-                <input mdInput placeholder = "Phase {{phase.order}} Name" [(ngModel)]="phase.name" name="phaseName" required>
+                <input mdInput placeholder = "Phase {{phase.order}} Name" [(ngModel)]="phase.name" name="phase-name-{{i}}" required>
             </md-input-container>
-        </p>
-        <p>
-           <button md-raised-button color="secondary" (click)=addPhase()>ADD PHASE</button>
-           <button [disabled]="phases.length <= 1" md-raised-button color="secondary" (click)=removePhase()>REMOVE PHASE</button>
+            <button md-icon-button (click)="addPhase(i+1)" tabindex="-1">
+                <md-icon>add_circle</md-icon>
+            </button>
+            <button md-icon-button (click)="removePhase(i)" [disabled]="phases.length <= 1" tabindex="-1">
+                <md-icon>remove_circle</md-icon>
+            </button>
         </p>
         <div style="text-align: center">
             <button type="submit" md-raised-button color="primary" style="width: 100%" (click)="createRetro(retroName)" [disabled]="!createRetroForm.form.valid">CREATE</button>
