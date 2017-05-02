@@ -1,12 +1,12 @@
 - type: parallel
   steps:
   - name: start
-    service: excella-retro
+    service: app
     command: npm start --host 0.0.0.0
   #- name: test
   #  service: excella-retro
   #  command: ng e2e
   - name: build-prod
-    service: excella-retro
+    service: app
     command: ng build --prod
     tag: ^(production|gh-pages)
