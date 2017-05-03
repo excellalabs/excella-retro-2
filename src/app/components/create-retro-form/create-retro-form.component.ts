@@ -24,9 +24,7 @@ export class CreateRetroFormComponent implements OnInit, OnDestroy {
     private dialogRef: MdDialogRef<CreateRetroFormComponent>) { }
 
   ngOnInit() {
-    while (this.phases.length < 3) {
-      this.addPhase();
-    }
+    this.addPhase(0);
 
     this.userSubscription = this.af.auth.subscribe(user => {
       if (user) {
@@ -46,12 +44,22 @@ export class CreateRetroFormComponent implements OnInit, OnDestroy {
     };
   }
 
-  addPhase() {
-    this.phases.push(new Phase('', 1, 1, '', this.phases.length + 1));
+  addPhase(index: number) {
+    this.phases.forEach(function(phase, i) {
+        if (i >= index) {
+          phase.order += 1;
+        };
+    })
+    this.phases.splice(index, 0, (new Phase('', 1, 1, '', index + 1)));
   }
 
-  removePhase() {
-    this.phases.splice(-1);
+  removePhase(index) {
+    this.phases.forEach(function(phase, i) {
+        if (i > index) {
+          phase.order -= 1;
+        };
+    })
+    this.phases.splice(index, 1);
   }
 
   createRetro(retroName: string) {

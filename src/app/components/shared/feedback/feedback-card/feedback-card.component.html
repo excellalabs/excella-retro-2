@@ -1,3 +1,9 @@
 <md-card fxFlex class="feedback-card">
   <p>{{feedback.text}}</p>
+  <button md-icon-button *ngIf='enabledGroup !== "" && enabledGroup !== undefined && !inGroup' (click)="addToGroup()">
+    <md-icon>add</md-icon>
+  </button>
+  <button md-icon-button *ngIf='enabledGroup === feedback.groupId && inGroup' (click)="removeFromGroup()">
+    <md-icon>remove</md-icon>
+  </button>
 </md-card>

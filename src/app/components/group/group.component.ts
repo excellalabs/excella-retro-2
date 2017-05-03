@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
 import { Group } from '../../models/group';
 import { Message } from '../../models/message';
@@ -12,6 +12,8 @@ export class GroupComponent implements OnInit {
   @Input() groupName: string;
   @Input() groupId: string;
   @Input() messages: Message[];
+  @Input() enabledGroup: string;
+  @Output() editingNotifier: EventEmitter<string> = new EventEmitter<string>();
   group: Group;
   groupObjectObservable: FirebaseObjectObservable<Group>;
   editMode: boolean;
@@ -29,10 +31,16 @@ export class GroupComponent implements OnInit {
     this.group.name = groupName;
     this.groupObjectObservable.update(this.group);
     this.editMode = false;
+    this.editingNotifier.emit('');
   }
 
-  enableEditing() {
-    this.editMode = true;
+  toggleEditing(groupName: string) {
+    if (this.editMode) {
+      this.editGroupName(groupName);
+    } else {
+      this.editMode = true;
+      this.editingNotifier.emit(this.groupId);
+    }
   }
 
 }
