@@ -1,0 +1,13 @@
+- type: serial
+  steps:
+  - name: build
+    service: app
+    command: ng build
+    exclude: ^(production|gh-pages)
+  - name: build-prod
+    service: app
+    command: ng build --prod
+    tag: ^(production|gh-pages)
+  #- name: test
+  #  service: excella-retro
+  #  command: ng e2e
