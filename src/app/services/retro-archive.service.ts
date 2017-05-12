@@ -12,57 +12,71 @@ import { Vote } from '../models/vote';
 
 @Injectable()
 export class RetroArchiveService {
-  archivedRetroObservable: FirebaseObjectObservable<any>;
-  archivedRetro: ArchivedRetro;
-  retro: Retro;
-  phasesObservable: FirebaseListObservable<Phase[]>;
-  phases: Phase[];
-  groupsObservable: FirebaseListObservable<Group[]>;
-  groups: Group[];
-  messagesObservable: FirebaseListObservable<Message[]>;
-  messages: Message[];
-  allVotesObservable: FirebaseListObservable<Vote[]>;
-  allVotes: Vote[];
-  votesForGroup: Vote[];
+  private archivedRetroObservable: FirebaseObjectObservable<any>;
+  private archivedRetro: ArchivedRetro;
+  private retroObservable: FirebaseObjectObservable<Retro>;
+  private retro: Retro;
+  private phasesObservable: FirebaseListObservable<Phase[]>;
+  private phases: Phase[];
+  private groupsObservable: FirebaseListObservable<Group[]>;
+  private groups: Group[];
+  private messagesObservable: FirebaseListObservable<Message[]>;
+  private messages: Message[];
+  private allVotesObservable: FirebaseListObservable<Vote[]>;
+  private allVotes: Vote[];
+  private votesForGroup: Vote[];
 
   constructor(private af: AngularFire) { }
 
-  getArchivedRetroById(retroId: string) {
-    this.archivedRetroObservable = this.af.database.object('archivedRetros/' + retroId);
-    const archivedRetroSubscription = this.archivedRetroObservable.subscribe(archivedRetroVal => {
-      if (archivedRetroVal.$exists()) {
+  getArchivedRetroById(archivedRetroVal, retroId: string) {
+      if (archivedRetroVal.length > 0) {
         return archivedRetroVal;
       } else {
-        archivedRetroSubscription.unsubscribe();
-        this.createArchivedRetro(retroId);
+        return this.createArchivedRetro(retroId);
       }
+  }
+
+  private createArchivedRetro(retroId: string) {
+    this.createObservables(retroId);
+
+    this.retroObservable.subscribe(retroVal => {
+      this.retro = retroVal;
+
+      this.phasesObservable.subscribe(phasesVal => {
+        this.phases = phasesVal;
+
+        this.groupsObservable.subscribe(groupsVal => {
+          this.groups = groupsVal;
+
+          this.messagesObservable.subscribe(messagesVal => {
+            this.messages = messagesVal;
+
+            this.allVotesObservable.subscribe(votesVal => {
+              this.allVotes = votesVal;
+
+              this.af.database.list('archivedRetros')
+                .push(this.mapRetroToArchive())
+                .then(archivedRetroVal => {
+                  this.archivedRetro = archivedRetroVal;
+                });
+
+              this.deleteExistingObjects(retroId);
+            });
+          });
+        });
+      });
     });
   }
 
-  createArchivedRetro(retroId: string): ArchivedRetro {
-    // Get existing data objects
-    this.getExistingObjects(retroId);
-
-    // Create archived-retro object and push to Firebase
-    this.af.database.list('archivedRetros')
-      .push(this.mapRetroToArchive())
-      .then(archivedRetro => { this.archivedRetro = archivedRetro; });
-
-    // Delete existing data objects
-    this.deleteExistingObjects(retroId);
-
-    // Return archived retro
-    return this.archivedRetro;
+  private createObservables(retroId: string): void {
+    this.getRetroObservable(retroId);
+    this.getPhasesObservable(retroId);
+    this.getGroupsObservable(retroId);
+    this.getMessagesObservable(retroId);
+    this.getVotesObservable(retroId);
   }
 
-  getExistingObjects(retroId: string): void {
-    this.getRetro(retroId);
-    this.getPhases(retroId);
-    this.getGroups(retroId);
-    this.getMessages(retroId);
-  }
-
-  mapRetroToArchive(): ArchivedRetro {
+  private mapRetroToArchive(): ArchivedRetro {
     const archivedRetro = new ArchivedRetro();
 
     archivedRetro.retroId = this.retro.$key;
@@ -72,7 +86,7 @@ export class RetroArchiveService {
     return archivedRetro;
   }
 
-  deleteExistingObjects(retroId: string): void {
+  private deleteExistingObjects(retroId: string): void {
     // Delete phase objects
     this.phasesObservable.remove();
 
@@ -86,61 +100,43 @@ export class RetroArchiveService {
     this.allVotesObservable.remove();
   }
 
-  private getRetro(retroId: string): void {
-    this.af.database.object('retros/' + retroId).subscribe(retroVal => {
-      this.retro = retroVal;
-    });
+  private getRetroObservable(retroId: string): void {
+    this.retroObservable = this.af.database.object('retros/' + retroId);
   }
 
-  private getPhases(retroId: string): void {
+  private getPhasesObservable(retroId: string): void {
     this.phasesObservable = this.af.database.list('phases', {
       query: {
         orderByChild: 'retroId',
         equalTo: retroId
       }
     });
-
-    this.phasesObservable.subscribe(phasesVal => {
-      this.phases = phasesVal;
-    });
   }
 
-  private getGroups(retroId: string): void {
+  private getGroupsObservable(retroId: string): void {
     this.groupsObservable = this.af.database.list('groups', {
       query: {
         orderByChild: 'retroId',
         equalTo: retroId
       }
     });
-
-    this.groupsObservable.subscribe(groupsVal => {
-      this.groups = groupsVal;
-    });
   }
 
-  private getMessages(retroId: string): void {
+  private getMessagesObservable(retroId: string): void {
     this.messagesObservable = this.af.database.list('messages', {
       query: {
         orderByChild: 'retroId',
         equalTo: retroId
       }
     });
-
-    this.messagesObservable.subscribe(messagesVal => {
-      this.messages = messagesVal;
-    });
   }
 
-  private getVotes(retroId: string): void {
+  private getVotesObservable(retroId: string): void {
     this.allVotesObservable = this.af.database.list('votes', {
       query: {
         orderByChild: 'retroId',
         equalTo: retroId
       }
-    });
-
-    this.allVotesObservable.subscribe(votesVal => {
-      this.allVotes = votesVal;
     });
   }
 
@@ -166,13 +162,19 @@ export class RetroArchiveService {
     });
 
     groupsInPhase.forEach(groupInPhase => {
-      const archivedGroup = new ArchivedGroup;
-      archivedGroup.groupId = groupInPhase.$key;
-      archivedGroup.name = groupInPhase.name;
-      archivedGroup.numOfVotes = this.getNumOfVotesForGroup(archivedGroup.groupId);
-      archivedGroup.archivedMessages = this.mapMessagesToArchivedGroup(archivedGroup.groupId);
-
-      archivedGroups.push(archivedGroup);
+      this.af.database.list('votes', {
+        query: {
+          orderByChild: 'groupId',
+          equalTo: groupInPhase.$key
+        }
+      }).subscribe(votesVal => {
+        const archivedGroup = new ArchivedGroup;
+        archivedGroup.groupId = groupInPhase.$key;
+        archivedGroup.name = groupInPhase.name;
+        archivedGroup.numOfVotes = votesVal.length;
+        archivedGroup.archivedMessages = this.mapMessagesToArchivedGroup(archivedGroup.groupId);
+        archivedGroups.push(archivedGroup);
+      });
     });
 
     archivedGroups.push(this.addUngroupedFeedbackGroup(phaseId));
@@ -210,18 +212,6 @@ export class RetroArchiveService {
     });
 
     return archivedMessages;
-  }
-
-  private getNumOfVotesForGroup(groupId: string): number {
-    this.af.database.list('votes', {
-      query: {
-        orderByChild: 'groupId',
-        equalTo: groupId
-      }
-    }).subscribe(votesVal => {
-      this.votesForGroup = votesVal;
-    });
-    return this.votesForGroup.length;
   }
 
   private addUngroupedFeedbackGroup(phaseId: string): ArchivedGroup {
