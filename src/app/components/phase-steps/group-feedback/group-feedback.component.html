@@ -4,11 +4,11 @@
     <div fxLayout>
       <div fxFlex="50%">
         <h2>Groups</h2>
-        <md-input-container>
-          <input mdInput placeholder="Enter a new group name" [(ngModel)]="newGroupName" name="newGroupNameInput" (keyup.enter)="createNewGroup(newGroupName)"/>
+        <md-input-container *ngIf="allowAdminFunctionsLocal === true">
+          <input mdInput placeholder="Enter a new group name" [(ngModel)]="newGroupName" name="newGroupNameInput" (keyup.enter)="createNewGroup(newGroupName)" />
         </md-input-container>
         <div *ngFor="let groupItem of groups">
-          <group (editingNotifier)="onNotify($event)"[groupName]="groupItem.name" [groupId]="groupItem.$key" [messages]="feedbackMessages" [enabledGroup]="enabledGroup"></group>
+          <group (editingNotifier)="onNotify($event)"[groupName]="groupItem.name" [groupId]="groupItem.$key" [messages]="feedbackMessages" [enabledGroup]="enabledGroup" [allowAdminFunctions]="allowAdminFunctions"></group>
         </div>
       </div>
       <div fxFlex="50%">
