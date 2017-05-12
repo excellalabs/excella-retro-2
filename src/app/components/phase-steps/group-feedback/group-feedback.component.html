@@ -4,7 +4,7 @@
     <div fxLayout>
       <div fxFlex="50%">
         <h2>Groups</h2>
-        <md-input-container *ngIf="allowAdminFunctionsLocal === true">
+        <md-input-container *ngIf="allowAdminFunctions">
           <input mdInput placeholder="Enter a new group name" [(ngModel)]="newGroupName" name="newGroupNameInput" (keyup.enter)="createNewGroup(newGroupName)" />
         </md-input-container>
         <div *ngFor="let groupItem of groups">
