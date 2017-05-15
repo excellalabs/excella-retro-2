@@ -39,25 +39,25 @@ export class RetroArchiveService {
   private createArchivedRetro(retroId: string) {
     this.createObservables(retroId);
 
-    this.retroObservable.subscribe(retroVal => {
+    this.retroObservable.first().subscribe(retroVal => {
       this.retro = retroVal;
 
-      this.phasesObservable.subscribe(phasesVal => {
+      this.phasesObservable.first().subscribe(phasesVal => {
         this.phases = phasesVal;
 
-        this.groupsObservable.subscribe(groupsVal => {
+        this.groupsObservable.first().subscribe(groupsVal => {
           this.groups = groupsVal;
 
-          this.messagesObservable.subscribe(messagesVal => {
+          this.messagesObservable.first().subscribe(messagesVal => {
             this.messages = messagesVal;
 
-            this.allVotesObservable.subscribe(votesVal => {
+            this.allVotesObservable.first().subscribe(votesVal => {
               this.allVotes = votesVal;
 
               this.af.database.list('archivedRetros')
                 .push(this.mapRetroToArchive())
                 .then(archivedRetroVal => {
-                  this.archivedRetro = archivedRetroVal;
+                  return archivedRetroVal;
                 });
 
               this.deleteExistingObjects(retroId);
@@ -167,7 +167,7 @@ export class RetroArchiveService {
           orderByChild: 'groupId',
           equalTo: groupInPhase.$key
         }
-      }).subscribe(votesVal => {
+      }).first().subscribe(votesVal => {
         const archivedGroup = new ArchivedGroup;
         archivedGroup.groupId = groupInPhase.$key;
         archivedGroup.name = groupInPhase.name;
