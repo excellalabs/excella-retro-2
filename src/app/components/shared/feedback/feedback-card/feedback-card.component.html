@@ -1,6 +1,6 @@
 <md-card fxFlex class="feedback-card">
   <div fxLayout>
-    <p fxFlex="90%" style="display: inline-block">{{feedback.text}}</p>
+    <p fxFlex="90%" style="display: inline-block; white-space: pre-wrap; word-break: keep-all">{{feedback.text}}</p>
     <button md-icon-button *ngIf='enabledGroup !== "" && enabledGroup !== undefined && !inGroup' (click)="addToGroup()" fxFlex="10%" style="display: inline-block">
       <md-icon>add</md-icon>
     </button>
