@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { Retro } from '../../../models/retro';
 import { Group } from '../../../models/group';
 import { Message } from '../../../models/message';
+import { Phase } from '../../../models/phase';
 import { ChildComponentData } from '../../../models/child-component-data';
 
 @Component({
@@ -17,6 +18,7 @@ export class GroupFeedbackComponent implements OnInit, OnDestroy {
   feedbackSubscription: Subscription;
   groupsSubscription: Subscription;
   retroObservable: FirebaseObjectObservable<Retro>;
+  currentPhaseObservable: FirebaseObjectObservable<Phase>;
   retro: Retro;
   retroId: string;
   feedbackMessagesObservable: FirebaseListObservable<Message[]>;
@@ -34,6 +36,7 @@ export class GroupFeedbackComponent implements OnInit, OnDestroy {
   ngOnInit() {
     const self = this;
     this.enabledGroup = '';
+    this.currentPhaseObservable = this.data.currentPhaseObservable;
     this.retroSubscription = this.data.retroObservable.subscribe(retroVal => {
       self.retroId = retroVal.$key;
       self.retro = retroVal;

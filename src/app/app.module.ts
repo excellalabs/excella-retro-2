@@ -33,6 +33,7 @@ import { FeedbackCardComponent } from './components/shared/feedback/feedback-car
 import { FeedbackContainerComponent } from './components/shared/feedback/feedback-container/feedback-container.component';
 import { RetroCompleteComponent } from './components/retro-complete/retro-complete.component';
 
+// Dev Environment
 export const firebaseConfig = {
   apiKey: 'AIzaSyAjMVQvUS9_E_ckc_yT7siUhQKOnEgD8bs',
   authDomain: 'excella-retro-2.firebaseapp.com',
@@ -40,6 +41,16 @@ export const firebaseConfig = {
   storageBucket: 'excella-retro-2.appspot.com',
   messagingSenderId: '419643079193'
 };
+
+// Prod Envioronment
+  // var firebaseConfig = {
+  //   apiKey: "AIzaSyC5r_KGRp4iDO8yS8kdYYnHa2HtMhxUYSI",
+  //   authDomain: "excella-retro.firebaseapp.com",
+  //   databaseURL: "https://excella-retro.firebaseio.com",
+  //   projectId: "excella-retro",
+  //   storageBucket: "excella-retro.appspot.com",
+  //   messagingSenderId: "181908731323"
+  // };
 
 const firebaseAuthConfig = {
   provider: AuthProviders.Google,
