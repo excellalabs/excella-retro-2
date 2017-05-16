@@ -1,21 +1,25 @@
 <app-phase-step-card>
-  <app-phase-step-header>Group Feedback</app-phase-step-header>
+  <app-phase-step-header><b>{{(currentPhaseObservable | async)?.name}}:</b> Group Feedback</app-phase-step-header>
   <app-phase-step-content>
     <div fxLayout>
       <div fxFlex="50%">
         <h2>Groups</h2>
-        <md-input-container *ngIf="allowAdminFunctions">
+        <md-input-container *ngIf="allowAdminFunctions" style="width: 90%">
           <input mdInput placeholder="Enter a new group name" [(ngModel)]="newGroupName" name="newGroupNameInput" (keyup.enter)="createNewGroup(newGroupName)" />
         </md-input-container>
-        <div *ngFor="let groupItem of groups">
-          <group (editingNotifier)="onNotify($event)"[groupName]="groupItem.name" [groupId]="groupItem.$key" [messages]="feedbackMessages" [enabledGroup]="enabledGroup" [allowAdminFunctions]="allowAdminFunctions"></group>
+        <div style="max-height: 500px; overflow-y: auto">
+          <div *ngFor="let groupItem of groups">
+            <group (editingNotifier)="onNotify($event)"[groupName]="groupItem.name" [groupId]="groupItem.$key" [messages]="feedbackMessages" [enabledGroup]="enabledGroup" [allowAdminFunctions]="allowAdminFunctions"></group>
+          </div>
         </div>
       </div>
       <div fxFlex="50%">
         <h2>Ungrouped Feedback</h2>
-        <app-feedback-container>
-          <app-feedback-card *ngFor="let feedback of ungroupedFeedbackMessages" [feedback]="feedback" [enabledGroup]="enabledGroup"></app-feedback-card>
-        </app-feedback-container>
+        <div style="max-height: 550px; overflow-y: auto">
+          <app-feedback-container>
+            <app-feedback-card *ngFor="let feedback of ungroupedFeedbackMessages" [feedback]="feedback" [enabledGroup]="enabledGroup"></app-feedback-card>
+          </app-feedback-container>
+        </div>
       </div>
     </div>
   </app-phase-step-content>
