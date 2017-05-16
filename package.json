@@ -4,7 +4,7 @@
   "license": "MIT",
   "angular-cli": {},
   "scripts": {
-    "start": "ng serve --port 4200 --host 0.0.0.0",
+    "start": "ng serve --public localhost:4200",
     "build": "ng build",
     "lint": "tslint \"src/**/*.ts\"",
     "test": "ng test",
