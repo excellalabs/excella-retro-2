@@ -86,6 +86,10 @@ export class GroupFeedbackComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
+    this.ungroupedFeedbackMessages.forEach(msg => {
+      this.createNewGroup(msg.text)
+    })
+
     this.retroSubscription.unsubscribe();
     this.feedbackSubscription.unsubscribe();
     this.groupsSubscription.unsubscribe();
