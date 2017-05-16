@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnDestroy, } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy} from '@angular/core';
 import { AngularFire, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2';
 import { Subscription } from 'rxjs/Subscription';
 import { Retro } from '../../../models/retro';
@@ -26,6 +26,8 @@ export class GroupFeedbackComponent implements OnInit, OnDestroy {
   groups: Group[];
   newGroupName: string;
   enabledGroup: string;
+  allowAdminFunctions: boolean;
+  user: any;
   
   constructor(private af: AngularFire) { }
 
@@ -48,6 +50,16 @@ export class GroupFeedbackComponent implements OnInit, OnDestroy {
             && (feedback.groupId === null || feedback.groupId === undefined || feedback.groupId === '');
         });
       });
+
+    this.af.auth.subscribe(user => {
+      if (user) {
+        self.user = user;
+        self.allowAdminFunctions = (self.user.auth.uid === self.retro.adminId);
+      } else {
+        self.user = null;
+        self.allowAdminFunctions = false;
+      }
+    });
 
       self.groupsObservable = self.af.database.list('/groups', {
         query: {
@@ -78,5 +90,4 @@ export class GroupFeedbackComponent implements OnInit, OnDestroy {
     this.feedbackSubscription.unsubscribe();
     this.groupsSubscription.unsubscribe();
   }
-
 }
