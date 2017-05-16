@@ -17,6 +17,7 @@ export class RetroSummaryComponent implements OnInit {
   retroId: string;
   archivedRetro: ArchivedRetro;
   archivedRetroId: string;
+  archivedPhases: ArchivedPhase[];
 
   constructor(private af: AngularFire,
     private route: ActivatedRoute,
@@ -33,6 +34,7 @@ export class RetroSummaryComponent implements OnInit {
     }).first().subscribe(archivedRetroVal => {
       this.archivedRetro = this.retroArchiveService.getArchivedRetroById(archivedRetroVal, this.retroId);
       this.archivedRetroId = this.archivedRetro[0].retroId;
+      this.archivedPhases = this.archivedRetro[0].archivedPhases;
     });
   }
 }
