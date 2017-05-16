@@ -7,7 +7,7 @@
         <md-input-container *ngIf="allowAdminFunctions" style="width: 90%">
           <input mdInput placeholder="Enter a new group name" [(ngModel)]="newGroupName" name="newGroupNameInput" (keyup.enter)="createNewGroup(newGroupName)" />
         </md-input-container>
-        <div style="max-height: 500px; overflow-y: auto">
+        <div style="max-height: 60vh; overflow-y: auto">
           <div *ngFor="let groupItem of groups">
             <group (editingNotifier)="onNotify($event)"[groupName]="groupItem.name" [groupId]="groupItem.$key" [messages]="feedbackMessages" [enabledGroup]="enabledGroup" [allowAdminFunctions]="allowAdminFunctions"></group>
           </div>
@@ -15,7 +15,7 @@
       </div>
       <div fxFlex="50%">
         <h2>Ungrouped Feedback</h2>
-        <div style="max-height: 550px; overflow-y: auto">
+        <div style="max-height: 70vh; overflow-y: auto">
           <app-feedback-container>
             <app-feedback-card *ngFor="let feedback of ungroupedFeedbackMessages" [feedback]="feedback" [enabledGroup]="enabledGroup"></app-feedback-card>
           </app-feedback-container>
