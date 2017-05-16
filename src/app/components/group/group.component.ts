@@ -13,6 +13,7 @@ export class GroupComponent implements OnInit {
   @Input() groupId: string;
   @Input() messages: Message[];
   @Input() enabledGroup: string;
+  @Input() allowAdminFunctions: boolean = false;
   @Output() editingNotifier: EventEmitter<string> = new EventEmitter<string>();
   group: Group;
   groupObjectObservable: FirebaseObjectObservable<Group>;

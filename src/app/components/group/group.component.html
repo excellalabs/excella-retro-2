@@ -1,16 +1,18 @@
 <div>
   <md-card>
     <md-card-title>
-      <span *ngIf="!editMode">{{groupName}}</span>
-      <md-input-container *ngIf="editMode">
-        <textarea mdInput [(ngModel)]="groupName" name="groupNameInput" (keyup.enter)="editGroupName(groupName)"></textarea>
-      </md-input-container>
-      <button md-icon-button *ngIf="(!enabledGroup) || (enabledGroup === groupId && !editMode)" (click)="toggleEditing(groupName)">
-        <md-icon>edit</md-icon>
-      </button>
-      <button md-icon-button *ngIf="enabledGroup === groupId" (click)="toggleEditing(groupName)">
-        <md-icon>check</md-icon>
-      </button>
+      <div fxLayout>
+        <span *ngIf="!editMode" fxFlex="90%">{{groupName}}</span>
+        <md-input-container *ngIf="editMode && allowAdminFunctions" fxFlex="90%">
+          <textarea mdInput [(ngModel)]="groupName" name="groupNameInput" style="resize: vertical"></textarea>
+        </md-input-container>
+        <button md-icon-button *ngIf="allowAdminFunctions &&((!enabledGroup) || (enabledGroup === groupId && !editMode))" (click)="toggleEditing(groupName)" fxFlex="10%">
+          <md-icon>edit</md-icon>
+        </button>
+        <button md-icon-button *ngIf="allowAdminFunctions && enabledGroup === groupId" (click)="toggleEditing(groupName)" fxFlex="10%">
+          <md-icon>check</md-icon>
+        </button>
+      </div>
     </md-card-title>
     <md-card-content>
       <app-feedback-container>

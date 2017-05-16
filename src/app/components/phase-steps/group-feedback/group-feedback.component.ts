@@ -1,9 +1,10 @@
-import { Component, Input, OnInit, OnDestroy, } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy} from '@angular/core';
 import { AngularFire, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2';
 import { Subscription } from 'rxjs/Subscription';
 import { Retro } from '../../../models/retro';
 import { Group } from '../../../models/group';
 import { Message } from '../../../models/message';
+import { Phase } from '../../../models/phase';
 import { ChildComponentData } from '../../../models/child-component-data';
 
 @Component({
@@ -17,6 +18,7 @@ export class GroupFeedbackComponent implements OnInit, OnDestroy {
   feedbackSubscription: Subscription;
   groupsSubscription: Subscription;
   retroObservable: FirebaseObjectObservable<Retro>;
+  currentPhaseObservable: FirebaseObjectObservable<Phase>;
   retro: Retro;
   retroId: string;
   feedbackMessagesObservable: FirebaseListObservable<Message[]>;
@@ -26,12 +28,15 @@ export class GroupFeedbackComponent implements OnInit, OnDestroy {
   groups: Group[];
   newGroupName: string;
   enabledGroup: string;
+  allowAdminFunctions: boolean;
+  user: any;
   
   constructor(private af: AngularFire) { }
 
   ngOnInit() {
     const self = this;
     this.enabledGroup = '';
+    this.currentPhaseObservable = this.data.currentPhaseObservable;
     this.retroSubscription = this.data.retroObservable.subscribe(retroVal => {
       self.retroId = retroVal.$key;
       self.retro = retroVal;
@@ -48,6 +53,16 @@ export class GroupFeedbackComponent implements OnInit, OnDestroy {
             && (feedback.groupId === null || feedback.groupId === undefined || feedback.groupId === '');
         });
       });
+
+    this.af.auth.subscribe(user => {
+      if (user) {
+        self.user = user;
+        self.allowAdminFunctions = (self.user.auth.uid === self.retro.adminId);
+      } else {
+        self.user = null;
+        self.allowAdminFunctions = false;
+      }
+    });
 
       self.groupsObservable = self.af.database.list('/groups', {
         query: {
@@ -78,5 +93,4 @@ export class GroupFeedbackComponent implements OnInit, OnDestroy {
     this.feedbackSubscription.unsubscribe();
     this.groupsSubscription.unsubscribe();
   }
-
 }
