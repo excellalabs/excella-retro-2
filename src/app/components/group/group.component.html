@@ -4,7 +4,7 @@
       <div fxLayout>
         <span *ngIf="!editMode" fxFlex="90%">{{groupName}}</span>
         <md-input-container *ngIf="editMode && allowAdminFunctions" fxFlex="90%">
-          <textarea mdInput [(ngModel)]="groupName" name="groupNameInput" (keyup.enter)="editGroupName(groupName)" style="resize: vertical"></textarea>
+          <textarea mdInput [(ngModel)]="groupName" name="groupNameInput" style="resize: vertical"></textarea>
         </md-input-container>
         <button md-icon-button *ngIf="allowAdminFunctions &&((!enabledGroup) || (enabledGroup === groupId && !editMode))" (click)="toggleEditing(groupName)" fxFlex="10%">
           <md-icon>edit</md-icon>
