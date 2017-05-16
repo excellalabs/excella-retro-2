@@ -16,23 +16,23 @@ import { AngularFire } from 'angularfire2';
 export class RetroSummaryComponent implements OnInit {
   retroId: string;
   archivedRetro: ArchivedRetro;
+  archivedRetroId: string;
 
   constructor(private af: AngularFire,
     private route: ActivatedRoute,
     private retroArchiveService: RetroArchiveService) { }
 
   ngOnInit() {
-    const self = this;
+    this.route.params.subscribe(params => this.retroId = params['retroId']);
 
-    this.route.params.subscribe(params => self.retroId = params['retroId']);
-
-    this.af.database.list('/archivedRetros', {
+    this.af.database.list('archivedRetros', {
       query: {
         orderByChild: 'retroId',
         equalTo: this.retroId
       }
-    }).subscribe(archivedRetroVal => {
-      self.archivedRetro = this.retroArchiveService.getArchivedRetroById(archivedRetroVal, this.retroId);
+    }).first().subscribe(archivedRetroVal => {
+      this.archivedRetro = this.retroArchiveService.getArchivedRetroById(archivedRetroVal, this.retroId);
+      this.archivedRetroId = this.archivedRetro[0].retroId;
     });
   }
 }

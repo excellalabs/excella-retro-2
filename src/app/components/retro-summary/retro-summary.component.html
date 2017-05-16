@@ -1,6 +1,6 @@
 <md-card class="card-no-padding">
   <md-toolbar color="accent">
-    <span>Retro Summary: {{(archivedRetro | async)?.retroId}}</span>
+    <span>Retro Summary: {{archivedRetroId}}</span>
   </md-toolbar>
   <md-card *ngFor="let archivedPhase of (archivedRetro | async)?.archivedPhases" class="card-no-padding">
     <md-toolbar color="primary">
