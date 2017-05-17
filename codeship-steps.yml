@@ -12,10 +12,10 @@
   #  service: excella-retro
   #  command: ng e2e
   - name: deploy-build-image
-    service: app
-    command: chmod +x /src/deploy/build-image.sh && /src/deploy/build-image.sh
+    service: awsdeployment
+    command: /deploy/src/deploy/build-image.sh
     tag: ^(production)
   - name: deploy-push-to-ecr
-    service: app
-    command: /src/deploy/push-to-ecr.sh && /src/deploy/push-to-ecr.sh
+    service: awsdeployment
+    command: /deploy/src/deploy/push-to-ecr.sh
     tag: ^(production)
