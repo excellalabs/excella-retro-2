@@ -13,13 +13,13 @@
   #  command: ng e2e
   - name: deploy-install-dependencies
     service: app
-    command: bash /src/deploy/install-dependencies.sh
+    command: bash /app/src/deploy/install-dependencies.sh
     tag: ^(production)
   - name: deploy-build-image
     service: app
-    command: bash /src/deploy/build-image.sh
+    command: bash /app/src/deploy/build-image.sh
     tag: ^(production)
   - name: deploy-push-to-ecr
     service: app
-    command: bash /src/deploy/push-to-ecr.sh
+    command: bash /app/src/deploy/push-to-ecr.sh
     tag: ^(production)
