@@ -6,7 +6,7 @@
     exclude: ^(production|gh-pages)
   - name: build-prod
     service: app
-    command: ng build --prod
+    command: ng build --prod --base-href retro.excella.com
     tag: ^(production|gh-pages)
   #- name: test
   #  service: excella-retro
