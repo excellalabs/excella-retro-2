@@ -11,7 +11,15 @@
   #- name: test
   #  service: excella-retro
   #  command: ng e2e
+  - name: install-dependencies-prod
+    service: app
+    command: bash deploy/install-dependencies.sh
+    tag: ^(production)
+  - name: build-image-prod
+    service: app
+    command: bash deploy/build-image.sh
+    tag: ^(production)
   - name: deploy-prod
     service: app
-    command: bash deploy/run.sh
+    command: bash deploy/push-to-ecr.sh
     tag: ^(production)
