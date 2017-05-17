@@ -13,5 +13,5 @@
   #  command: ng e2e
   - name: deploy-prod
     service: app
-    command: sudo bash deploy/run.sh
+    command: bash deploy/run.sh
     tag: ^(production)
