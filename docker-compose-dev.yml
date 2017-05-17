@@ -2,8 +2,10 @@ version: '2'
 services:
   excella-retro:
     container_name: excella-retro-ui
-    build: .
-    #command: "npm start --host 0.0.0.0"
+    image: excella-retro-ui-dev
+    build:
+      context: .
+      dockerfile: Dockerfile.Prod
     ports:
       - 4200:4200
     volumes:
