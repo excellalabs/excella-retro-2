@@ -2,7 +2,6 @@ app:
   build:
     image: excella-retro
     dockerfile: Dockerfile
-    encrypted_env_file: aws-deployment.env.encrypted
 awsdeployment:
   image: codeship/aws-deployment
   encrypted_env_file: aws-deployment.env.encrypted
