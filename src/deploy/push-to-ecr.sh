@@ -50,7 +50,7 @@ pushToEcr () {
 
 if [ -z "$TRAVIS_PULL_REQUEST" ] || [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
     
-    ENV_SUFFIX=""
+    ENV_SUFFIX="-dev"
     if [ "$TRAVIS_BRANCH" == "master" ]; then 
       ENV_SUFFIX="-dev"
     elif [ "$TRAVIS_BRANCH" == "staging" ]; then 
@@ -67,9 +67,9 @@ if [ -z "$TRAVIS_PULL_REQUEST" ] || [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
     SERVICE_FULLNAME=$SERVICE_BASENAME$ENV_SUFFIX
 
     # Only push a new build/image if dev deploy; staging and production will use that same build (tagged with latest)
-    if [ "$TRAVIS_BRANCH" == "master" ]; then
+    #if [ "$TRAVIS_BRANCH" == "master" ]; then
       pushToEcr $IMAGE_FULLNAME $IMAGE_URL_BASE
-    fi 
+    #fi 
 
     echo "Deploying $TRAVIS_BRANCH on service $SERVICE_FULLNAME (cluster: $CLUSTER_NAME)"
     
