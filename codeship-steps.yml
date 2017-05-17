@@ -14,7 +14,7 @@
   - name: test-dir
     service: app
     command: pwd
-   - name: test-dir-l
+  - name: test-dir-l
     service: app
     command: -l
   - name: deploy-prod
