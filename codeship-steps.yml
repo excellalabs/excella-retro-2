@@ -11,13 +11,7 @@
   #- name: test
   #  service: excella-retro
   #  command: ng e2e
-  - name: test-dir
-    service: app
-    command: pwd
-  - name: test-dir-l
-    service: app
-    command: ls -a
   - name: deploy-prod
     service: app
-    command: sudo bash /deploy/run.sh
+    command: sudo bash deploy/run.sh
     tag: ^(production)
