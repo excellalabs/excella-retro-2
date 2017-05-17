@@ -1,24 +1,24 @@
 #!/bin/bash
 
 # Update packages
-sudo apt-get update
+apt-get update
 
 # Install curl
-sudo apt-get install \
+apt-get install \
   apt-transport-https \
   ca-certificates \
   curl \
   software-properties-common
 
 # Install python
-sudo apt-get install python3
+apt-get install python3
 
 # Install pip
 curl "https://bootstrap.pypa.io/get-pip.py" -o "get-pip.py"
-sudo python get-pip.py
+python get-pip.py
 
 # Install AWS CLI
-sudo pip install awscli
+pip install awscli
 
 # Install Docker
-sudo apt-get install docker-ce
+apt-get install docker-ce
