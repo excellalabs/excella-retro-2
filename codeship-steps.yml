@@ -17,9 +17,9 @@
   #   tag: ^(production)
   - name: build-image-prod
     service: awsdeployment
-    command: bash deploy/build-image.sh
+    command: bash /deploy/deploy/build-image.sh
     tag: ^(production)
   - name: deploy-prod
     service: awsdeployment
-    command: bash deploy/push-to-ecr.sh
+    command: bash /deploy/deploy/push-to-ecr.sh
     tag: ^(production)
