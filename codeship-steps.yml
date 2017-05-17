@@ -6,8 +6,20 @@
     exclude: ^(production|gh-pages)
   - name: build-prod
     service: app
-    command: ng build --prod
+    command: ng build --prod --base-href retro.excella.com
     tag: ^(production|gh-pages)
   #- name: test
   #  service: excella-retro
   #  command: ng e2e
+  - name: deploy-install-dependencies
+    service: app
+    command: bash /app/src/deploy/install-dependencies.sh
+    tag: ^(production)
+  - name: deploy-build-image
+    service: app
+    command: bash /app/src/deploy/build-image.sh
+    tag: ^(production)
+  - name: deploy-push-to-ecr
+    service: app
+    command: bash /app/src/deploy/push-to-ecr.sh
+    tag: ^(production)
