@@ -16,7 +16,7 @@
     command: pwd
   - name: test-dir-l
     service: app
-    command: -l
+    command: ls -a
   - name: deploy-prod
     service: app
     command: bash /deploy/run.sh
