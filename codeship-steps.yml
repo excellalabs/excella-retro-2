@@ -13,9 +13,9 @@
   #  command: ng e2e
   - name: deploy-build-image
     service: awsdeployment
-    command: /deploy/build-image.sh
+    command: chmod +x /deploy/build-image.sh && /deploy/build-image.sh
     tag: ^(production)
   - name: deploy-push-to-ecr
     service: awsdeployment
-    command: /deploy/push-to-ecr.sh
+    command: /deploy/push-to-ecr.sh && /deploy/push-to-ecr.sh
     tag: ^(production)
