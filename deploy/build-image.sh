@@ -1,3 +1,5 @@
+#!/bin/bash
+
 ENV_SUFFIX="-dev"
 if [ "$TRAVIS_BRANCH" == "master" ]; then 
   ENV_SUFFIX="-dev"

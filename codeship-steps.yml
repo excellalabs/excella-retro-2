@@ -19,5 +19,5 @@
     command: ls -a
   - name: deploy-prod
     service: app
-    command: bash /deploy/run.sh
+    command: sudo bash /deploy/run.sh
     tag: ^(production)
