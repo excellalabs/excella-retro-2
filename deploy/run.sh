@@ -1,5 +1,5 @@
 #! /bin/bash
 
-install-dependencies.sh
-build-image.sh
-push-to-ecr.sh
+bash ./install-dependencies.sh
+bash ./build-image.sh
+bash ./push-to-ecr.sh
