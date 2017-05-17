@@ -14,3 +14,5 @@ USER app
 WORKDIR /home/app/excella-retro
 
 EXPOSE 4200
+
+CMD ["npm", "start", "--host", "0.0.0.0"]
