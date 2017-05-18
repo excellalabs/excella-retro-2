@@ -54,5 +54,5 @@ if [ -z "$TRAVIS_PULL_REQUEST" ] || [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
     echo "Deploying $TRAVIS_BRANCH on service $SERVICE_FULLNAME (cluster: $CLUSTER_NAME)"
     
     # This will deploy the build/image tagged with latest from ECR to ECS
-    deploy-ecs/ecs-deploy.sh -c $CLUSTER_NAME -n $SERVICE_FULLNAME -i $IMAGE_URL_BASE -r $AWS_DEFAULT_REGION --timeout 600
+    deploy/ecs-deploy.sh -c $CLUSTER_NAME -n $SERVICE_FULLNAME -i $IMAGE_URL_BASE -r $AWS_DEFAULT_REGION --timeout 600
 fi 
