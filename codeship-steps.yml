@@ -13,7 +13,7 @@
   #  command: ng e2e
   - name: install-dependencies-prod
     service: awsdeployment
-    command: bash deploy/install-dependencies.sh
+    command: bash /deploy/deploy/install-dependencies.sh
     tag: ^(production)
   - name: build-image-prod
     service: awsdeployment
