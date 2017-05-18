@@ -2,10 +2,10 @@ version: '2'
 services:
   excella-retro:
     container_name: excella-retro-ui
-    image: excella-retro-ui-dev
+    image: excella-retro-ui-prod
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.Prod
     ports:
       - 4200:4200
     volumes:
