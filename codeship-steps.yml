@@ -20,6 +20,6 @@
     command: bash deploy/build-image.sh
     tag: ^(production)
   - name: deploy-prod
-    service: aws-deployment
+    service: awsdeployment
     command: bash deploy/push-to-ecr.sh
     tag: ^(production)
