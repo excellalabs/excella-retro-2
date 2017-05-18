@@ -79,9 +79,11 @@ export class GroupFeedbackComponent implements OnInit, OnDestroy {
   }
 
   createNewGroup(newGroupName: string) {
-    let group = new Group(newGroupName, this.retro.currentPhaseId, this.retro.$key);
-    this.groupsObservable.push(group);
-    this.newGroupName = '';
+    if (newGroupName) {
+      let group = new Group(newGroupName, this.retro.currentPhaseId, this.retro.$key);
+      this.groupsObservable.push(group);
+      this.newGroupName = '';
+    }
   }
 
   onNotify(groupId: string) {
@@ -89,6 +91,10 @@ export class GroupFeedbackComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
+    this.ungroupedFeedbackMessages.forEach(msg => {
+      this.createNewGroup(msg.text)
+    })
+
     this.retroSubscription.unsubscribe();
     this.feedbackSubscription.unsubscribe();
     this.groupsSubscription.unsubscribe();
