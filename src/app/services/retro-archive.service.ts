@@ -162,22 +162,17 @@ export class RetroArchiveService {
     });
 
     groupsInPhase.forEach(groupInPhase => {
-      this.af.database.list('votes', {
-        query: {
-          orderByChild: 'groupId',
-          equalTo: groupInPhase.$key
-        }
-      }).first().subscribe(votesVal => {
-        const archivedGroup = new ArchivedGroup;
-        archivedGroup.groupId = groupInPhase.$key;
-        archivedGroup.name = groupInPhase.name;
-        archivedGroup.numOfVotes = votesVal.length;
-        archivedGroup.archivedMessages = this.mapMessagesToArchivedGroup(archivedGroup.groupId);
-        archivedGroups.push(archivedGroup);
+      const archivedGroup = new ArchivedGroup;
+      const votesByGroup = this.allVotes.filter(vote => {
+        return vote.groupId = groupInPhase.$key;
       });
-    });
 
-    archivedGroups.push(this.addUngroupedFeedbackGroup(phaseId));
+      archivedGroup.groupId = groupInPhase.$key;
+      archivedGroup.name = groupInPhase.name;
+      archivedGroup.numOfVotes = votesByGroup.length;
+      archivedGroup.archivedMessages = this.mapMessagesToArchivedGroup(archivedGroup.groupId);
+      archivedGroups.push(archivedGroup);
+    });
 
     return archivedGroups;
   }
@@ -197,30 +192,5 @@ export class RetroArchiveService {
     });
 
     return archivedMessages;
-  }
-
-  private mapUngroupedMessagesToArchive(phaseId: string): ArchivedMessage[] {
-    const archivedMessages = new Array<ArchivedMessage>();
-    const ungroupedMessages = this.messages.filter(message => {
-      return message.groupId === null;
-    });
-
-    ungroupedMessages.forEach(ungroupedMessage => {
-      const archivedMessage = new ArchivedMessage();
-      archivedMessage.messageId = ungroupedMessage.$key;
-      archivedMessage.text = ungroupedMessage.text;
-    });
-
-    return archivedMessages;
-  }
-
-  private addUngroupedFeedbackGroup(phaseId: string): ArchivedGroup {
-    const ungroupedFeedbackGroup = new ArchivedGroup();
-
-    ungroupedFeedbackGroup.name = 'Ungrouped Feedback';
-    ungroupedFeedbackGroup.numOfVotes = 0;
-    ungroupedFeedbackGroup.archivedMessages = this.mapUngroupedMessagesToArchive(phaseId);
-
-    return ungroupedFeedbackGroup;
   }
 }
