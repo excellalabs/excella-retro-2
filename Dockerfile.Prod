@@ -8,7 +8,7 @@ RUN npm install --global @angular/cli@latest
 # COPY . /home/app/excella-retro
 # RUN chown -R app:app /home/app/*
 
-#RUN apk update
+# RUN apk update
 COPY package.json /tmp/package.json
 RUN cd /tmp && npm install --quiet
 RUN mkdir -p /usr/app && cp -a /tmp/node_modules /usr/app
@@ -16,10 +16,10 @@ RUN mkdir -p /usr/app && cp -a /tmp/node_modules /usr/app
 WORKDIR /usr/app
 COPY ./ /usr/app/
 
-#USER app
-#WORKDIR /home/app/excella-retro
+# USER app
+# WORKDIR /home/app/excella-retro
 
 EXPOSE 4200
 
-# RUN chmod +x ./entrypoint.sh
+RUN chmod +x ./entrypoint.sh
 ENTRYPOINT ["./entrypoint.sh"]
