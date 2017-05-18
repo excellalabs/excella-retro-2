@@ -32,7 +32,14 @@ export class RetroSummaryComponent implements OnInit {
         equalTo: this.retroId
       }
     }).first().subscribe(archivedRetroVal => {
-      this.archivedRetro = this.retroArchiveService.getArchivedRetroById(archivedRetroVal, this.retroId);
+      if (archivedRetroVal.length > 0) {
+        this.archivedRetro = archivedRetroVal;
+      } else {
+        this.retroArchiveService.getArchivedRetroById(archivedRetroVal, this.retroId).then(newArchivedRetroVal => {
+          this.archivedRetro = newArchivedRetroVal;
+        });
+      }
+
       this.archivedRetroId = this.archivedRetro[0].retroId;
       this.archivedPhases = this.archivedRetro[0].archivedPhases;
     });
