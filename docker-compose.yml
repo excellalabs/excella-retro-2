@@ -5,7 +5,7 @@ services:
     image: excella-retro-ui-dev
     build:
       context: .
-      dockerfile: Dockerfile.Prod
+      dockerfile: Dockerfile
     ports:
       - 4200:4200
     volumes:
