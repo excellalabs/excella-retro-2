@@ -4,13 +4,13 @@ RUN useradd --user-group --create-home --shell /bin/false app
 
 RUN npm install --global @angular/cli@1.0.0
 
-WORKDIR /home/app/excella-retro
-COPY package.json /home/app/excella-retro/package.json
-RUN npm install && npm cache clean
-COPY . /home/app/excella-retro
-RUN chown -R app:app /home/app/*
+COPY package.json /tmp/package.json
+RUN cd /tmp && npm install --quiet
+RUN mkdir -p /usr/app && cp -a /tmp/node_modules /usr/app
 
-USER app
-WORKDIR /home/app/excella-retro
+WORKDIR /usr/app
+COPY ./ /usr/app/
 
 EXPOSE 4200
+
+CMD ng build
