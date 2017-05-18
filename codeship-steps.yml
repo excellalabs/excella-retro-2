@@ -1,11 +1,11 @@
 - type: serial
   steps:
   - name: build
-    service: app
+    service: excella-retro
     command: ng build
     exclude: ^(production|gh-pages)
   - name: build-prod
-    service: app
+    service: excella-retro
     command: ng build --prod --base-href retro.excella.com
     tag: ^(production|gh-pages)
   #- name: test
@@ -16,10 +16,10 @@
   #   command: bash /deploy/deploy/install-dependencies.sh
     tag: ^(production)
   - name: build-image-prod
-    service: app
+    service: excella-retro
     command: bash deploy/build-image.sh
     tag: ^(production)
   - name: deploy-prod
-    service: aws-deployment
+    service: excella-retro
     command: bash deploy/push-to-ecr.sh
     tag: ^(production)
