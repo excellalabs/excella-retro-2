@@ -2,7 +2,8 @@ FROM node:6.10.2
 
 RUN useradd --user-group --create-home --shell /bin/false app
 
-RUN npm install --global @angular/cli@latest
+# issue with it running with latest cli
+RUN npm install --global @angular/cli@1.0.0 
 
 # RUN npm install && npm cache clean
 # COPY . /home/app/excella-retro
