@@ -2,9 +2,6 @@
   <a href='' style='text-decoration: none'><span style="color: white">Excella Retro</span></a>  
   <span class="spacer"></span>
   <span *ngIf="user">{{user.auth.displayName}}</span>
-  <button md-icon-button (click)="toggleDarkMode()">
-    <md-icon>lightbulb_outline</md-icon>
-  </button>
   <button md-icon-button [mdMenuTriggerFor]="menu">
     <md-icon>more_vert</md-icon>
   </button>
