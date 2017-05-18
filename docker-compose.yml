@@ -2,7 +2,7 @@ version: '2'
 services:
   excella-retro:
     container_name: excella-retro-ui
-    image: excella-retro-ui-dev
+    # image: excella-retro-ui-dev
     build:
       context: .
       dockerfile: Dockerfile.Prod
