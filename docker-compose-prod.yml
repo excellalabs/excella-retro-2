@@ -7,7 +7,7 @@ services:
       context: .
       dockerfile: Dockerfile.Prod
     ports:
-      - 4200:4200
+      - 80:80
     volumes:
       - .:/home/app/excella-retro
       - /home/app/excella-retro/node_modules

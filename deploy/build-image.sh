@@ -13,9 +13,10 @@ docker-compose build --pull
 
 docker-compose run npm run lint
 # docker-compose run ng test --browsers Chrome_no_sandbox -w false
-# ocker-compose run npm run e2e
+# docker-compose run npm run e2e
+
+docker-compose run ng build --prod
 
 if [ "$TRAVIS_BRANCH" == "production" ]; then 
-  docker-compose run ng build --prod
-  docker-compose -f docker-compose-prod.yml build --pull
+  docker-compose -f docker-compose-prod.yml up
 fi
