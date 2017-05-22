@@ -6,7 +6,7 @@ RUN npm install --global @angular/cli@1.0.0
 
 WORKDIR /home/app/excella-retro
 COPY package.json /home/app/excella-retro/package.json
-RUN npm install && npm cache clean
+RUN npm install --quiet
 COPY . /home/app/excella-retro
 RUN chown -R app:app /home/app/*
 
