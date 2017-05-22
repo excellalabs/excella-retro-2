@@ -1,25 +1,3 @@
-FROM node:6.10.2
+FROM nginx:1.11-alpine
 
-RUN useradd --user-group --create-home --shell /bin/false app
-
-RUN npm install --global @angular/cli@latest
-
-# RUN npm install && npm cache clean
-# COPY . /home/app/excella-retro
-# RUN chown -R app:app /home/app/*
-
-# RUN apk update
-COPY package.json /tmp/package.json
-RUN cd /tmp && npm install --quiet
-RUN mkdir -p /usr/app && cp -a /tmp/node_modules /usr/app
-
-WORKDIR /usr/app
-COPY ./ /usr/app/
-
-# USER app
-# WORKDIR /home/app/excella-retro
-
-EXPOSE 4200
-
-RUN chmod +x ./entrypoint.sh
-ENTRYPOINT ["./entrypoint.sh"]
+COPY dist /usr/share/nginx/html

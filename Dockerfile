@@ -12,5 +12,3 @@ RUN chown -R app:app /home/app/*
 
 USER app
 WORKDIR /home/app/excella-retro
-
-EXPOSE 4200

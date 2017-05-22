@@ -8,6 +8,7 @@ services:
       dockerfile: Dockerfile
     ports:
       - 4200:4200
+    command: ng serve
     volumes:
       - .:/home/app/excella-retro
       - /home/app/excella-retro/node_modules
