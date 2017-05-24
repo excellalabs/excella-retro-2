@@ -15,9 +15,8 @@ docker-compose build --pull
 # docker-compose run ng test --browsers Chrome_no_sandbox -w false
 # docker-compose run npm run e2e
 
-docker-compose run excella-retro sudo chown -R $USER:$GROUP ~/.npm
 docker-compose run excella-retro npm cache clean
-docker-compose run excella-retro sudo ng build --prod
+docker-compose run excella-retro ng build --prod
 
 if [ "$TRAVIS_BRANCH" == "production" ]; then
   docker-compose -f docker-compose-prod.yml up
