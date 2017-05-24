@@ -1,11 +1,11 @@
 #!/bin/bash
 
 ENV_SUFFIX=""
-if [ "$TRAVIS_BRANCH" == "master" ]; then 
+if [ "$TRAVIS_BRANCH" == "master" ]; then
   ENV_SUFFIX=""
-elif [ "$TRAVIS_BRANCH" == "staging" ]; then 
+elif [ "$TRAVIS_BRANCH" == "staging" ]; then
   ENV_SUFFIX="-stg"
-elif [ "$TRAVIS_BRANCH" == "production" ]; then 
+elif [ "$TRAVIS_BRANCH" == "production" ]; then
   ENV_SUFFIX="-prod"
 fi
 
@@ -17,8 +17,8 @@ docker-compose build --pull
 
 docker-compose run excella-retro sudo chown -R $USER:$GROUP ~/.npm
 docker-compose run excella-retro npm cache clean
-docker-compose run excella-retro ng build --prod
+docker-compose run excella-retro sudo ng build --prod
 
-if [ "$TRAVIS_BRANCH" == "production" ]; then 
+if [ "$TRAVIS_BRANCH" == "production" ]; then
   docker-compose -f docker-compose-prod.yml up
 fi
