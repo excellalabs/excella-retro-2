@@ -32,25 +32,28 @@ import { PhaseStepContentComponent } from './components/shared/phase-step/phase-
 import { FeedbackCardComponent } from './components/shared/feedback/feedback-card/feedback-card.component';
 import { FeedbackContainerComponent } from './components/shared/feedback/feedback-container/feedback-container.component';
 import { RetroCompleteComponent } from './components/retro-complete/retro-complete.component';
+import { RetroSummaryComponent } from './components/retro-summary/retro-summary.component';
+import { ChildComponentService } from './services/child-component.service';
+import { RetroArchiveService } from './services/retro-archive.service';
 
 // Dev Environment
-export const firebaseConfig = {
-  apiKey: 'AIzaSyAjMVQvUS9_E_ckc_yT7siUhQKOnEgD8bs',
-  authDomain: 'excella-retro-2.firebaseapp.com',
-  databaseURL: 'https://excella-retro-2.firebaseio.com',
-  storageBucket: 'excella-retro-2.appspot.com',
-  messagingSenderId: '419643079193'
-};
+// export const firebaseConfig = {
+//   apiKey: 'AIzaSyAjMVQvUS9_E_ckc_yT7siUhQKOnEgD8bs',
+//   authDomain: 'excella-retro-2.firebaseapp.com',
+//   databaseURL: 'https://excella-retro-2.firebaseio.com',
+//   storageBucket: 'excella-retro-2.appspot.com',
+//   messagingSenderId: '419643079193'
+// };
 
 // Prod Envioronment
-  // var firebaseConfig = {
-  //   apiKey: "AIzaSyC5r_KGRp4iDO8yS8kdYYnHa2HtMhxUYSI",
-  //   authDomain: "excella-retro.firebaseapp.com",
-  //   databaseURL: "https://excella-retro.firebaseio.com",
-  //   projectId: "excella-retro",
-  //   storageBucket: "excella-retro.appspot.com",
-  //   messagingSenderId: "181908731323"
-  // };
+  export const firebaseConfig = {
+    apiKey: 'AIzaSyC5r_KGRp4iDO8yS8kdYYnHa2HtMhxUYSI',
+    authDomain: 'excella-retro.firebaseapp.com',
+    databaseURL: 'https://excella-retro.firebaseio.com',
+    projectId: 'excella-retro',
+    storageBucket: 'excella-retro.appspot.com',
+    messagingSenderId: '181908731323'
+  };
 
 const firebaseAuthConfig = {
   provider: AuthProviders.Google,
@@ -69,6 +72,7 @@ const firebaseAuthConfig = {
     GroupFeedbackComponent,
     VoteFeedbackComponent,
     RetroCompleteComponent,
+    RetroSummaryComponent,
     ChildComponentDirective,
     AdminToolbarComponent,
     CreateRetroFormComponent,
@@ -87,7 +91,8 @@ const firebaseAuthConfig = {
     SubmitFeedbackComponent,
     GroupFeedbackComponent,
     VoteFeedbackComponent,
-    RetroCompleteComponent
+    RetroCompleteComponent,
+    RetroSummaryComponent
   ],
   imports: [
     BrowserModule,
@@ -104,7 +109,10 @@ const firebaseAuthConfig = {
     }),
     ClipboardModule
   ],
-  providers: [],
+  providers: [
+    ChildComponentService,
+    RetroArchiveService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
