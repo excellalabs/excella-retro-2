@@ -15,7 +15,6 @@ docker-compose build --pull
 # docker-compose run ng test --browsers Chrome_no_sandbox -w false
 # docker-compose run npm run e2e
 
-docker-compose run excella-retro mkdir dist
 docker-compose run excella-retro npm cache clean
 docker-compose run excella-retro ng build --prod
 
