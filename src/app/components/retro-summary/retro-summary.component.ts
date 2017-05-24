@@ -6,7 +6,7 @@ import { ArchivedGroup } from '../../models/archive/archived-group';
 import { ArchivedMessage } from '../../models/archive/archived-message';
 import { ArchivedPhase } from '../../models/archive/archived-phase';
 import { AngularFire } from 'angularfire2';
-
+import '../../shared/rxjs-operators';
 
 @Component({
   selector: 'app-retro-summary',
@@ -15,7 +15,7 @@ import { AngularFire } from 'angularfire2';
 })
 export class RetroSummaryComponent implements OnInit {
   retroId: string;
-  archivedRetro: ArchivedRetro;
+  archivedRetro: any;
   archivedRetroId: string;
   archivedPhases: ArchivedPhase[];
 
@@ -23,25 +23,35 @@ export class RetroSummaryComponent implements OnInit {
     private route: ActivatedRoute,
     private retroArchiveService: RetroArchiveService) { }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.route.params.subscribe(params => this.retroId = params['retroId']);
 
-    this.af.database.list('archivedRetros', {
+    if (!this.archivedRetro || this.archivedRetro.length === 0) {
+      await this.retroArchiveService.createArchivedRetro(this.retroId)
+        .then((newArchivedRetroVal) => {
+          const archivedRetroId = newArchivedRetroVal.key;
+          this.retroArchiveService.deleteExistingObjects(this.retroId);
+
+          this.getArchivedRetroObservable().subscribe(archivedRetroVal => {
+            this.archivedRetro = archivedRetroVal;
+            this.archivedRetroId = this.archivedRetro[0].retroId;
+            this.archivedPhases = this.archivedRetro[0].archivedPhases;
+          });
+        });
+    } else {
+      const archivedRetroObservable: any = this.getArchivedRetroObservable();
+      this.archivedRetro = await archivedRetroObservable.first().toPromise();
+      this.archivedRetroId = this.archivedRetro[0].retroId;
+      this.archivedPhases = this.archivedRetro[0].archivedPhases;
+    }
+  }
+
+  getArchivedRetroObservable() {
+    return this.af.database.list('archivedRetros', {
       query: {
         orderByChild: 'retroId',
         equalTo: this.retroId
       }
-    }).first().subscribe(archivedRetroVal => {
-      if (archivedRetroVal.length > 0) {
-        this.archivedRetro = archivedRetroVal;
-      } else {
-        this.retroArchiveService.getArchivedRetroById(archivedRetroVal, this.retroId).then(newArchivedRetroVal => {
-          this.archivedRetro = newArchivedRetroVal;
-        });
-      }
-
-      this.archivedRetroId = this.archivedRetro[0].retroId;
-      this.archivedPhases = this.archivedRetro[0].archivedPhases;
     });
   }
 }

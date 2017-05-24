@@ -15,45 +15,44 @@ import '../shared/rxjs-operators';
 export class RetroArchiveService {
   private archivedRetroObservable: FirebaseObjectObservable<any>;
   private archivedRetro: ArchivedRetro;
-  private retroObservable: FirebaseObjectObservable<Retro>;
+  private retroObservable: any;
   private retro: Retro;
-  private phasesObservable: FirebaseListObservable<Phase[]>;
+  private phasesObservable: any;
   private phases: Phase[];
-  private groupsObservable: FirebaseListObservable<Group[]>;
+  private groupsObservable: any;
   private groups: Group[];
-  private messagesObservable: FirebaseListObservable<Message[]>;
+  private messagesObservable: any;
   private messages: Message[];
-  private allVotesObservable: FirebaseListObservable<Vote[]>;
+  private allVotesObservable: any;
   private allVotes: Vote[];
   private votesForGroup: Vote[];
 
   constructor(private af: AngularFire) { }
 
-  async getArchivedRetroById(archivedRetroVal, retroId: string) {
-    return await this.createArchivedRetro(retroId);
-  }
-
-  async createArchivedRetro(retroId: string) {
-    let archivedRetro: ArchivedRetro;
-
+  public async createArchivedRetro(retroId: string) {
     this.createObservables(retroId);
 
-    await this.retroObservable.take(1).toPromise().then(retroVal => this.retro = retroVal);
-    await this.phasesObservable.take(1).toPromise().then(phasesVal => this.phases = phasesVal);
-    await this.groupsObservable.take(1).toPromise().then(groupsVal => this.groups = groupsVal);
-    await this.messagesObservable.take(1).toPromise().then(messagesVal => this.messages = messagesVal);
-    await this.retroObservable.take(1).toPromise().then(retroVal => this.retro = retroVal);
-    await this.allVotesObservable.take(1).toPromise().then(votesVal => this.allVotes = votesVal);
+    this.retro = await this.retroObservable.first().toPromise();
+    this.phases = await this.phasesObservable.first().toPromise();
+    this.groups = await this.groupsObservable.first().toPromise();
+    this.messages = await this.messagesObservable.first().toPromise();
+    this.allVotes = await this.allVotesObservable.first().toPromise();
 
-    this.af.database.list('archivedRetros')
-      .push(this.mapRetroToArchive())
-      .then(archivedRetroVal => {
-        this.deleteExistingObjects(retroId);
-        archivedRetro = archivedRetroVal;
-      });
+    return this.af.database.list('archivedRetros').push(this.mapRetroToArchive());
+  }
 
+  public deleteExistingObjects(retroId: string): void {
+    // Delete phase objects
+    this.phasesObservable.remove();
 
-    return archivedRetro;
+    // Delete group objects
+    this.groupsObservable.remove();
+
+    // Delete message objects
+    this.messagesObservable.remove();
+
+    // Delete vote objects
+    this.allVotesObservable.remove();
   }
 
   private createObservables(retroId: string): void {
@@ -72,20 +71,6 @@ export class RetroArchiveService {
     archivedRetro.archivedPhases = this.mapPhasesToArchive();
 
     return archivedRetro;
-  }
-
-  private deleteExistingObjects(retroId: string): void {
-    // Delete phase objects
-    this.phasesObservable.remove();
-
-    // Delete group objects
-    this.groupsObservable.remove();
-
-    // Delete message objects
-    this.messagesObservable.remove();
-
-    // Delete vote objects
-    this.allVotesObservable.remove();
   }
 
   private getRetroObservable(retroId: string): void {
