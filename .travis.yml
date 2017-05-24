@@ -9,9 +9,6 @@ sudo: required
 chmod: +x
 services:
   - docker
-cache:
-  directories:
-    - node_modules
 before_install:
 script:
   - chmod +x deploy/build-image.sh
