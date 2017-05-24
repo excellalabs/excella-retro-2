@@ -15,7 +15,7 @@ docker-compose build --pull
 # docker-compose run ng test --browsers Chrome_no_sandbox -w false
 # docker-compose run npm run e2e
 
-sudo chown -R $(whoami) $(npm config get prefix)/{lib/node_modules,bin,share}
+docker-compose run excella-retro mkdir dist
 docker-compose run excella-retro npm cache clean
 docker-compose run excella-retro ng build --prod
 
