@@ -82,20 +82,21 @@ export class CreateRetroFormComponent implements OnInit, OnDestroy {
       });
 
       this.phasesSubscription = phasesObservable.subscribe(orderedPhases => {
-          const firstPhaseId = orderedPhases[0].$key;
-          pushedRetro.update({ currentPhaseId: firstPhaseId });
-        });
+        const firstPhaseId = orderedPhases[0].$key;
+        pushedRetro.update({ currentPhaseId: firstPhaseId });
 
-      const currentUserId = localStorage.getItem('currentUserId');
-      if (currentUserId == null) {
-        const newUser = this.af.database.list('users').push({
-          retroId: pushedRetro.key
-        });
-        localStorage.setItem('currentUserId', newUser.key);
-      }
+        const currentUserId = localStorage.getItem('currentUserId');
+        if (currentUserId == null) {
+          const newUser = this.af.database.list('users').push({
+            retroId: pushedRetro.key
+          });
 
-      that.router.navigate(['/retro/' + pushedRetro.key]);
-      that.dialogRef.close();
+          localStorage.setItem('currentUserId', newUser.key);
+        }
+
+        that.router.navigate(['/retro/' + pushedRetro.key]);
+        that.dialogRef.close();
+      });
     });
   }
 }
