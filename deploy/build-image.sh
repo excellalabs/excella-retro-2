@@ -20,5 +20,5 @@ docker-compose run excella-retro npm cache clean
 docker-compose run excella-retro ng build --prod
 
 if [ "$TRAVIS_BRANCH" == "production" ]; then
-  docker-compose -f docker-compose-prod.yml up
+  docker-compose -f docker-compose-prod.yml up -d
 fi
