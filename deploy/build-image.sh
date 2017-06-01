@@ -1,4 +1,5 @@
 #!/bin/bash
+set -x
 
 ENV_SUFFIX=""
 if [ "$TRAVIS_BRANCH" == "master" ]; then

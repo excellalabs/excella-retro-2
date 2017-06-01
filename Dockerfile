@@ -10,6 +10,6 @@ RUN npm install --quiet
 COPY . /home/app/excella-retro
 RUN chown -R app:app /home/app/*
 
-USER app
+#USER app
 WORKDIR /home/app/excella-retro
 RUN mkdir dist
