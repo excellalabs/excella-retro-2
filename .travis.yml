@@ -1,5 +1,9 @@
 language: python
 dist: trusty
+cache:
+  bundler: true
+  directories:
+  - node_modules
 branches:
  only:
  - master
@@ -23,12 +27,11 @@ after_success:
   - chmod +x deploy/push-to-ecr-ecs.sh
   - deploy/push-to-ecr-ecs.sh
 
-
 ### CI environment variables ###
 # AWS_ACCESS_KEY
 # AWS_SECRET_ACCESS_KEY
 # AWS_ACCOUNT_ID
-# AWS_DEFAULT_REGION  
+# AWS_DEFAULT_REGION
 # CLUSTER_NAME
 ### Per environment
 # SERVICE
