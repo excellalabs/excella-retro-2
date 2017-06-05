@@ -4,8 +4,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
 import { MaterialModule } from '@angular/material';
+import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { LocalStorageModule } from 'angular-2-local-storage';
 import { ClipboardModule } from 'ngx-clipboard';
@@ -35,6 +35,7 @@ import { RetroCompleteComponent } from './components/retro-complete/retro-comple
 import { RetroSummaryComponent } from './components/retro-summary/retro-summary.component';
 import { ChildComponentService } from './services/child-component.service';
 import { RetroArchiveService } from './services/retro-archive.service';
+import { EndRetroComponent } from './components/shared/end-retro/end-retro.component';
 
 // Dev Environment
 // export const firebaseConfig = {
@@ -83,7 +84,8 @@ const firebaseAuthConfig = {
     FeedbackContainerComponent,
     GroupedMessagesPipe,
     GroupComponent,
-    CreateRetroFormComponent
+    CreateRetroFormComponent,
+    EndRetroComponent
   ],
   entryComponents: [
     JoinRetroFormComponent,
@@ -92,16 +94,17 @@ const firebaseAuthConfig = {
     GroupFeedbackComponent,
     VoteFeedbackComponent,
     RetroCompleteComponent,
-    RetroSummaryComponent
+    RetroSummaryComponent,
+    EndRetroComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
     HttpModule,
+    MaterialModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(firebaseConfig, firebaseAuthConfig),
-    MaterialModule.forRoot(),
     FlexLayoutModule,
     LocalStorageModule.withConfig({
       prefix: 'excella-retro-2',
