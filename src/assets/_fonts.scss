@@ -1,6 +1,10 @@
 @font-face {
 	font-family: "Marydale";
-	src: url("assets/marydale.ttf") format("truetype");
+	src:
+		url("/assets/fonts/marydale.eot") format("eot"),
+		url("/assets/fonts/marydale.woff") format("woff"),
+		url("/assets/fonts/marydale.ttf") format("truetype"),
+		url("/assets/fonts/marydale.svg") format("svg");
 }
 
 $marydale_regular: Marydale, Arial;

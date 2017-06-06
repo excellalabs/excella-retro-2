@@ -1,14 +1,43 @@
 /* You can add global styles to this file, and also import other style files */
-@import 'assets/_fonts.scss';
+@import './assets/fonts';
+@import './assets/colors';
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
 
 body {
-  font-family: $marydale_regular;
   margin: 0;
+  font-family: $helvetica;
 }
+
+h1 {
+  font-family: $marydale_regular;
+  font-size: 48px;
+}
+
+h2 {
+  font-family: $helvetica;
+  font-size: 36px;
+  font-weight: bold;
+  color: $secondary_blue;
+}
+
+h3 {
+  font-family: $helvetica;
+  font-size: 24px;
+  padding-bottom: 30px;
+}
+
+h4 {
+  font-family: $helvetica;
+  font-size: 18px;
+  font-weight: bold;
+}
+
 p {
-  word-break: break-all
+  font-family: $helvetica;
+  font-size: 14px;
+  word-break: break-all;
 }
+
 md-card {
   margin: 20px;
 }
