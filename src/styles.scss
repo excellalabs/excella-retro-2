@@ -43,26 +43,31 @@ p {
 md-card {
   margin: 20px;
 }
+
 .spacer {
   -webkit-box-flex: 1;
   -ms-flex: 1 1 auto;
   flex: 1 1 auto;
 }
+
 .mat-sidenav-content {
   width: 100%;
 
   // /* TODO: Set this to min-height needed for admin-toolbar controls */
   // min-height: 400px;
 }
+
 .floating-fab {
   position: fixed !important;
   right: 20px;
   bottom: 20px;
   z-index: 9999;
 }
+
 .phase-step-title {
   color: rgba(0, 0, 0, 0.54)
 }
+
 .card-no-padding {
   padding: 0px !important;
 }
