@@ -5,9 +5,13 @@
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue.
-$app-primary: mat-palette($mat-indigo, 900);
-$app-accent:  mat-palette($mat-red, 800);
-$app-warn:    mat-palette($mat-yellow);
+$app-primary: mat-palette($mat-grey, 800); // #424242
+$primary-hex: #424242;
+
+$app-accent:  mat-palette($mat-teal, 300); // #4DB6AC
+$accent-hex:#4DB6AC;
+
+$app-warn:    mat-palette($mat-red);
 
 // Excella Primary
 $app-light-theme: mat-light-theme($app-primary, $app-accent, $app-warn);
@@ -16,6 +20,7 @@ $app-light-theme: mat-light-theme($app-primary, $app-accent, $app-warn);
 
 // Excella Primary (DARK MODE)
 $app-dark-theme: mat-dark-theme($app-primary, $app-accent, $app-warn);
+
 .app-dark-theme {
   @include angular-material-theme($app-dark-theme);
 }

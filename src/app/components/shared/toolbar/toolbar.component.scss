@@ -1,0 +1,11 @@
+@import '../../../../assets/fonts';
+@import '../../../../assets/custom_theme.scss';
+
+#header-primary-white {
+  color: $white;
+  text-decoration: none;
+}
+
+#header-primary-accent {
+  color: $accent-hex;
+}
