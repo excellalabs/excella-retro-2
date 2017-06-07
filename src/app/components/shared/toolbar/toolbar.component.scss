@@ -1,11 +1,21 @@
 @import '../../../../assets/fonts';
-@import '../../../../assets/custom_theme.scss';
+@import '../../../../assets/colors';
 
 #header-primary-white {
   color: $white;
   text-decoration: none;
 }
 
+#header-primary-white:hover {
+  color: $bright_teal;
+  text-decoration: none;
+}
+
 #header-primary-accent {
-  color: $accent-hex;
+  color: $bright_teal;
+}
+
+#github-icon {
+  color: $white;
+  height: 21px;
 }

@@ -6,11 +6,7 @@
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue.
 $app-primary: mat-palette($mat-grey, 800); // #424242
-$primary-hex: #424242;
-
 $app-accent:  mat-palette($mat-teal, 300); // #4DB6AC
-$accent-hex:#4DB6AC;
-
 $app-warn:    mat-palette($mat-red);
 
 // Excella Primary

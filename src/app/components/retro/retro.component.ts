@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, NgZone } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
@@ -15,6 +15,7 @@ import { RetroCompleteComponent } from '../retro-complete/retro-complete.compone
 import { LocalStorageService } from 'angular-2-local-storage';
 import { ChildComponentService } from '../../services/child-component.service';
 import { ChildComponentDirective } from '../../directives/child-component-directive';
+import { WindowService } from '../../services/window.service';
 
 @Component({
   selector: 'app-retro',
@@ -34,6 +35,8 @@ export class RetroComponent implements OnInit {
   @Input() childComponent: ChildComponent;
   showAdminToolbar: boolean;
   @ViewChild(ChildComponentDirective) childComponentHost: ChildComponentDirective;
+  formattedWindowHeight: string;
+  loadingScreen = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -41,11 +44,21 @@ export class RetroComponent implements OnInit {
     private router: Router,
     private af: AngularFire,
     private localStorageService: LocalStorageService,
-    private childComponentService: ChildComponentService
-  ) { }
+    private childComponentService: ChildComponentService,
+    private ngZone: NgZone,
+    private windowService: WindowService
+  ) {
+    window.onresize = (e) => {
+      this.ngZone.run(() => {
+        this.formattedWindowHeight = this.windowService.setResponsiveWindowHeight(window);
+      });
+    };
+  }
 
   ngOnInit() {
     const self = this;
+
+    this.formattedWindowHeight = this.windowService.setResponsiveWindowHeight(window);
 
     this.af.auth.subscribe(user => {
       if (user) {
@@ -57,7 +70,10 @@ export class RetroComponent implements OnInit {
 
     this.subscription = this.route.params.subscribe(params => self.retroId = params['retroId']);
     this.retroObservable = this.af.database.object('retros/' + self.retroId);
+
+    this.showLoadingScreen();
     this.retroObservable.subscribe(retroVal => {
+      self.hideLoadingScreen();
       self.retroSnapshot = retroVal;
       self.retroIsActive = self.retroSnapshot.isActive;
       self.toggleAdminToolbar();
@@ -100,5 +116,13 @@ export class RetroComponent implements OnInit {
       this.retroSnapshot.isActive
       && this.user
       && this.user.auth.uid === this.retroSnapshot.adminId;
+  }
+
+  showLoadingScreen() {
+    this.loadingScreen = true;
+  }
+
+  hideLoadingScreen() {
+    this.loadingScreen = false;
   }
 }

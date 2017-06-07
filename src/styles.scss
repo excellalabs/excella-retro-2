@@ -57,6 +57,10 @@ md-card {
   // min-height: 400px;
 }
 
+.mat-toolbar {
+  font-size: initial !important;
+}
+
 .floating-fab {
   position: fixed !important;
   right: 20px;
