@@ -3,38 +3,40 @@
 @import './assets/colors';
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
 
-body {
+body, html {
   margin: 0;
   font-family: $helvetica;
+  box-sizing: border-box;
+  height: 100%;
 }
 
 h1 {
   font-family: $marydale_regular;
-  font-size: 48px;
+  font-size: 36px;
 }
 
 h2 {
   font-family: $helvetica;
-  font-size: 36px;
+  font-size: 24px;
   font-weight: bold;
   color: $secondary_blue;
 }
 
 h3 {
   font-family: $helvetica;
-  font-size: 24px;
+  font-size: 18px;
   padding-bottom: 30px;
 }
 
 h4 {
   font-family: $helvetica;
-  font-size: 18px;
+  font-size: 14px;
   font-weight: bold;
 }
 
 p {
   font-family: $helvetica;
-  font-size: 14px;
+  font-size: 12px;
   word-break: break-all;
 }
 
@@ -49,13 +51,13 @@ md-card {
 .mat-sidenav-content {
   width: 100%;
 
-  /* TODO: Set this to min-height needed for admin-toolbar controls */
-  min-height: 400px;
+  // /* TODO: Set this to min-height needed for admin-toolbar controls */
+  // min-height: 400px;
 }
 .floating-fab {
-  position: absolute !important;
-  right: 10px;
-  bottom: 10px;
+  position: fixed !important;
+  right: 20px;
+  bottom: 20px;
   z-index: 9999;
 }
 .phase-step-title {

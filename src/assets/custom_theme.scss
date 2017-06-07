@@ -1,4 +1,5 @@
 @import '~@angular/material/theming';
+@import './colors';
 @include mat-core();
 
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
@@ -8,12 +9,13 @@ $app-primary: mat-palette($mat-indigo, 900);
 $app-accent:  mat-palette($mat-red, 800);
 $app-warn:    mat-palette($mat-yellow);
 
+// Excella Primary
 $app-light-theme: mat-light-theme($app-primary, $app-accent, $app-warn);
+
 @include angular-material-theme($app-light-theme);
 
+// Excella Primary (DARK MODE)
+$app-dark-theme: mat-dark-theme($app-primary, $app-accent, $app-warn);
 .app-dark-theme {
-  background-color: black;
-
-  $app-dark-theme: mat-dark-theme($app-primary, $app-accent, $app-warn);
   @include angular-material-theme($app-dark-theme);
 }

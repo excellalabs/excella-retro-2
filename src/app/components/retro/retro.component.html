@@ -1,4 +1,4 @@
-<md-sidenav-container fxLayout>
+<md-sidenav-container fxLayout="column" fxFlexFill>
   <div class="floating-fab">
     <span *ngIf="showAdminToolbar" mdTooltip="Open Admin Toolbar">
       <button md-fab (click)="sidenav.toggle()">
@@ -6,7 +6,7 @@
       </button>
     </span>
   </div>
-  <md-sidenav  #sidenav mode="over" opened="false" fxFlex="250px">
+  <md-sidenav fxFlex #sidenav mode="over" opened="false">
     <div class="admin-toolbar">
       <app-admin-toolbar [retroObservable]="retroObservable"></app-admin-toolbar>
     </div>
