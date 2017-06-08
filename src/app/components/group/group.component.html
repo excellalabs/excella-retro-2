@@ -1,8 +1,8 @@
 <div>
-  <md-card>
-    <md-card-title>
+  <md-card style="margin: 12px 20px; padding: 12px 12px">
+    <md-card-title style="margin: 0px">
       <div fxLayout>
-        <span *ngIf="!editMode" fxFlex="90%">{{groupName}}</span>
+        <h4 *ngIf="!editMode" fxFlex="90%">{{groupName}}</h4>
         <md-input-container *ngIf="editMode && allowAdminFunctions" fxFlex="90%">
           <textarea mdInput [(ngModel)]="groupName" name="groupNameInput" style="resize: vertical"></textarea>
         </md-input-container>

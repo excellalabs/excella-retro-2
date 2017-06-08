@@ -30,7 +30,7 @@ export class GroupFeedbackComponent implements OnInit, OnDestroy {
   enabledGroup: string;
   allowAdminFunctions: boolean;
   user: any;
-  
+
   constructor(private af: AngularFire) { }
 
   ngOnInit() {
@@ -49,7 +49,7 @@ export class GroupFeedbackComponent implements OnInit, OnDestroy {
       self.feedbackSubscription = self.feedbackMessagesObservable.subscribe(feedbackMessages => {
         self.feedbackMessages = feedbackMessages;
         self.ungroupedFeedbackMessages = feedbackMessages.filter(feedback => {
-          return feedback.phaseId === self.retro.currentPhaseId 
+          return feedback.phaseId === self.retro.currentPhaseId
             && (feedback.groupId === null || feedback.groupId === undefined || feedback.groupId === '');
         });
       });
