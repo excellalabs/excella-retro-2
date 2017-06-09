@@ -38,21 +38,31 @@ export class RetroArchiveService {
     this.messages = await this.messagesObservable.first().toPromise();
     this.allVotes = await this.allVotesObservable.first().toPromise();
 
+
     return this.af.database.list('archivedRetros').push(this.mapRetroToArchive());
   }
 
   public deleteExistingObjects(retroId: string): void {
+    var that = this;
     // Delete phase objects
-    this.phasesObservable.remove();
+    this.phases.forEach(phase => {
+      that.af.database.object('/phases/' + phase.$key).remove()
+    });
 
     // Delete group objects
-    this.groupsObservable.remove();
+    this.groups.forEach(group => {
+      that.af.database.object('/groups/' + group.$key).remove()
+    });
 
     // Delete message objects
-    this.messagesObservable.remove();
+    this.messages.forEach(message => {
+      that.af.database.object('/messages/' + message.$key).remove()
+    });
 
     // Delete vote objects
-    this.allVotesObservable.remove();
+    this.allVotes.forEach(vote => {
+      that.af.database.object('/votes/' + vote.$key).remove()
+    });
   }
 
   private createObservables(retroId: string): void {
