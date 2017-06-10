@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, NgZone } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Input, ViewChildren, QueryList, NgZone } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
@@ -22,7 +22,7 @@ import { WindowService } from '../../services/window.service';
   templateUrl: './retro.component.html',
   styleUrls: ['./retro.component.css']
 })
-export class RetroComponent implements OnInit {
+export class RetroComponent implements OnInit, AfterViewInit {
   retroId: string;
   retroIsActive: boolean;
   retroObservable: FirebaseObjectObservable<Retro>;
@@ -34,7 +34,8 @@ export class RetroComponent implements OnInit {
   public retroSnapshot: Retro;
   @Input() childComponent: ChildComponent;
   showAdminToolbar: boolean;
-  @ViewChild(ChildComponentDirective) childComponentHost: ChildComponentDirective;
+  @ViewChildren(ChildComponentDirective) childComponentHostQueryList: QueryList<ChildComponentDirective>;
+  childComponentHost: ChildComponentDirective;
   formattedWindowHeight: string;
   loadingScreen = false;
 
@@ -47,18 +48,18 @@ export class RetroComponent implements OnInit {
     private childComponentService: ChildComponentService,
     private ngZone: NgZone,
     private windowService: WindowService
-  ) {
-    window.onresize = (e) => {
-      this.ngZone.run(() => {
-        this.formattedWindowHeight = this.windowService.setResponsiveWindowHeight(window);
-      });
-    };
-  }
+  ) { }
 
   ngOnInit() {
     const self = this;
 
     this.formattedWindowHeight = this.windowService.setResponsiveWindowHeight(window);
+
+    window.onresize = (e) => {
+      this.ngZone.run(() => {
+        this.formattedWindowHeight = this.windowService.setResponsiveWindowHeight(window);
+      });
+    };
 
     this.af.auth.subscribe(user => {
       if (user) {
@@ -72,6 +73,11 @@ export class RetroComponent implements OnInit {
     this.retroObservable = this.af.database.object('retros/' + self.retroId);
 
     this.showLoadingScreen();
+  }
+
+  ngAfterViewInit() {
+    const self = this;
+
     this.retroObservable.subscribe(retroVal => {
       self.hideLoadingScreen();
       self.retroSnapshot = retroVal;
@@ -100,8 +106,15 @@ export class RetroComponent implements OnInit {
     } else {
       this.childComponent = new ChildComponent(RetroCompleteComponent, data);
     }
-
-    this.childComponentService.renderChildComponent(this.childComponent, this.childComponentHost);
+    this.childComponentHost = this.childComponentHostQueryList.first;
+    if (this.childComponentHost && this.childComponentHost.viewContainerRef) {
+      this.childComponentService.renderChildComponent(this.childComponent, this.childComponentHost);
+    } else {
+      this.childComponentHostQueryList.changes.subscribe((comps: QueryList<ChildComponentDirective>) => {
+        this.childComponentHost = comps.first;
+        this.childComponentService.renderChildComponent(this.childComponent, this.childComponentHost);
+      });
+    }
   }
 
   validateUser() {
