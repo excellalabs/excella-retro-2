@@ -3,7 +3,7 @@
   <app-phase-step-content>
     <div fxLayout>
       <div fxFlex="50%">
-        <h4>Add Feedback</h4>
+        <h3>Add Feedback</h3>
         <md-input-container style="width:75%">
           <textarea mdInput placeholder="Feedback" [(ngModel)]="feedbackToSubmit.text"></textarea>
         </md-input-container>
@@ -12,7 +12,7 @@
         </div>
       </div>
       <div fxFlex="50%">
-        <h4>Live Feedback</h4>
+        <h3>Live Feedback</h3>
         <app-feedback-container>
           <div *ngIf="hasExistingMessages">
             <app-feedback-card *ngFor="let feedback of existingFeedbackVal" [feedback]="feedback"></app-feedback-card>

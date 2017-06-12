@@ -59,7 +59,7 @@ import { WindowService } from './services/window.service';
 
 const firebaseAuthConfig = {
   provider: AuthProviders.Google,
-  method: AuthMethods.Redirect,
+  method: AuthMethods.Popup,
   remember: 'default'
 };
 

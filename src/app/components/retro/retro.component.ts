@@ -106,7 +106,9 @@ export class RetroComponent implements OnInit, AfterViewInit {
     } else {
       this.childComponent = new ChildComponent(RetroCompleteComponent, data);
     }
+
     this.childComponentHost = this.childComponentHostQueryList.first;
+
     if (this.childComponentHost && this.childComponentHost.viewContainerRef) {
       this.childComponentService.renderChildComponent(this.childComponent, this.childComponentHost);
     } else {

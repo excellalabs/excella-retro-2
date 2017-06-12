@@ -4,18 +4,10 @@
   <a md-icon-button href="https://github.com/excellalabs/excella-retro-2" target="_blank">
     <img src="../../../../assets/github-logo-white.svg" id="github-icon"/>
   </a>
-  <button md-icon-button [mdMenuTriggerFor]="menu">
-    <md-icon>more_vert</md-icon>
+  <button *ngIf="user" md-icon-button>
+    <img class="mat-card-avatar" id="custom-avatar" src="{{user.auth.photoURL}}" (click)="logout()">
   </button>
-  <md-menu #menu="mdMenu">
-    <button md-menu-item *ngIf="!user" (click)="login()">
-      <md-icon>fingerprint</md-icon>
-      <span>Login</span>
-      <span *ngIf="user" (click)="logout()">Logout</span>
-    </button>
-    <button md-menu-item *ngIf="user" (click)="logout()">
-      <md-icon>fingerprint</md-icon>
-      <span>Logout</span>
-    </button>
-  </md-menu>
+  <button md-button *ngIf="!user" (click)="login()">
+    LOGIN
+  </button>
 </md-toolbar>

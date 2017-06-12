@@ -22,10 +22,10 @@ export class ToolbarComponent implements OnInit {
       this.af.auth.login();
     }
 
-    logout() {
-      this.af.auth.logout();
-      this.router.navigateByUrl('');
-    }
+  logout() {
+    this.af.auth.logout();
+    this.router.navigateByUrl('');
+  }
 
   ngOnInit() {
     this.checkDarkMode();
