@@ -1,13 +1,13 @@
 <md-toolbar color="primary" class="mat-elevation-z4">
   <h1><a href='' id="header-primary-white">EXCELLA<span id="header-primary-accent">RETRO</span></a></h1>
   <span class="spacer"></span>
-  <a md-icon-button href="https://github.com/excellalabs/excella-retro-2" target="_blank">
-    <img src="../../../../assets/github-logo-white.svg" id="github-icon"/>
-  </a>
   <button *ngIf="user" md-icon-button>
     <img class="mat-card-avatar" id="custom-avatar" src="{{user.auth.photoURL}}" (click)="logout()">
   </button>
   <button md-button *ngIf="!user" (click)="login()">
     LOGIN
   </button>
+  <a md-icon-button href="https://github.com/excellalabs/excella-retro-2" target="_blank">
+    <img src="../../../../assets/github-logo-white.svg" id="github-icon"/>
+  </a>
 </md-toolbar>
