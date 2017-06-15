@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Input, ViewChildren, QueryList, NgZone } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
@@ -15,13 +15,14 @@ import { RetroCompleteComponent } from '../retro-complete/retro-complete.compone
 import { LocalStorageService } from 'angular-2-local-storage';
 import { ChildComponentService } from '../../services/child-component.service';
 import { ChildComponentDirective } from '../../directives/child-component-directive';
+import { WindowService } from '../../services/window.service';
 
 @Component({
   selector: 'app-retro',
   templateUrl: './retro.component.html',
   styleUrls: ['./retro.component.css']
 })
-export class RetroComponent implements OnInit {
+export class RetroComponent implements OnInit, AfterViewInit {
   retroId: string;
   retroIsActive: boolean;
   retroObservable: FirebaseObjectObservable<Retro>;
@@ -33,7 +34,10 @@ export class RetroComponent implements OnInit {
   public retroSnapshot: Retro;
   @Input() childComponent: ChildComponent;
   showAdminToolbar: boolean;
-  @ViewChild(ChildComponentDirective) childComponentHost: ChildComponentDirective;
+  @ViewChildren(ChildComponentDirective) childComponentHostQueryList: QueryList<ChildComponentDirective>;
+  childComponentHost: ChildComponentDirective;
+  formattedWindowHeight: string;
+  loadingScreen = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -41,11 +45,21 @@ export class RetroComponent implements OnInit {
     private router: Router,
     private af: AngularFire,
     private localStorageService: LocalStorageService,
-    private childComponentService: ChildComponentService
+    private childComponentService: ChildComponentService,
+    private ngZone: NgZone,
+    private windowService: WindowService
   ) { }
 
   ngOnInit() {
     const self = this;
+
+    this.formattedWindowHeight = this.windowService.setResponsiveWindowHeight(window);
+
+    window.onresize = (e) => {
+      this.ngZone.run(() => {
+        this.formattedWindowHeight = this.windowService.setResponsiveWindowHeight(window);
+      });
+    };
 
     this.af.auth.subscribe(user => {
       if (user) {
@@ -57,7 +71,15 @@ export class RetroComponent implements OnInit {
 
     this.subscription = this.route.params.subscribe(params => self.retroId = params['retroId']);
     this.retroObservable = this.af.database.object('retros/' + self.retroId);
+
+    this.showLoadingScreen();
+  }
+
+  ngAfterViewInit() {
+    const self = this;
+
     this.retroObservable.subscribe(retroVal => {
+      self.hideLoadingScreen();
       self.retroSnapshot = retroVal;
       self.retroIsActive = self.retroSnapshot.isActive;
       self.toggleAdminToolbar();
@@ -85,7 +107,16 @@ export class RetroComponent implements OnInit {
       this.childComponent = new ChildComponent(RetroCompleteComponent, data);
     }
 
-    this.childComponentService.renderChildComponent(this.childComponent, this.childComponentHost);
+    this.childComponentHost = this.childComponentHostQueryList.first;
+
+    if (this.childComponentHost && this.childComponentHost.viewContainerRef) {
+      this.childComponentService.renderChildComponent(this.childComponent, this.childComponentHost);
+    } else {
+      this.childComponentHostQueryList.changes.subscribe((comps: QueryList<ChildComponentDirective>) => {
+        this.childComponentHost = comps.first;
+        this.childComponentService.renderChildComponent(this.childComponent, this.childComponentHost);
+      });
+    }
   }
 
   validateUser() {
@@ -100,5 +131,13 @@ export class RetroComponent implements OnInit {
       this.retroSnapshot.isActive
       && this.user
       && this.user.auth.uid === this.retroSnapshot.adminId;
+  }
+
+  showLoadingScreen() {
+    this.loadingScreen = true;
+  }
+
+  hideLoadingScreen() {
+    this.loadingScreen = false;
   }
 }

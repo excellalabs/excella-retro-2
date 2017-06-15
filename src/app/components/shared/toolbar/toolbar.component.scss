@@ -1,0 +1,26 @@
+@import '../../../../assets/fonts';
+@import '../../../../assets/colors';
+
+#header-primary-white {
+  color: $white;
+  text-decoration: none;
+}
+
+#header-primary-white:hover {
+  color: $bright_teal;
+  text-decoration: none;
+}
+
+#header-primary-accent {
+  color: $bright_teal;
+}
+
+#github-icon {
+  color: $white;
+  height: 21px;
+}
+
+#custom-avatar {
+  height: 28px;
+  width: 28px;
+}

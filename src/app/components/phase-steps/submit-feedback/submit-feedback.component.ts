@@ -34,7 +34,7 @@ export class SubmitFeedbackComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     const self = this;
-    
+
     this.currentUserId = localStorage.getItem('currentUserId');
     this.retroObservable = this.data.retroObservable;
     this.currentPhaseObservable = this.data.currentPhaseObservable;
@@ -48,7 +48,7 @@ export class SubmitFeedbackComponent implements OnInit, OnDestroy {
         self.currentPhaseSubscription.unsubscribe();
       });
 
-      self.existingFeedbackObservable = self.af.database.list('messages', 
+      self.existingFeedbackObservable = self.af.database.list('messages',
           { query: { orderByChild: "retroId", equalTo: self.retroId}});
       this.existingFeedbackSubscription = self.existingFeedbackObservable.subscribe(existingFeedbackVal => {
         self.existingFeedbackVal = existingFeedbackVal;

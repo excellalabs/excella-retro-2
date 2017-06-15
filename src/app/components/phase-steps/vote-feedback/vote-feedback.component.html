@@ -1,18 +1,27 @@
 <md-card style="padding:0px">
   <md-toolbar color="accent">
-    <span>Vote</span>
+    <span><b>{{(currentPhaseObservable | async)?.name}}:</b> Vote</span>
   </md-toolbar>
   <md-card-content style="padding:0 24px 8px">
     <div fxLayout>
-      <div fxFlex="50%">
-        <h4># Votes remaining: {{votesRemaining}}</h4>
+      <div fxFlex="100%">
+        <h3>Votes remaining: {{votesRemaining}}</h3>
         <div fxLayout="column">
-          <md-card fxFlex *ngFor="let group of groups">
-            <span>{{group.name}}</span>
-            <span class="badge-display"> {{getVoteCount(group)}}</span>
-            <button md-raised-button color="primary" (click)="addVote(group)" 
-                [disabled]="votesRemaining <= 0" style="float: right">VOTE</button>
-          </md-card>
+          <div style="max-height: 70vh; overflow-y: auto">
+            <md-card fxFlex *ngFor="let group of groups" style="padding-top: 0px">
+              <md-card-header>
+                <md-card-title>
+                  <h4><span>Votes: {{getVoteCount(group)}}</span></h4>
+                </md-card-title>
+              </md-card-header>
+              <md-card-content>
+                <p>{{group.name}}</p>
+              </md-card-content>
+              <md-card-actions style="padding: 0px">
+                <button md-raised-button color="primary" (click)="addVote(group)" [disabled]="votesRemaining <= 0">VOTE</button>
+              </md-card-actions>
+            </md-card>
+          </div>
         </div>
       </div>
     </div>

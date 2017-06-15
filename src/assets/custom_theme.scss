@@ -1,0 +1,27 @@
+@import '~@angular/material/theming';
+@include mat-core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue.
+
+$primary-primary: mat-palette($mat-grey, 800);          // #424242
+$primary-accent:  mat-palette($mat-teal, 300);          // #4DB6AC
+$primary-warn:    mat-palette($mat-red);                // #F44336
+$primary-light-theme: mat-light-theme($primary-primary, $primary-accent, $primary-warn);
+@include angular-material-theme($primary-light-theme);
+
+$secondary-primary: mat-palette($mat-indigo, 400);      // #5C6BC0
+$secondary-accent:  mat-palette($mat-deep-orange, 800); // #D84315
+$secondary-warn:    mat-palette($mat-red);              // #F44336
+$secondary-light-theme: mat-light-theme($secondary-primary, $secondary-accent, $secondary-warn);
+
+.secondary {
+  @include angular-material-theme($secondary-light-theme);
+}
+
+// Excella Primary (DARK MODE)
+// $app-dark-theme: mat-dark-theme($app-primary, $app-accent, $app-warn);
+// .app-dark-theme {
+//   @include angular-material-theme($app-dark-theme);
+// }

@@ -36,6 +36,7 @@ import { RetroSummaryComponent } from './components/retro-summary/retro-summary.
 import { ChildComponentService } from './services/child-component.service';
 import { RetroArchiveService } from './services/retro-archive.service';
 import { EndRetroComponent } from './components/shared/end-retro/end-retro.component';
+import { WindowService } from './services/window.service';
 
 // Dev Environment
 // export const firebaseConfig = {
@@ -58,7 +59,7 @@ import { EndRetroComponent } from './components/shared/end-retro/end-retro.compo
 
 const firebaseAuthConfig = {
   provider: AuthProviders.Google,
-  method: AuthMethods.Redirect,
+  method: AuthMethods.Popup,
   remember: 'default'
 };
 
@@ -114,7 +115,8 @@ const firebaseAuthConfig = {
   ],
   providers: [
     ChildComponentService,
-    RetroArchiveService
+    RetroArchiveService,
+    WindowService
   ],
   bootstrap: [AppComponent]
 })

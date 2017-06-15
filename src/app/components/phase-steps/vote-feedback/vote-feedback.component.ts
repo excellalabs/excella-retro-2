@@ -4,6 +4,7 @@ import { Message } from '../../../models/message';
 import { Retro } from '../../../models/retro';
 import { Group } from '../../../models/group';
 import { Vote } from '../../../models/vote';
+import { Phase } from '../../../models/phase';
 import { ChildComponentData } from '../../../models/child-component-data';
 import { AngularFire, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2';
 import { LocalStorageService } from 'angular-2-local-storage';
@@ -16,6 +17,7 @@ import { LocalStorageService } from 'angular-2-local-storage';
 export class VoteFeedbackComponent implements OnInit, OnDestroy {
   votesObservable: FirebaseListObservable<Vote[]>;
   groupsObservable: FirebaseListObservable<Group[]>;
+  currentPhaseObservable: FirebaseObjectObservable<Phase>;
   dataSubscription: Subscription;
   votesSubscription: Subscription;
   groups: Group[];
@@ -40,6 +42,8 @@ export class VoteFeedbackComponent implements OnInit, OnDestroy {
         self.retroName = retro.name;
         self.retroId = retro.$key;
         self.currentPhaseId = retro.currentPhaseId;
+
+        this.currentPhaseObservable = this.data.currentPhaseObservable;
 
         self.votesObservable = self.af.database.list('votes',
           { query: { orderByChild: 'userId', equalTo: self.currentUserId } });
