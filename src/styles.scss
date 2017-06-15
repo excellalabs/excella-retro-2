@@ -2,10 +2,11 @@
 @import './assets/fonts';
 @import './assets/colors';
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+@import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic");
 
 body, html {
   margin: 0;
-  font-family: $helvetica;
+  font-family: Roboto;
   box-sizing: border-box;
   height: 100%;
 }
@@ -16,27 +17,27 @@ h1 {
 }
 
 h2 {
-  font-family: $helvetica;
+  font-family: Roboto;
   font-size: 24px;
   font-weight: bold;
   color: $secondary_blue;
 }
 
 h3 {
-  font-family: $helvetica;
+  font-family: Roboto;
   font-size: 16px;
   text-transform: uppercase;
   color: $orange;
 }
 
 h4 {
-  font-family: $helvetica;
+  font-family: Roboto;
   font-size: 14px;
   font-weight: bold;
 }
 
 p {
-  font-family: $helvetica;
+  font-family: Roboto;
   font-size: 12px;
   word-break: break-all;
 }
