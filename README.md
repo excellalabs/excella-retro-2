@@ -1,6 +1,6 @@
 # Excella Retro 2.0
 
-Beta v1: https://excella-retro.firebaseapp.com/
+Beta v2: https://excella-retro.firebaseapp.com/
 
 [![Build Status](https://travis-ci.org/excellalabs/excella-retro-2.svg?branch=master)](https://travis-ci.org/excellalabs/excella-retro-2)
 
