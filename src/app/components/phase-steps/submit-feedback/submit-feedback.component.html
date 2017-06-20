@@ -1,0 +1,29 @@
+<app-phase-step-card>
+  <app-phase-step-header><b>{{(currentPhaseObservable | async)?.name}}:</b> Submit Feedback</app-phase-step-header>
+  <app-phase-step-content>
+    <div fxLayout>
+      <div fxFlex="50%">
+        <h3>Add Feedback</h3>
+        <md-input-container style="width:75%">
+          <textarea mdInput placeholder="Feedback" [(ngModel)]="feedbackToSubmit.text"></textarea>
+        </md-input-container>
+        <div>
+          <button md-raised-button color="primary" (click)="submitFeedback()">SUBMIT</button>
+        </div>
+      </div>
+      <div fxFlex="50%">
+        <h3>Live Feedback</h3>
+        <div style="max-height: 70vh; overflow-y: auto">
+          <app-feedback-container>
+            <div *ngIf="hasExistingMessages">
+              <app-feedback-card *ngFor="let feedback of existingFeedbackVal" [feedback]="feedback"></app-feedback-card>
+            </div>
+            <div *ngIf="!hasExistingMessages">
+              <p><i style="color:rgba(0, 0, 0, 0.38)">No feedback has been entered.</i></p>
+            </div>
+          </app-feedback-container>
+        </div>
+      </div>
+    </div>
+  </app-phase-step-content>
+</app-phase-step-card>

@@ -1,0 +1,87 @@
+/* You can add global styles to this file, and also import other style files */
+@import './assets/fonts';
+@import './assets/colors';
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+@import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic");
+
+body, html {
+  margin: 0;
+  font-family: Roboto;
+  box-sizing: border-box;
+  height: 100%;
+}
+
+h1 {
+  font-family: $marydale_regular;
+  font-size: 30px;
+}
+
+h2 {
+  font-family: Roboto;
+  font-size: 24px;
+  font-weight: bold;
+  color: $secondary_blue;
+}
+
+h3 {
+  font-family: Roboto;
+  font-size: 16px;
+  text-transform: uppercase;
+  color: $orange;
+}
+
+h4 {
+  font-family: Roboto;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+p {
+  font-family: Roboto;
+  font-size: 12px;
+  word-break: break-all;
+}
+
+md-card {
+  margin: 20px;
+}
+
+.spacer {
+  -webkit-box-flex: 1;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+}
+
+.mat-sidenav-content {
+  width: 100%;
+
+  // /* TODO: Set this to min-height needed for admin-toolbar controls */
+  // min-height: 400px;
+}
+
+.mat-toolbar {
+  font-size: initial !important;
+}
+
+.floating-fab {
+  position: fixed !important;
+  right: 20px;
+  bottom: 20px;
+  z-index: 9999;
+}
+
+.phase-step-title {
+  color: rgba(0, 0, 0, 0.54)
+}
+
+.card-no-padding {
+  padding: 0px !important;
+}
+
+.card-content-padding {
+  padding: 0 24px 8px;
+}
+
+.mat-card-header-text {
+  margin: 0px !important;
+}

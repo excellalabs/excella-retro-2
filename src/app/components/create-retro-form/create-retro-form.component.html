@@ -1,0 +1,30 @@
+<div md-dialog-content>
+  <form #createRetroForm="ngForm">
+    <div>
+      <md-input-container>
+        <input mdInput placeholder="Retro Name" [(ngModel)]="retroName" name="retroNameInput" required/>
+      </md-input-container>
+    </div>
+    <div>
+      <md-input-container>
+        <input mdInput type="number" placeholder="Number of Votes" [(ngModel)]="numberOfVotes" name="numberOfVotesInput" required>
+      </md-input-container>
+    </div>
+    <div *ngFor="let phase of phases; let i = index">
+      <div>
+        <md-input-container>
+          <input mdInput [(ngModel)]="phase.name" name="phase-name-{{i}}" required>
+        </md-input-container>
+        <button md-icon-button (click)="addPhase(i+1)" tabindex="-1">
+          <md-icon>add_circle</md-icon>
+        </button>
+        <button md-icon-button (click)="removePhase(i)" [disabled]="phases.length <= 1" tabindex="-1">
+          <md-icon>remove_circle</md-icon>
+        </button>
+      </div>
+    </div>
+    <div style="text-align: center">
+      <button type="submit" md-raised-button color="primary" style="width: 100%" (click)="createRetro(retroName)" [disabled]="!createRetroForm.form.valid">CREATE</button>
+    </div>
+  </form>
+</div>

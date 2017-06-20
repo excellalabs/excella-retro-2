@@ -1,0 +1,39 @@
+language: python
+dist: trusty
+cache:
+  bundler: true
+  directories:
+  - node_modules
+branches:
+ only:
+ - master
+ - staging
+ - production
+sudo: required
+chmod: +x
+services:
+  - docker
+before_install:
+script:
+  - chmod +x deploy/build-image.sh
+  - deploy/build-image.sh
+after_success:
+  - 'curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip"'
+  - 'unzip awscli-bundle.zip'
+  - './awscli-bundle/install -b ~/bin/aws'
+  - 'export PATH=~/bin:$PATH'
+
+  - chmod +x deploy/ecs-deploy.sh
+  - chmod +x deploy/push-to-ecr-ecs.sh
+  - deploy/push-to-ecr-ecs.sh
+
+### CI environment variables ###
+# AWS_ACCESS_KEY
+# AWS_SECRET_ACCESS_KEY
+# AWS_ACCOUNT_ID
+# AWS_DEFAULT_REGION
+# CLUSTER_NAME
+### Per environment
+# SERVICE
+# IMAGE_NAME
+
