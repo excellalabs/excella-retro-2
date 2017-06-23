@@ -12,8 +12,9 @@ body, html {
 }
 
 h1 {
-  font-family: $marydale_regular;
-  font-size: 30px;
+  font-family: $marydale_regular !important;
+  font-size: 30px !important;
+  font-weight: bold !important;
 }
 
 h2 {

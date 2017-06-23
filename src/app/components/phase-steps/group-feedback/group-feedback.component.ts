@@ -96,7 +96,7 @@ export class GroupFeedbackComponent implements OnInit, OnDestroy {
         this.createNewGroup(msg.text)
       });
     }
-    
+
     this.retroSubscription.unsubscribe();
     this.feedbackSubscription.unsubscribe();
     this.groupsSubscription.unsubscribe();
