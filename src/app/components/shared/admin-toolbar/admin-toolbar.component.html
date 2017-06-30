@@ -4,12 +4,12 @@
     <input mdInput placeholder="Retro ID" readonly value="{{(retroObservable | async)?.$key}}" #retroIdInput>
   </md-input-container>
   <div>
-    <span mdTooltip="Email Retro ID">
+    <!--<span mdTooltip="Email Retro ID">
       <button md-mini-fab disabled><md-icon>email</md-icon></button>
     </span>
     <span mdTooltip="Share Retro Link">
       <button md-mini-fab disabled><md-icon>link</md-icon></button>
-    </span>
+    </span>-->
     <span mdTooltip="Copy Retro ID">
       <button md-mini-fab [ngxClipboard]="retroIdInput" (click)="copyTextSuccessful()"><md-icon>content_copy</md-icon></button>
     </span>
