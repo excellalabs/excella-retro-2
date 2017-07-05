@@ -147,7 +147,7 @@ export class RetroArchiveService {
     groupsInPhase.forEach(groupInPhase => {
       const archivedGroup = new ArchivedGroup;
       const votesByGroup = this.allVotes.filter(vote => {
-        return vote.groupId = groupInPhase.$key;
+        return vote.groupId === groupInPhase.$key;
       });
 
       archivedGroup.groupId = groupInPhase.$key;
