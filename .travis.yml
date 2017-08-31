@@ -5,12 +5,8 @@ cache:
   directories:
     - "node_modules"
 before_deploy:
+script:
   - 'npm run docker:build && npm run aws:release'
-#   - 'curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip"'
-#   - 'unzip awscli-bundle.zip'
-#   - './awscli-bundle/install -b ~/bin/aws'
-#   - 'export PATH=~/bin:$PATH'
-#   - 'aws s3 rm s3://$S3_BUCKET_DEV --recursive'
 deploy:
   provider: s3
   access_key_id: $AWS_ACCESS_KEY
