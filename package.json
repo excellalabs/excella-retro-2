@@ -1,6 +1,6 @@
 {
   "name": "excella-retro",
-  "version": "0.0.0",
+  "version": "2.0.0",
   "license": "MIT",
   "angular-cli": {},
   "scripts": {
@@ -20,7 +20,7 @@
     "@angular/flex-layout": "^2.0.0-rc.1",
     "@angular/forms": "^4.0.0",
     "@angular/http": "^4.0.0",
-    "@angular/material": "^2.0.0-beta.6",
+    "@angular/material": "2.0.0-beta.6",
     "@angular/platform-browser": "^4.0.0",
     "@angular/platform-browser-dynamic": "^4.0.0",
     "@angular/router": "^4.0.0",
