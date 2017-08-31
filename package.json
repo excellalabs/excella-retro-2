@@ -3,13 +3,24 @@
   "version": "2.0.0",
   "license": "MIT",
   "angular-cli": {},
+  "imageRepo": "crossvar $AWS_SERVER_URL",
+  "imageName": "crossvar $IMAGE_BASENAME",
+  "imagePort": "8080",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "docker:build": "with-package docker image build . -t pkg.imageRepo:pkg.version && npm run docker:tag",
+    "docker:tag": "with-package docker image tag pkg.imageRepo:pkg.version pkg.imageRepo:latest",
+    "docker:run": "npm run docker:clean && npm run docker:runHelper",
+    "docker:runHelper": "with-package docker run --name pkg.imageName -d -p pkg.imagePort:3000 pkg.imageRepo",
+    "docker:publish": "with-package docker image push pkg.imageRepo",
+    "docker:clean": "with-package docker rm -f pkg.imageName || true",
+    "docker:taillogs": "with-package docker logs -f pkg.imageName",
+    "docker:debug": "npm run docker:build && npm run docker:run && sleep 1 && with-package open 'http://localhost:pkg.imagePort' && npm run docker:taillogs"
   },
   "private": true,
   "dependencies": {
