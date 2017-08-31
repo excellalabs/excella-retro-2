@@ -1,11 +1,16 @@
 {
   "name": "excella-retro",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "license": "MIT",
   "angular-cli": {},
-  "imageRepo": "crossvar $AWS_SERVER_URL",
-  "imageName": "crossvar $IMAGE_BASENAME",
+  "homepage": "https://retro.excella.com",
+  "private": true,
+  "imageRepo": "090999229429.dkr.ecr.us-east-1.amazonaws.com/excella-retro-ui",
+  "imageName": "excella-retro-ui",
   "imagePort": "8080",
+  "awsRegion": "us-east-1",
+  "awsEcsCluster": "staging-tests",
+  "awsService": "excella-retro-ui",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -20,9 +25,11 @@
     "docker:publish": "with-package docker image push pkg.imageRepo",
     "docker:clean": "with-package docker rm -f pkg.imageName || true",
     "docker:taillogs": "with-package docker logs -f pkg.imageName",
-    "docker:debug": "npm run docker:build && npm run docker:run && sleep 1 && with-package open 'http://localhost:pkg.imagePort' && npm run docker:taillogs"
+    "docker:debug": "npm run docker:build && npm run docker:run && sleep 1 && with-package open 'http://localhost:pkg.imagePort' && npm run docker:taillogs",
+    "aws:login": "AWS_REGION=$(with-package echo 'pkg.awsRegion' | tail -1 | awk '{print $NF}') && eval $(aws ecr get-login --no-include-email --region $AWS_REGION)",
+    "aws:deploy": "with-package docker run --env-file ./.env silintl/ecs-deploy -c pkg.awsEcsCluster -n pkg.awsService -i pkg.imageRepo:latest -r pkg.awsRegion --timeout 1000",
+    "aws:release": "npm run aws:login && npm run docker:publish && npm run aws:deploy"
   },
-  "private": true,
   "dependencies": {
     "@angular/animations": "^4.0.0",
     "@angular/common": "^4.0.0",
@@ -62,6 +69,13 @@
     "protractor": "~5.1.0",
     "ts-node": "2.0.0",
     "tslint": "^4.5.0",
-    "typescript": "~2.2.0"
-  }
+    "typescript": "~2.2.0",
+    "with-package": "^0.2.0"
+  },
+  "authors": [
+    "Sam Blissard<sam.blissard@excella.com>",
+    "Alex Hoffman<alex.hoffman@excella.com>",
+    "Cameron Ivey<cameron.ivey@excella.com>",
+    "Brendan Sawyer<brendan.sawyer@excella.com>"
+  ]
 }

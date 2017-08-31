@@ -1,3 +1,6 @@
-FROM nginx:1.11-alpine
+FROM duluca/minimal-node-web-server:8.3.0
 
-COPY dist /usr/share/nginx/html
+WORKDIR /usr/src/app
+COPY dist public
+
+ENV ENFORCE_HTTPS=xProto
