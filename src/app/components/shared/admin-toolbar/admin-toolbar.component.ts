@@ -16,7 +16,7 @@ export class AdminToolbarComponent implements OnInit {
   currentPhaseObservable: FirebaseObjectObservable<Phase>;
   retroVal: Retro;
   endPhaseStepButtonTooltipText: string;
-  readonly phaseStepCount = 3;
+  readonly phaseStepCount = 4;
 
   constructor(
     public snackbar: MdSnackBar,
@@ -44,6 +44,8 @@ export class AdminToolbarComponent implements OnInit {
       this.endPhaseStepButtonTooltipText = 'Finish "Group Feedback" Step';
     } else if (currentPhaseStep === 3) {
       this.endPhaseStepButtonTooltipText = 'Finish "Vote on Feedback" Step';
+    } else if (currentPhaseStep === 4) {
+      this.endPhaseStepButtonTooltipText = 'Finish "Phase Summary" Step';
     }
   }
 
