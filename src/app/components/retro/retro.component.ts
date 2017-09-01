@@ -11,6 +11,7 @@ import { ChildComponent } from '../../models/child-component';
 import { SubmitFeedbackComponent } from '../phase-steps/submit-feedback/submit-feedback.component';
 import { GroupFeedbackComponent } from '../phase-steps/group-feedback/group-feedback.component';
 import { VoteFeedbackComponent } from '../phase-steps/vote-feedback/vote-feedback.component';
+import { PhaseSummaryComponent } from '../phase-steps/phase-summary/phase-summary.component';
 import { RetroCompleteComponent } from '../retro-complete/retro-complete.component';
 import { LocalStorageService } from 'angular-2-local-storage';
 import { ChildComponentService } from '../../services/child-component.service';
@@ -102,6 +103,8 @@ export class RetroComponent implements OnInit, AfterViewInit {
         this.childComponent = new ChildComponent(GroupFeedbackComponent, data);
       } else if (this.currentPhaseStep === 3) {
         this.childComponent = new ChildComponent(VoteFeedbackComponent, data);
+      } else if (this.currentPhaseStep === 4) {
+        this.childComponent = new ChildComponent(PhaseSummaryComponent, data);
       }
     } else {
       this.childComponent = new ChildComponent(RetroCompleteComponent, data);

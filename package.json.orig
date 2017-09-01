@@ -1,6 +1,10 @@
 {
   "name": "excella-retro",
+<<<<<<< HEAD
+  "version": "2.0.0",
+=======
   "version": "2.1.0",
+>>>>>>> master
   "license": "MIT",
   "angular-cli": {},
   "homepage": "https://retro.excella.com",

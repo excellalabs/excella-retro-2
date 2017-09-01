@@ -37,6 +37,7 @@ import { ChildComponentService } from './services/child-component.service';
 import { RetroArchiveService } from './services/retro-archive.service';
 import { EndRetroComponent } from './components/shared/end-retro/end-retro.component';
 import { WindowService } from './services/window.service';
+import { PhaseSummaryComponent } from './components/phase-steps/phase-summary/phase-summary.component';
 
 // Dev Environment
 // export const firebaseConfig = {
@@ -86,7 +87,8 @@ const firebaseAuthConfig = {
     GroupedMessagesPipe,
     GroupComponent,
     CreateRetroFormComponent,
-    EndRetroComponent
+    EndRetroComponent,
+    PhaseSummaryComponent
   ],
   entryComponents: [
     JoinRetroFormComponent,
@@ -94,6 +96,7 @@ const firebaseAuthConfig = {
     SubmitFeedbackComponent,
     GroupFeedbackComponent,
     VoteFeedbackComponent,
+    PhaseSummaryComponent,
     RetroCompleteComponent,
     RetroSummaryComponent,
     EndRetroComponent
