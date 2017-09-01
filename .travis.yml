@@ -1,9 +1,12 @@
 language: node_js
 node_js:
   - "7"
+sudo: required
 cache:
   directories:
     - "node_modules"
+services:
+  - docker
 before_deploy:
 script:
   - 'npm run docker:build && npm run aws:release'
