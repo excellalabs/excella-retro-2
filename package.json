@@ -9,7 +9,7 @@
   "imageName": "excella-retro-ui",
   "imagePort": "8080",
   "awsRegion": "us-east-1",
-  "awsEcsCluster": "staging-tests",
+  "awsEcsCluster": "excella-prod-ecs-cluster",
   "awsService": "excella-retro-ui",
   "scripts": {
     "ng": "ng",
