@@ -27,7 +27,7 @@
     "docker:taillogs": "with-package docker logs -f pkg.imageName",
     "docker:debug": "npm run docker:build && npm run docker:run && sleep 1 && with-package open 'http://localhost:pkg.imagePort' && npm run docker:taillogs",
     "aws:login": "AWS_REGION=$(with-package echo 'pkg.awsRegion' | tail -1 | awk '{print $NF}') && eval $(aws ecr get-login --no-include-email --region $AWS_REGION)",
-    "aws:deploy": "with-package docker run --env-file ./.env silintl/ecs-deploy -c pkg.awsEcsCluster -n pkg.awsService -i pkg.imageRepo:latest -r pkg.awsRegion --timeout 1000",
+    "aws:deploy": "with-package docker run silintl/ecs-deploy -c pkg.awsEcsCluster -n pkg.awsService -i pkg.imageRepo:latest -r pkg.awsRegion --timeout 1000",
     "aws:release": "npm run aws:login && npm run docker:publish && npm run aws:deploy"
   },
   "dependencies": {
