@@ -1,15 +1,6 @@
-FROM node:6.10.2
+FROM duluca/minimal-node-web-server:8.3.0
 
-RUN useradd --user-group --create-home --shell /bin/false app
+WORKDIR /usr/src/app
+COPY dist public
 
-RUN npm install --quiet --global @angular/cli@1.0.0
-
-WORKDIR /home/app/excella-retro
-COPY package.json /home/app/excella-retro/package.json
-RUN npm install --quiet
-COPY . /home/app/excella-retro
-RUN chown -R app:app /home/app/*
-
-#USER app
-WORKDIR /home/app/excella-retro
-RUN mkdir dist
+ENV ENFORCE_HTTPS=xProto

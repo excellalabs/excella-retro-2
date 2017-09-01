@@ -1,39 +1,30 @@
-language: python
-dist: trusty
-cache:
-  bundler: true
-  directories:
-  - node_modules
-branches:
- only:
- - master
- - staging
- - production
+language: node_js
+node_js:
+  - "7"
 sudo: required
-chmod: +x
+cache:
+  directories:
+    - "node_modules"
 services:
   - docker
-before_install:
+before_deploy:
 script:
-  - chmod +x deploy/build-image.sh
-  - deploy/build-image.sh
-after_success:
-  - 'curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip"'
-  - 'unzip awscli-bundle.zip'
-  - './awscli-bundle/install -b ~/bin/aws'
-  - 'export PATH=~/bin:$PATH'
-
-  - chmod +x deploy/ecs-deploy.sh
-  - chmod +x deploy/push-to-ecr-ecs.sh
-  - deploy/push-to-ecr-ecs.sh
+  - 'npm run docker:build && npm run aws:release'
+deploy:
+  provider: s3
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_ACCESS_KEY
+  bucket: $S3_BUCKET_DEV
+  skip_cleanup: true
+  region: $AWS_DEFAULT_REGION
+  local_dir: dist
+  on:
+    branch: production
 
 ### CI environment variables ###
 # AWS_ACCESS_KEY
 # AWS_SECRET_ACCESS_KEY
 # AWS_ACCOUNT_ID
 # AWS_DEFAULT_REGION
-# CLUSTER_NAME
-### Per environment
-# SERVICE
-# IMAGE_NAME
-
+# S3_BUCKET_DEV
+# S3_BUCKET_PROD
