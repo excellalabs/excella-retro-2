@@ -9,22 +9,8 @@ services:
   - docker
 before_deploy:
 script:
+  - 'sudo apt-get install python3'
+  - 'curl -O https://bootstrap.pypa.io/get-pip.py'
+  - 'python get-pip.py --user'
+  - 'pip install awscli --upgrade --user'
   - 'npm run docker:build && npm run aws:release'
-deploy:
-  provider: s3
-  access_key_id: $AWS_ACCESS_KEY
-  secret_access_key: $AWS_SECRET_ACCESS_KEY
-  bucket: $S3_BUCKET_DEV
-  skip_cleanup: true
-  region: $AWS_DEFAULT_REGION
-  local_dir: dist
-  on:
-    branch: production
-
-### CI environment variables ###
-# AWS_ACCESS_KEY
-# AWS_SECRET_ACCESS_KEY
-# AWS_ACCOUNT_ID
-# AWS_DEFAULT_REGION
-# S3_BUCKET_DEV
-# S3_BUCKET_PROD
