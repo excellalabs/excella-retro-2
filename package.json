@@ -6,7 +6,7 @@
   "homepage": "https://retro.excella.com",
   "private": true,
   "imageRepo": "090999229429.dkr.ecr.us-east-1.amazonaws.com/excella-retro-ui",
-  "imageName": "excella-retro-ui-prod",
+  "imageName": "excella-retro-ui",
   "imagePort": "8080",
   "awsRegion": "us-east-1",
   "awsEcsCluster": "excella-prod-ecs-cluster",
