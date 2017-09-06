@@ -9,4 +9,8 @@ services:
   - docker
 before_deploy:
 script:
+  - 'sudo apt-get install python3'
+  - 'curl -O https://bootstrap.pypa.io/get-pip.py'
+  - 'python get-pip.py --user'
+  - 'pip install awscli --upgrade --user'
   - 'npm run docker:build && npm run aws:release'
