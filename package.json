@@ -5,12 +5,6 @@
   "angular-cli": {},
   "homepage": "https://retro.excella.com",
   "private": true,
-  "imageRepo": "090999229429.dkr.ecr.us-east-1.amazonaws.com/excella-retro-ui",
-  "imageName": "excella-retro-ui",
-  "imagePort": "8080",
-  "awsRegion": "us-east-1",
-  "awsEcsCluster": "excella-prod-ecs-cluster",
-  "awsService": "excella-retro-prod",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -58,7 +52,6 @@
     "@types/jasmine": "2.5.38",
     "@types/node": "^6.0.60",
     "codelyzer": "~2.0.0",
-    "cross-var": "^1.0.3",
     "jasmine-core": "~2.5.2",
     "jasmine-spec-reporter": "~3.2.0",
     "karma": "~1.4.1",
@@ -70,8 +63,7 @@
     "protractor": "~5.1.0",
     "ts-node": "2.0.0",
     "tslint": "^4.5.0",
-    "typescript": "~2.2.0",
-    "with-package": "^0.2.0"
+    "typescript": "~2.2.0"
   },
   "authors": [
     "Sam Blissard<sam.blissard@excella.com>",
