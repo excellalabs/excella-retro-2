@@ -4,7 +4,12 @@
   "license": "MIT",
   "angular-cli": {},
   "homepage": "https://retro.excella.com",
-  "private": true,
+  "imageRepo": "090999229429.dkr.ecr.us-east-1.amazonaws.com/excella-retro-ui",
+  "imageName": "excella-retro-ui",
+  "imagePort": "8080",
+  "awsRegion": "us-east-1",
+  "awsEcsCluster": "excella-prod-ecs-cluster",
+  "awsService": "excella-retro-prod",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -12,14 +17,13 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "docker:build": "npm run build -- --prod && with-package docker image build . -t pkg.imageRepo:pkg.version",
-    "docker:tag": "with-package docker image tag pkg.imageRepo:pkg.version pkg.imageRepo:latest",
+    "docker:build": "npm run build -- --prod && with-package docker image build . -t pkg.imageRepo:latest",
     "docker:run": "npm run docker:clean && npm run docker:runHelper",
     "docker:runHelper": "with-package docker run --name pkg.imageName -d -p pkg.imagePort:3000 pkg.imageRepo",
-    "docker:publish": "npm run docker:tag && with-package docker image push pkg.imageRepo",
+    "docker:publish": "with-package docker image push pkg.imageRepo",
     "docker:clean": "with-package docker rm -f pkg.imageName || true",
     "docker:taillogs": "with-package docker logs -f pkg.imageName",
-    "docker:debug": "npm run docker:build -- --file Dockerfile.dev && npm run docker:tag && npm run docker:run && sleep 1 && with-package open 'http://localhost:pkg.imagePort' && npm run docker:taillogs",
+    "docker:debug": "npm run docker:build -- --file Dockerfile.dev && npm run docker:run && sleep 1 && with-package open 'http://localhost:pkg.imagePort' && npm run docker:taillogs",
     "aws:login": "with-package aws ecr get-login --no-include-email --region pkg.awsRegion",
     "aws:deploy": "with-package docker run --env-file ./.env silintl/ecs-deploy -c pkg.awsEcsCluster -n pkg.awsService -i pkg.imageRepo:latest -r pkg.awsRegion --timeout 1000",
     "aws:release": "npm run aws:login && npm run docker:publish && npm run aws:deploy"
@@ -63,7 +67,8 @@
     "protractor": "~5.1.0",
     "ts-node": "2.0.0",
     "tslint": "^4.5.0",
-    "typescript": "~2.2.0"
+    "typescript": "~2.2.0",
+    "with-package": "^0.2.0"
   },
   "authors": [
     "Sam Blissard<sam.blissard@excella.com>",
