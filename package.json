@@ -10,7 +10,7 @@
   "imagePort": "8080",
   "awsRegion": "us-east-1",
   "awsEcsCluster": "excella-prod-ecs-cluster",
-  "awsService": "excella-retro-ui-prod",
+  "awsService": "excella-retro-prod",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -18,7 +18,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "docker:build": "npm run build -- --prod --base-href https://retro.excella.com && with-package docker image build . -t pkg.imageRepo:pkg.version && npm run docker:tag",
+    "docker:build": "npm run build -- --prod && with-package docker image build . -t pkg.imageRepo:pkg.version && npm run docker:tag",
     "docker:tag": "with-package docker image tag pkg.imageRepo:pkg.version pkg.imageRepo:latest",
     "docker:run": "npm run docker:clean && npm run docker:runHelper",
     "docker:runHelper": "with-package docker run --name pkg.imageName -d -p pkg.imagePort:3000 pkg.imageRepo",
@@ -27,7 +27,7 @@
     "docker:taillogs": "with-package docker logs -f pkg.imageName",
     "docker:debug": "npm run docker:build && npm run docker:run && sleep 1 && with-package open 'http://localhost:pkg.imagePort' && npm run docker:taillogs",
     "aws:login": "with-package aws ecr get-login --no-include-email --region pkg.awsRegion",
-    "aws:deploy": "with-package cross-var docker run --env AWS_ACCESS_KEY_ID='$AWS_ACCESS_KEY_ID' --env AWS_SECRET_ACCESS_KEY='$AWS_SECRET_ACCESS_KEY' silintl/ecs-deploy -c pkg.awsEcsCluster -n pkg.awsService -i pkg.imageRepo:latest -r pkg.awsRegion --timeout 1000",
+    "aws:deploy": "with-package docker run --env-file ./.env silintl/ecs-deploy -c pkg.awsEcsCluster -n pkg.awsService -i pkg.imageRepo:latest -r pkg.awsRegion --timeout 1000",
     "aws:release": "npm run aws:login && npm run docker:publish && npm run aws:deploy"
   },
   "dependencies": {
