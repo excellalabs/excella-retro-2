@@ -9,8 +9,18 @@ services:
   - docker
 before_deploy:
 script:
+  # install python (needed to install pip)
   - 'sudo apt-get install python3'
+
+  # install pip (needed to install AWS CLI)
   - 'curl -O https://bootstrap.pypa.io/get-pip.py'
   - 'python get-pip.py --user'
+
+  # install AWS CLI
   - 'pip install awscli --upgrade --user'
-  - 'npm run docker:build && npm run aws:release'
+
+  # build image
+  - 'npm run docker:build'
+
+  # if building master branch, then deploy to AWS
+  - 'if [ ${TRAVIS_BRANCH} = "master" ]; then npm run aws:release fi'
