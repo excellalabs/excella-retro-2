@@ -24,9 +24,9 @@
       }
     },
     "@angular/animations": {
-      "version": "4.3.6",
-      "resolved": "https://registry.npmjs.org/@angular/animations/-/animations-4.3.6.tgz",
-      "integrity": "sha1-v5KD7HyMmLMvVp2E3NoQiQ/cAmI=",
+      "version": "4.2.4",
+      "resolved": "https://registry.npmjs.org/@angular/animations/-/animations-4.2.4.tgz",
+      "integrity": "sha1-VS02H/8WPFbQ39pPljoWv+TkTpg=",
       "requires": {
         "tslib": "1.7.1"
       }
@@ -100,7 +100,7 @@
         "stylus": "0.54.5",
         "stylus-loader": "3.0.1",
         "temp": "0.8.3",
-        "typescript": "2.2.2",
+        "typescript": "2.3.4",
         "url-loader": "0.5.9",
         "walk-sync": "0.3.2",
         "webpack": "3.4.1",
@@ -173,6 +173,12 @@
       "requires": {
         "tslib": "1.7.1"
       }
+    },
+    "@angular/language-service": {
+      "version": "4.3.6",
+      "resolved": "https://registry.npmjs.org/@angular/language-service/-/language-service-4.3.6.tgz",
+      "integrity": "sha1-cc8tu0ZhVo89EqnA5LngQ++TvTo=",
+      "dev": true
     },
     "@angular/material": {
       "version": "2.0.0-beta.10",
@@ -9624,9 +9630,9 @@
       }
     },
     "typescript": {
-      "version": "2.2.2",
-      "resolved": "https://registry.npmjs.org/typescript/-/typescript-2.2.2.tgz",
-      "integrity": "sha1-YGAiUIR5tV/6NotY/uljoD39eww=",
+      "version": "2.3.4",
+      "resolved": "https://registry.npmjs.org/typescript/-/typescript-2.3.4.tgz",
+      "integrity": "sha1-PTgyGCgjHkNPKHUUlZw3qCtin0I=",
       "dev": true
     },
     "uglify-js": {
