@@ -2,6 +2,7 @@
   "name": "excella-retro",
   "version": "2.1.0",
   "license": "MIT",
+  "repository": {},
   "angular-cli": {},
   "homepage": "https://retro.excella.com",
   "imageRepo": "090999229429.dkr.ecr.us-east-1.amazonaws.com/excella-retro-ui",
@@ -29,7 +30,7 @@
     "aws:release": "npm run aws:login && npm run docker:publish && npm run aws:deploy"
   },
   "dependencies": {
-    "@angular/animations": "^4.3.6",
+    "@angular/animations": "^4.2.4",
     "@angular/cdk": "^2.0.0-beta.10",
     "@angular/common": "^4.2.4",
     "@angular/compiler": "^4.2.4",
