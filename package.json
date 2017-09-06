@@ -10,7 +10,7 @@
   "imagePort": "8080",
   "awsRegion": "us-east-1",
   "awsEcsCluster": "excella-prod-ecs-cluster",
-  "awsService": "excella-retro-ui",
+  "awsService": "excella-retro-ui-prod",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
