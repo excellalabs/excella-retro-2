@@ -6,8 +6,8 @@
     <div fxLayout>
       <div fxFlex="100%">
         <h3>Votes remaining: {{votesRemaining}}</h3>
-        <div fxLayout="column">
-          <div style="max-height: 70vh; overflow-y: auto">
+        <div>
+          <div fxLayout="column" style="max-height: 70vh; overflow-y: auto">
             <md-card fxFlex *ngFor="let group of groups" style="padding-top: 0px">
               <md-card-header>
                 <md-card-title>
