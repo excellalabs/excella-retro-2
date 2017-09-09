@@ -17,6 +17,4 @@ script:
 - python get-pip.py --user
 - pip install awscli --upgrade --user
 - npm run docker:build
-deploy:
-script:
 - if [ $TRAVIS_BRANCH = "master" ]; then npm run aws:release; fi
