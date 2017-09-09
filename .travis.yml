@@ -1,16 +1,24 @@
 language: node_js
 node_js:
-  - "7"
+- '8'
 sudo: required
 cache:
   directories:
-    - "node_modules"
+  - node_modules
 services:
-  - docker
+- docker
+before_install:
+- openssl aes-256-cbc -K $encrypted_01d7ad8a67f4_key -iv $encrypted_01d7ad8a67f4_iv
+  -in .env.enc -out .env -d
 before_deploy:
 script:
-  - 'sudo apt-get install python3'
-  - 'curl -O https://bootstrap.pypa.io/get-pip.py'
-  - 'python get-pip.py --user'
-  - 'pip install awscli --upgrade --user'
-  - 'npm run docker:build && npm run aws:release'
+- sudo apt-get install python3
+- curl -O https://bootstrap.pypa.io/get-pip.py
+- python get-pip.py --user
+- pip install awscli --upgrade --user
+- npm run docker:build
+deploy:
+  provider: script
+  script: npm run aws:release
+  on:
+    branch: master
