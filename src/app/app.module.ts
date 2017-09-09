@@ -4,7 +4,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { MaterialModule } from '@angular/material';
 import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { LocalStorageModule } from 'angular-2-local-storage';
@@ -14,6 +13,7 @@ import 'hammerjs';
 // Internal imports
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './routing/app-routing.module';
+import { MaterialModule } from './material/material.module';
 import { ToolbarComponent } from './components/shared/toolbar/toolbar.component';
 import { HomeComponent } from './components/home/home.component';
 import { RetroComponent } from './components/retro/retro.component';
@@ -104,9 +104,9 @@ const firebaseAuthConfig = {
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    MaterialModule,
     FormsModule,
     HttpModule,
-    MaterialModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(firebaseConfig, firebaseAuthConfig),
     FlexLayoutModule,
