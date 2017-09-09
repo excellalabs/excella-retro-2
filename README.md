@@ -1,6 +1,6 @@
 # Excella Retro 2.0
 
-http://retro.excella.com/
+https://retro.excella.com/
 
 [![Build Status](https://travis-ci.org/excellalabs/excella-retro-2.svg?branch=master)](https://travis-ci.org/excellalabs/excella-retro-2)
 

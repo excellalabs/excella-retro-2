@@ -4,9 +4,14 @@
   <button *ngIf="user" md-icon-button (click)="logout()">
     <img class="mat-card-avatar" id="custom-avatar" src="{{user.auth.photoURL}}">
   </button>
-  <button md-button *ngIf="!user" (click)="login()">
+  <button md-button *ngIf="!user" fxShow.xs="false" (click)="login()">
     SCRUM MASTER LOGIN
   </button>
+  <button md-button *ngIf="!user" fxShow="false" fxShow.xs="true" (click)="login()">
+  <md-icon md-button (click)="login()">
+    fingerprint
+  </md-icon> 
+ </button>
   <a md-icon-button href="https://github.com/excellalabs/excella-retro-2" target="_blank">
     <img src="../../../../assets/github-logo-white.svg" id="github-icon"/>
   </a>
