@@ -18,6 +18,8 @@ This project was generated with [angular-cli](https://github.com/angular/angular
 
 ## Instructions
 
+0) Install the latest versions of Node (min v8.4.0) and NPM (min v5.4.1 -- this should already be included with Node v8.4.0 installation).
+
 1) Clone repository.
 
 2) Open command prompt, `cd` into directory.
