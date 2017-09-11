@@ -9,9 +9,9 @@ This project was generated with [angular-cli](https://github.com/angular/angular
 ## Versions
 
 - Angular
-  - Angular 4.0.0
-  - Angular-CLI 1.0.0
-  - TypeScript 2.1.0
+  - Angular 4.4.0-RC.0
+  - Angular-CLI 1.3.2
+  - TypeScript 2.3.3
 - Firebase
   - Firebase 3.6.10
   - AngularFire2 2.0.0-beta.8
