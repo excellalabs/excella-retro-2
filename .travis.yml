@@ -7,12 +7,15 @@ cache:
   - node_modules
 services:
 - docker
-install:
+before_script:
 - sudo apt-get install python3
 - curl -O https://bootstrap.pypa.io/get-pip.py
 - python get-pip.py --user
 - pip install awscli --upgrade --user
-build:
+script:
 - npm run docker:build
 deploy:
-- if [ $TRAVIS_BRANCH = "master" ]; then docker run silintl/ecs-deploy -c $AWS_ECS_CLUSTER -n $AWS_SERVICE_NAME -i $AWS_REPO_URL:latest -r $AWS_REGION --timeout 1000 -k $AWS_ACCESS_KEY_ID -s $AWS_SECRET_ACCESS_KEY; fi
+  provider: script
+  script: scripts/deploy.sh
+  on:
+    branch: master
