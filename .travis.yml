@@ -7,14 +7,12 @@ cache:
   - node_modules
 services:
 - docker
-before_install:
-- openssl aes-256-cbc -K $encrypted_01d7ad8a67f4_key -iv $encrypted_01d7ad8a67f4_iv
-  -in .env.enc -out .env -d
-before_deploy:
-script:
+install:
 - sudo apt-get install python3
 - curl -O https://bootstrap.pypa.io/get-pip.py
 - python get-pip.py --user
 - pip install awscli --upgrade --user
+build:
 - npm run docker:build
-- if [ $TRAVIS_BRANCH = "master" ]; then npm run aws:release; fi
+deploy:
+- if [ $TRAVIS_BRANCH = "master" ]; then docker run silintl/ecs-deploy -c $AWS_ECS_CLUSTER -n $AWS_SERVICE_NAME -i $AWS_REPO_URL:latest -r $AWS_REGION --timeout 1000 -k $AWS_ACCESS_KEY_ID -s $AWS_SECRET_ACCESS_KEY; fi
