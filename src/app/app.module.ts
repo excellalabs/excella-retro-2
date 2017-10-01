@@ -31,7 +31,6 @@ import { PhaseStepHeaderComponent } from './components/shared/phase-step/phase-s
 import { PhaseStepContentComponent } from './components/shared/phase-step/phase-step-content/phase-step-content.component';
 import { FeedbackCardComponent } from './components/shared/feedback/feedback-card/feedback-card.component';
 import { FeedbackContainerComponent } from './components/shared/feedback/feedback-container/feedback-container.component';
-import { RetroCompleteComponent } from './components/retro-complete/retro-complete.component';
 import { RetroSummaryComponent } from './components/retro-summary/retro-summary.component';
 import { ChildComponentService } from './services/child-component.service';
 import { RetroArchiveService } from './services/retro-archive.service';
@@ -74,7 +73,6 @@ const firebaseAuthConfig = {
     SubmitFeedbackComponent,
     GroupFeedbackComponent,
     VoteFeedbackComponent,
-    RetroCompleteComponent,
     RetroSummaryComponent,
     ChildComponentDirective,
     AdminToolbarComponent,
@@ -97,7 +95,6 @@ const firebaseAuthConfig = {
     GroupFeedbackComponent,
     VoteFeedbackComponent,
     PhaseSummaryComponent,
-    RetroCompleteComponent,
     RetroSummaryComponent,
     EndRetroComponent
   ],
