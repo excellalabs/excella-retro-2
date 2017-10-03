@@ -12,7 +12,6 @@ import { SubmitFeedbackComponent } from '../phase-steps/submit-feedback/submit-f
 import { GroupFeedbackComponent } from '../phase-steps/group-feedback/group-feedback.component';
 import { VoteFeedbackComponent } from '../phase-steps/vote-feedback/vote-feedback.component';
 import { PhaseSummaryComponent } from '../phase-steps/phase-summary/phase-summary.component';
-import { RetroCompleteComponent } from '../retro-complete/retro-complete.component';
 import { LocalStorageService } from 'angular-2-local-storage';
 import { ChildComponentService } from '../../services/child-component.service';
 import { ChildComponentDirective } from '../../directives/child-component-directive';
@@ -107,7 +106,8 @@ export class RetroComponent implements OnInit, AfterViewInit {
         this.childComponent = new ChildComponent(PhaseSummaryComponent, data);
       }
     } else {
-      this.childComponent = new ChildComponent(RetroCompleteComponent, data);
+      this.router.navigate(['summary'], { relativeTo: this.route });
+      return;
     }
 
     this.childComponentHost = this.childComponentHostQueryList.first;
