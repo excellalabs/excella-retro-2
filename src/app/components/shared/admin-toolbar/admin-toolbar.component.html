@@ -1,23 +1,23 @@
 <div>
   <h3>SCRUM MASTER TOOLS</h3>
-  <md-input-container>
-    <input mdInput placeholder="Retro ID" readonly value="{{(retroObservable | async)?.$key}}" #retroIdInput>
-  </md-input-container>
+  <mat-form-field>
+    <input matInput placeholder="Retro ID" readonly value="{{(retroObservable | async)?.$key}}" #retroIdInput>
+  </mat-form-field>
   <div>
-    <!--<span mdTooltip="Email Retro ID">
-      <button md-mini-fab disabled><md-icon>email</md-icon></button>
+    <!--<span matTooltip="Email Retro ID">
+      <button mat-mini-fab disabled><mat-icon>email</mat-icon></button>
     </span>
-    <span mdTooltip="Share Retro Link">
-      <button md-mini-fab disabled><md-icon>link</md-icon></button>
+    <span matTooltip="Share Retro Link">
+      <button mat-mini-fab disabled><mat-icon>link</mat-icon></button>
     </span>-->
-    <span mdTooltip="Copy Retro ID">
-      <button md-mini-fab [ngxClipboard]="retroIdInput" (click)="copyTextSuccessful()"><md-icon>content_copy</md-icon></button>
+    <span matTooltip="Copy Retro ID">
+      <button mat-mini-fab [ngxClipboard]="retroIdInput" (click)="copyTextSuccessful()"><mat-icon>content_copy</mat-icon></button>
     </span>
   </div>
   <div class="section">
-    <span mdTooltip="{{endPhaseStepButtonTooltipText}}">
-      <button md-raised-button color="primary" (click)="endStep()" class="end-button">END STEP</button>
+    <span matTooltip="{{endPhaseStepButtonTooltipText}}">
+      <button mat-raised-button color="primary" (click)="endStep()" class="end-button">END STEP</button>
     </span>
-    <button md-raised-button color="warn" (click)="showEndRetroDialog()" class="end-button">END RETRO</button>
+    <button mat-raised-button color="warn" (click)="showEndRetroDialog()" class="end-button">END RETRO</button>
   </div>
 </div>

@@ -4,11 +4,11 @@
     <div fxLayout="row" fxLayout.xs="column">
       <div fxFlex="50%">
         <h3>Add Feedback</h3>
-        <md-input-container style="width:75%">
-          <textarea mdInput placeholder="Feedback" [(ngModel)]="feedbackToSubmit.text"></textarea>
-        </md-input-container>
+        <mat-form-field style="width:75%">
+          <textarea matInput placeholder="Feedback" [(ngModel)]="feedbackToSubmit.text"></textarea>
+        </mat-form-field>
         <div>
-          <button md-raised-button color="primary" (click)="submitFeedback()">SUBMIT</button>
+          <button mat-raised-button color="primary" (click)="submitFeedback()">SUBMIT</button>
         </div>
       </div>
       <div fxFlex="50%">

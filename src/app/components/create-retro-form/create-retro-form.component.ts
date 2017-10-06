@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { MdDialogRef, MdSelect } from '@angular/material';
+import { MatDialogRef, MatSelect } from '@angular/material';
 import { Subscription } from 'rxjs/Subscription';
 import { Retro } from '../../models/retro';
 import { Phase } from '../../models/phase';
@@ -21,7 +21,7 @@ export class CreateRetroFormComponent implements OnInit, OnDestroy {
 
   constructor(private af: AngularFire,
     private router: Router,
-    private dialogRef: MdDialogRef<CreateRetroFormComponent>) { }
+    private dialogRef: MatDialogRef<CreateRetroFormComponent>) { }
 
   ngOnInit() {
     this.addPhase(0, 'What Went Well?');
