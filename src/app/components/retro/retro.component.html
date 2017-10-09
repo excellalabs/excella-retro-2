@@ -1,19 +1,19 @@
-<md-sidenav-container *ngIf="!loadingScreen" fxLayout="column" [style.height]="formattedWindowHeight">
+<mat-sidenav-container *ngIf="!loadingScreen" fxLayout="column" [style.height]="formattedWindowHeight">
     <div class="floating-fab">
       <span *ngIf="showAdminToolbar">
-        <button md-fab (click)="sidenav.toggle()">
-          <md-icon>settings</md-icon>
+        <button mat-fab (click)="sidenav.toggle()">
+          <mat-icon>settings</mat-icon>
         </button>
       </span>
     </div>
-    <md-sidenav fxFlex #sidenav mode="over" opened="false" align="end">
+    <mat-sidenav fxFlex #sidenav mode="over" opened="false" align="end">
       <div class="admin-toolbar">
         <app-admin-toolbar [retroObservable]="retroObservable"></app-admin-toolbar>
       </div>
-    </md-sidenav>
+    </mat-sidenav>
     <ng-template appChildComponent></ng-template>
-</md-sidenav-container>
+</mat-sidenav-container>
 
 <div *ngIf="loadingScreen">
-  <md-spinner color="accent" style="margin:0 auto;"></md-spinner>
+  <mat-spinner color="accent" style="margin:0 auto;"></mat-spinner>
 </div>

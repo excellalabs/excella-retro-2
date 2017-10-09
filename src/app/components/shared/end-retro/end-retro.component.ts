@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MdDialogRef } from '@angular/material';
+import { MatDialogRef } from '@angular/material';
 
 @Component({
   selector: 'app-end-retro',
@@ -8,7 +8,7 @@ import { MdDialogRef } from '@angular/material';
 })
 export class EndRetroComponent implements OnInit {
 
-  constructor(public dialogRef: MdDialogRef<EndRetroComponent>) { }
+  constructor(public dialogRef: MatDialogRef<EndRetroComponent>) { }
 
   ngOnInit() {
   }

@@ -1,23 +1,23 @@
 <div>
-  <md-card style="margin: 12px 20px; padding: 12px 12px">
-    <md-card-title style="margin: 0px">
+  <mat-card style="margin: 12px 20px; padding: 12px 12px">
+    <mat-card-title style="margin: 0px">
       <div fxLayout>
         <h4 *ngIf="!editMode" fxFlex="90%">{{groupName}}</h4>
-        <md-input-container *ngIf="editMode && allowAdminFunctions" fxFlex="90%">
-          <textarea mdInput [(ngModel)]="groupName" name="groupNameInput" style="resize: vertical"></textarea>
-        </md-input-container>
-        <button md-icon-button *ngIf="allowAdminFunctions &&((!enabledGroup) || (enabledGroup === groupId && !editMode))" (click)="toggleEditing(groupName)" fxFlex="10%">
-          <md-icon>edit</md-icon>
+        <mat-form-field *ngIf="editMode && allowAdminFunctions" fxFlex="90%">
+          <textarea matInput [(ngModel)]="groupName" name="groupNameInput" style="resize: vertical"></textarea>
+        </mat-form-field>
+        <button mat-icon-button *ngIf="allowAdminFunctions &&((!enabledGroup) || (enabledGroup === groupId && !editMode))" (click)="toggleEditing(groupName)" fxFlex="10%">
+          <mat-icon>edit</mat-icon>
         </button>
-        <button md-icon-button *ngIf="allowAdminFunctions && enabledGroup === groupId" (click)="toggleEditing(groupName)" fxFlex="10%">
-          <md-icon>check</md-icon>
+        <button mat-icon-button *ngIf="allowAdminFunctions && enabledGroup === groupId" (click)="toggleEditing(groupName)" fxFlex="10%">
+          <mat-icon>check</mat-icon>
         </button>
       </div>
-    </md-card-title>
-    <md-card-content>
+    </mat-card-title>
+    <mat-card-content>
       <app-feedback-container>
         <app-feedback-card *ngFor="let feedback of messages | groupedMessagesPipe: groupId" [feedback]="feedback" [enabledGroup]="enabledGroup"></app-feedback-card>
       </app-feedback-container>
-    </md-card-content>
-  </md-card>
+    </mat-card-content>
+  </mat-card>
 </div>

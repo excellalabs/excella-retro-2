@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
-import { MdSnackBar, MdDialog } from '@angular/material';
+import { MatSnackBar, MatDialog } from '@angular/material';
 import { Retro } from '../../../models/retro';
 import { Phase } from '../../../models/phase';
 import { LocalStorageService } from 'angular-2-local-storage';
@@ -19,8 +19,8 @@ export class AdminToolbarComponent implements OnInit {
   readonly phaseStepCount = 4;
 
   constructor(
-    public snackbar: MdSnackBar,
-    public dialog: MdDialog,
+    public snackbar: MatSnackBar,
+    public dialog: MatDialog,
     private af: AngularFire,
     private localStorageService: LocalStorageService
     ) { }

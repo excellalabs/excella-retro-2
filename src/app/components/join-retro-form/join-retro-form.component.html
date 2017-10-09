@@ -1,13 +1,13 @@
-<div md-dialog-content>
+<div mat-dialog-content>
     <form #joinRetroForm="ngForm">
         <p>
-            <md-input-container>
-                <input mdInput placeholder="Retro ID" [(ngModel)]="retroId" name="retroIdInput" required/>
-            </md-input-container>
+            <mat-form-field>
+                <input matInput placeholder="Retro ID" [(ngModel)]="retroId" name="retroIdInput" required/>
+            </mat-form-field>
         </p>
 
         <div style="text-align: center">
-            <button type="submit" md-raised-button color="primary" style="width: 100%" (click)="joinRetro(retroId)" [disabled]="!joinRetroForm.form.valid">JOIN</button>
+            <button type="submit" mat-raised-button color="primary" style="width: 100%" (click)="joinRetro(retroId)" [disabled]="!joinRetroForm.form.valid">JOIN</button>
         </div>
     </form>
 </div>
