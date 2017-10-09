@@ -33,10 +33,14 @@ export class HomeComponent implements OnInit {
     if(this.user){
      this.dialog.open(CreateRetroFormComponent);
     } else {
-       this.snackBar.open("Must be logged in to create a retro", "OK", {
-        duration: 2000,
+      this.af.auth.login().then((sucess) => {
+        this.dialog.open(CreateRetroFormComponent);
+      })
+      .catch((err) => {
+        this.snackBar.open("Must be logged in to create a retro", "OK", {
+          duration: 2000,
+        });
       });
     }
   }
-
 }

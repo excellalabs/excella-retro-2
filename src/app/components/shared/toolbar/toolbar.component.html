@@ -1,8 +1,11 @@
 <mat-toolbar color="primary" class="mat-elevation-z4">
   <h1><a href='' id="header-primary-white">EXCELLA<span id="header-primary-accent">RETRO</span></a></h1>
   <span class="spacer"></span>
-  <button *ngIf="user" mat-icon-button (click)="logout()">
+  <button *ngIf="user" mat-icon-button>
     <img class="mat-card-avatar" id="custom-avatar" src="{{user.auth.photoURL}}">
+  </button>
+  <button *ngIf="user" mat-icon-button (click)="logout()">
+    <mat-icon>lock_open</mat-icon>
   </button>
   <button mat-button *ngIf="!user" fxShow.xs="false" (click)="login()">
     SCRUM MASTER LOGIN
