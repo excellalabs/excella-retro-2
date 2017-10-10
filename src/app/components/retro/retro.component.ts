@@ -30,6 +30,8 @@ export class RetroComponent implements OnInit, AfterViewInit {
   private currentPhaseObservable: FirebaseObjectObservable<Phase>;
   private currentPhaseId: string;
   private currentPhaseStep: number;
+  currentPhaseNumber: number;
+  phaseCount: number;
   public user: any;
   public retroSnapshot: Retro;
   @Input() childComponent: ChildComponent;
@@ -82,6 +84,7 @@ export class RetroComponent implements OnInit, AfterViewInit {
       self.hideLoadingScreen();
       self.retroSnapshot = retroVal;
       self.retroIsActive = self.retroSnapshot.isActive;
+      self.currentPhaseNumber = retroVal.currentPhaseNumber;
       self.toggleAdminToolbar();
       self.currentPhaseId = retroVal.currentPhaseId;
       self.currentPhaseObservable = self.af.database.object('phases/' + self.currentPhaseId);
@@ -89,6 +92,9 @@ export class RetroComponent implements OnInit, AfterViewInit {
         self.currentPhaseStep = phaseVal.currentPhaseStep;
         self.renderPhaseStep();
       });
+      self.af.database.list('phases', { query: { orderByChild: 'retroId', equalTo: self.retroId} }).subscribe(phases => {
+        self.phaseCount = phases.length;
+      })
     });
   }
 
@@ -142,5 +148,12 @@ export class RetroComponent implements OnInit, AfterViewInit {
 
   hideLoadingScreen() {
     this.loadingScreen = false;
+  }
+
+  getRetroProgressPercentage(currentPhaseNumber: number) {
+    let phaseStepPercentageIncrement = 1 / this.phaseCount / 4;
+    let currentPhaseProgressPercentage = this.currentPhaseStep * phaseStepPercentageIncrement;
+    var overallPhaseProgressPercentage = ((currentPhaseNumber - 1) / this.phaseCount) + currentPhaseProgressPercentage;
+    return overallPhaseProgressPercentage * 100;
   }
 }

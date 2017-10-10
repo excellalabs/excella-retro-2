@@ -11,6 +11,8 @@
         <app-admin-toolbar [retroObservable]="retroObservable"></app-admin-toolbar>
       </div>
     </mat-sidenav>
+    <h3>Retro Progress</h3>
+    <mat-progress-bar [mode]="determinate" [value]="getRetroProgressPercentage(currentPhaseNumber)"></mat-progress-bar>
     <ng-template appChildComponent></ng-template>
 </mat-sidenav-container>
 
