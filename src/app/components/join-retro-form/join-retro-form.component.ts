@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { MdDialogRef } from '@angular/material';
+import { MatDialogRef } from '@angular/material';
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
 import { User } from '../../models/user';
 import { LocalStorageService } from 'angular-2-local-storage';
@@ -16,7 +16,7 @@ export class JoinRetroFormComponent {
 
   constructor(
       private router: Router,
-      private dialogRef: MdDialogRef<JoinRetroFormComponent>,
+      private dialogRef: MatDialogRef<JoinRetroFormComponent>,
       private af: AngularFire,
       private localStorageService: LocalStorageService
   ) {}

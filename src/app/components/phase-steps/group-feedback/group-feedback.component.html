@@ -4,11 +4,11 @@
     <div fxLayout="row" fxLayout.xs="column">
       <div fxFlex="50%">
         <h3>Groups</h3>
-        <md-input-container *ngIf="allowAdminFunctions" style="width: 85%">
-          <input mdInput placeholder="Enter a new group name" [(ngModel)]="newGroupName" name="newGroupNameInput" />
-        </md-input-container>
-        <button md-icon-button *ngIf="allowAdminFunctions" (click)="createNewGroup(newGroupName)" width="15%">
-          <md-icon>add_box</md-icon>
+        <mat-form-field *ngIf="allowAdminFunctions" style="width: 85%">
+          <input matInput placeholder="Enter a new group name" [(ngModel)]="newGroupName" name="newGroupNameInput" />
+        </mat-form-field>
+        <button mat-icon-button *ngIf="allowAdminFunctions" (click)="createNewGroup(newGroupName)" width="15%">
+          <mat-icon>add_box</mat-icon>
         </button>
         <div style="max-height: 60vh; overflow-y: auto">
           <div *ngFor="let groupItem of groups">

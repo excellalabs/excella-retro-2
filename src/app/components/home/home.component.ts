@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MdDialog, MdSnackBar } from '@angular/material';
+import { MatDialog, MatSnackBar } from '@angular/material';
 import { JoinRetroFormComponent } from '../join-retro-form/join-retro-form.component';
 import { CreateRetroFormComponent } from '../create-retro-form/create-retro-form.component';
 import { AngularFire } from 'angularfire2';
@@ -12,7 +12,7 @@ import { AngularFire } from 'angularfire2';
 })
 export class HomeComponent implements OnInit {
   user;
-  constructor(public dialog: MdDialog, private af: AngularFire, public snackBar: MdSnackBar) {}
+  constructor(public dialog: MatDialog, private af: AngularFire, public snackBar: MatSnackBar) {}
 
   ngOnInit() {
     this.af.auth.subscribe(user => {

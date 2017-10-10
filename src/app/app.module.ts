@@ -8,6 +8,8 @@ import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { LocalStorageModule } from 'angular-2-local-storage';
 import { ClipboardModule } from 'ngx-clipboard';
+import { MATERIAL_COMPATIBILITY_MODE } from '@angular/material';
+
 import 'hammerjs';
 
 // Internal imports
@@ -116,7 +118,8 @@ const firebaseAuthConfig = {
   providers: [
     ChildComponentService,
     RetroArchiveService,
-    WindowService
+    WindowService,
+    {provide: MATERIAL_COMPATIBILITY_MODE, useValue: true}
   ],
   bootstrap: [AppComponent]
 })

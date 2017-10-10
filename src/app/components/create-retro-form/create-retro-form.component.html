@@ -1,30 +1,30 @@
-<div md-dialog-content>
+<div mat-dialog-content>
   <form #createRetroForm="ngForm">
     <div>
-      <md-input-container>
-        <input mdInput placeholder="Retro Name" [(ngModel)]="retroName" name="retroNameInput" required/>
-      </md-input-container>
+      <mat-form-field>
+        <input matInput placeholder="Retro Name" [(ngModel)]="retroName" name="retroNameInput" required/>
+      </mat-form-field>
     </div>
     <div>
-      <md-input-container>
-        <input mdInput type="number" placeholder="Number of Votes" [(ngModel)]="numberOfVotes" name="numberOfVotesInput" required>
-      </md-input-container>
+      <mat-form-field>
+        <input matInput type="number" placeholder="Number of Votes" [(ngModel)]="numberOfVotes" name="numberOfVotesInput" required>
+      </mat-form-field>
     </div>
     <div *ngFor="let phase of phases; let i = index">
       <div>
-        <md-input-container>
-          <input mdInput [(ngModel)]="phase.name" name="phase-name-{{i}}" required>
-        </md-input-container>
-        <button md-icon-button (click)="addPhase(i+1)" tabindex="-1">
-          <md-icon>add_circle</md-icon>
+        <mat-form-field>
+          <input matInput [(ngModel)]="phase.name" name="phase-name-{{i}}" required>
+        </mat-form-field>
+        <button mat-icon-button (click)="addPhase(i+1)" tabindex="-1">
+          <mat-icon>add_circle</mat-icon>
         </button>
-        <button md-icon-button (click)="removePhase(i)" [disabled]="phases.length <= 1" tabindex="-1">
-          <md-icon>remove_circle</md-icon>
+        <button mat-icon-button (click)="removePhase(i)" [disabled]="phases.length <= 1" tabindex="-1">
+          <mat-icon>remove_circle</mat-icon>
         </button>
       </div>
     </div>
     <div style="text-align: center">
-      <button type="submit" md-raised-button color="primary" style="width: 100%" (click)="createRetro(retroName)" [disabled]="!createRetroForm.form.valid">CREATE</button>
+      <button type="submit" mat-raised-button color="primary" style="width: 100%" (click)="createRetro(retroName)" [disabled]="!createRetroForm.form.valid">CREATE</button>
     </div>
   </form>
 </div>
