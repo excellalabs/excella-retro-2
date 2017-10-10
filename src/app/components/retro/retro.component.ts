@@ -16,6 +16,8 @@ import { LocalStorageService } from 'angular-2-local-storage';
 import { ChildComponentService } from '../../services/child-component.service';
 import { ChildComponentDirective } from '../../directives/child-component-directive';
 import { WindowService } from '../../services/window.service';
+import { ObservableMedia, MediaChange } from '@angular/flex-layout/';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-retro',
@@ -32,12 +34,16 @@ export class RetroComponent implements OnInit, AfterViewInit {
   private currentPhaseStep: number;
   public user: any;
   public retroSnapshot: Retro;
+  public isMobile: boolean = false;
+  private activeMediaQuery = '';
+
   @Input() childComponent: ChildComponent;
   showAdminToolbar: boolean;
   @ViewChildren(ChildComponentDirective) childComponentHostQueryList: QueryList<ChildComponentDirective>;
   childComponentHost: ChildComponentDirective;
   formattedWindowHeight: string;
   loadingScreen = false;
+  watcher: Subscription;
 
   constructor(
     private route: ActivatedRoute,
@@ -47,11 +53,20 @@ export class RetroComponent implements OnInit, AfterViewInit {
     private localStorageService: LocalStorageService,
     private childComponentService: ChildComponentService,
     private ngZone: NgZone,
-    private windowService: WindowService
+    private windowService: WindowService,
+    public media: ObservableMedia
   ) { }
 
   ngOnInit() {
     const self = this;
+    this.watcher = this.media.subscribe((change: MediaChange) => {
+      this.activeMediaQuery = change ? `'${change.mqAlias}' = (${change.mediaQuery})` : '';
+      if ( change.mqAlias === 'xs') {
+        this.isMobile = true;
+      } else {
+        this.isMobile = false;
+      }
+    });
 
     this.formattedWindowHeight = this.windowService.setResponsiveWindowHeight(window);
 
