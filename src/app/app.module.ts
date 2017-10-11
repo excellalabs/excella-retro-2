@@ -11,6 +11,7 @@ import { ClipboardModule } from 'ngx-clipboard';
 import { MATERIAL_COMPATIBILITY_MODE } from '@angular/material';
 
 import 'hammerjs';
+import 'nanoid';
 
 // Internal imports
 import { AppComponent } from './app.component';
