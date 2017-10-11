@@ -27,9 +27,10 @@ export class RetroComponent implements OnInit, AfterViewInit {
   retroIsActive: boolean;
   retroObservable: FirebaseObjectObservable<Retro>;
   private subscription: any;
-  private currentPhaseObservable: FirebaseObjectObservable<Phase>;
+  currentPhaseObservable: FirebaseObjectObservable<Phase>;
   private currentPhaseId: string;
   private currentPhaseStep: number;
+  phaseCount: number;
   public user: any;
   public retroSnapshot: Retro;
   @Input() childComponent: ChildComponent;
@@ -142,5 +143,9 @@ export class RetroComponent implements OnInit, AfterViewInit {
 
   hideLoadingScreen() {
     this.loadingScreen = false;
+  }
+
+  getCurrentPhaseProgressPercentage(currentPhaseStep: number) {
+    return (this.currentPhaseStep / 4 ) * 100
   }
 }
