@@ -5,7 +5,7 @@
       <div fxFlex="50%">
         <h3>Add Feedback</h3>
         <mat-form-field style="width:75%">
-          <textarea matInput placeholder="Feedback" [(ngModel)]="feedbackToSubmit.text"></textarea>
+          <textarea matTextareaAutosize matInput placeholder="Feedback" [(ngModel)]="feedbackToSubmit.text"></textarea>
         </mat-form-field>
         <div>
           <button mat-raised-button color="primary" (click)="submitFeedback()">SUBMIT</button>
