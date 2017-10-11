@@ -76,9 +76,20 @@ export class VoteFeedbackComponent implements OnInit, OnDestroy {
     }
   }
 
+  getVotesByGroupId(groupKey: string) {
+    return this.votes.filter(vote => vote.groupId === groupKey);
+  }
+
+  removeVote(group: Group) {
+    if (this.getVoteCount(group) > 0) {
+      const votes = this.getVotesByGroupId(group.$key);
+      this.votesObservable.remove(votes[0].$key);
+    }
+  }
+
   getVoteCount(group: Group) {
     if (this.votes != null) {
-      return this.votes.filter(vote => vote.groupId === group.$key).length;
+      return this.getVotesByGroupId(group.$key).length;
     }
     return 0;
   }
