@@ -12,7 +12,7 @@
       </div>
     </mat-sidenav>
     <div class="phase-progress">
-      <h3>Phase Progress</h3>
+      <h2>{{(currentPhaseObservable | async)?.name}}</h2>
       <mat-progress-bar [mode]="determinate" [value]="getCurrentPhaseProgressPercentage(currentPhaseNumber)"></mat-progress-bar>
     </div>
     <ng-template appChildComponent></ng-template>
