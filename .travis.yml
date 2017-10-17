@@ -7,7 +7,7 @@ cache:
   - node_modules
 services:
 - docker
-before_deploy: 
+before_deploy:
 script:
 - sudo apt-get install python3
 - curl -O https://bootstrap.pypa.io/get-pip.py
