@@ -1,20 +1,21 @@
 language: node_js
 node_js:
-- '8'
+- '8.4'
 sudo: required
 cache:
   directories:
   - node_modules
 services:
 - docker
-before_install:
-- openssl aes-256-cbc -K $encrypted_01d7ad8a67f4_key -iv $encrypted_01d7ad8a67f4_iv
-  -in .env.enc -out .env -d
-before_deploy:
-script:
+before_script:
 - sudo apt-get install python3
 - curl -O https://bootstrap.pypa.io/get-pip.py
 - python get-pip.py --user
 - pip install awscli --upgrade --user
+script:
 - npm run docker:build
-- if [ $TRAVIS_BRANCH = "master" ]; then npm run aws:release; fi
+deploy:
+  provider: script
+  script: sh $TRAVIS_BUILD_DIR/scripts/deploy.sh
+  on:
+    branch: master
