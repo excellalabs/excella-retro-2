@@ -16,6 +16,6 @@ script:
 - npm run docker:build
 deploy:
   provider: script
-  script: sh $TRAVIS_BUILD_DIR/scripts/deploy.sh
+  script: chmod +x scripts/deploy.sh && scripts/deploy.sh
   on:
     branch: master
