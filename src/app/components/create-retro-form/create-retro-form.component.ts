@@ -14,6 +14,7 @@ declare var require: any;
 export class CreateRetroFormComponent implements OnInit, OnDestroy {
   userSubscription: Subscription;
   phasesSubscription: Subscription;
+  retroSubscription: Subscription;
   retroName: string;
   numberOfVotes = 2;
   phases = [];
@@ -44,6 +45,9 @@ export class CreateRetroFormComponent implements OnInit, OnDestroy {
     if (this.phasesSubscription) {
       this.phasesSubscription.unsubscribe();
     };
+    if (this.retroSubscription) {
+      this.retroSubscription.unsubscribe();
+    }
   }
 
   addPhase(index: number, name?: string) {
@@ -75,7 +79,7 @@ export class CreateRetroFormComponent implements OnInit, OnDestroy {
     
     this.af.database.object('retros/' + randomId).set(retro).then(() => {
       let retroObservable = this.af.database.object('retros/' + randomId);
-      let retroSubscription = retroObservable.subscribe(pushedRetro => {
+      this.retroSubscription = retroObservable.subscribe(pushedRetro => {
         for (let x = 0; x < that.phases.length; x++) {
           that.phases[x].retroId = pushedRetro.$key;
           allPhasesList.push(that.phases[x]);
@@ -105,8 +109,6 @@ export class CreateRetroFormComponent implements OnInit, OnDestroy {
           that.dialogRef.close();
         });
       });
-      retroSubscription.unsubscribe();
-      
     });
   }
 
