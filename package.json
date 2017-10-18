@@ -21,7 +21,7 @@
     "docker:build": "npm run build -- --prod && with-package docker image build . -t pkg.imageRepo:latest",
     "docker:run": "npm run docker:clean && npm run docker:runHelper",
     "docker:runHelper": "with-package docker run --name pkg.imageName -d -p pkg.imagePort:3000 pkg.imageRepo",
-    "docker:publish": "with-package docker image push pkg.imageRepo",
+    "docker:publish": "with-package docker image push pkg.imageRepo:latest",
     "docker:clean": "with-package docker rm -f pkg.imageName || true",
     "docker:taillogs": "with-package docker logs -f pkg.imageName",
     "docker:debug": "npm run docker:build -- --file Dockerfile.dev && npm run docker:run && sleep 1 && with-package open 'http://localhost:pkg.imagePort' && npm run docker:taillogs",
