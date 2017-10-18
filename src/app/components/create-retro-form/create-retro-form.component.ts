@@ -5,7 +5,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { Retro } from '../../models/retro';
 import { Phase } from '../../models/phase';
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
-
+declare var require: any;
 @Component({
   selector: 'app-create-retro-form',
   templateUrl: './create-retro-form.component.html',
@@ -14,6 +14,7 @@ import { AngularFire, FirebaseListObservable } from 'angularfire2';
 export class CreateRetroFormComponent implements OnInit, OnDestroy {
   userSubscription: Subscription;
   phasesSubscription: Subscription;
+  retroSubscription: Subscription;
   retroName: string;
   numberOfVotes = 2;
   phases = [];
@@ -44,6 +45,9 @@ export class CreateRetroFormComponent implements OnInit, OnDestroy {
     if (this.phasesSubscription) {
       this.phasesSubscription.unsubscribe();
     };
+    if (this.retroSubscription) {
+      this.retroSubscription.unsubscribe();
+    }
   }
 
   addPhase(index: number, name?: string) {
@@ -71,35 +75,55 @@ export class CreateRetroFormComponent implements OnInit, OnDestroy {
     const retrosList = this.af.database.list('retros');
     const allPhasesList = this.af.database.list('phases');
 
-    retrosList.push(retro).then((pushedRetro) => {
-      for (let x = 0; x < that.phases.length; x++) {
-        that.phases[x].retroId = pushedRetro.key;
-        allPhasesList.push(that.phases[x]);
-      }
-
-      const phasesObservable = this.af.database.list('phases', {
-        query: {
-          orderByChild: 'retroId',
-          equalTo: pushedRetro.key
+    var randomId = this.generateRandomId();
+    
+    this.af.database.object('retros/' + randomId).set(retro).then(() => {
+      let retroObservable = this.af.database.object('retros/' + randomId);
+      this.retroSubscription = retroObservable.subscribe(pushedRetro => {
+        for (let x = 0; x < that.phases.length; x++) {
+          that.phases[x].retroId = pushedRetro.$key;
+          allPhasesList.push(that.phases[x]);
         }
-      });
-
-      this.phasesSubscription = phasesObservable.subscribe(orderedPhases => {
-        const firstPhaseId = orderedPhases[0].$key;
-        pushedRetro.update({ currentPhaseId: firstPhaseId });
-
-        const currentUserId = localStorage.getItem('currentUserId');
-        if (currentUserId == null) {
-          const newUser = this.af.database.list('users').push({
-            retroId: pushedRetro.key
-          });
-
-          localStorage.setItem('currentUserId', newUser.key);
-        }
-
-        that.router.navigate(['/retro/' + pushedRetro.key]);
-        that.dialogRef.close();
+  
+        const phasesObservable = this.af.database.list('phases', {
+          query: {
+            orderByChild: 'retroId',
+            equalTo: pushedRetro.$key
+          }
+        });
+  
+        this.phasesSubscription = phasesObservable.subscribe(orderedPhases => {
+          const firstPhaseId = orderedPhases[0].$key;
+          retroObservable.update({ currentPhaseId: firstPhaseId });
+  
+          const currentUserId = localStorage.getItem('currentUserId');
+          if (currentUserId == null) {
+            const newUser = this.af.database.list('users').push({
+              retroId: pushedRetro.$key
+            });
+  
+            localStorage.setItem('currentUserId', newUser.key);
+          }
+  
+          that.router.navigate(['/retro/' + pushedRetro.$key]);
+          that.dialogRef.close();
+        });
       });
     });
+  }
+
+  retroWithIdExists(id: string) {
+    this.af.database.object('retros/' + id).subscribe(retroVal => {
+      return !(retroVal.hasOwnProperty('$value') && !retroVal['$value']);
+    });
+  }
+
+  generateRandomId() {
+    var generate = require('nanoid/generate');
+    var randomId = generate('1234567890ABCDEF', 6);
+    while(this.retroWithIdExists(randomId)) {
+      randomId = generate('1234567890ABCDEF', 6)
+    }
+    return randomId;
   }
 }
