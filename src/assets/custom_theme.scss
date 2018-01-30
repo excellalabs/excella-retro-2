@@ -5,9 +5,9 @@
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue.
 
-$primary-primary: mat-palette($mat-grey, 800);          // #424242
-$primary-accent:  mat-palette($mat-teal, 300);          // #4DB6AC
-$primary-warn:    mat-palette($mat-red);                // #F44336
+$primary-primary: mat-palette($mat-grey, 800);
+$primary-accent:  mat-palette($mat-red, 500);
+$primary-warn:    mat-palette($mat-yellow);
 $primary-light-theme: mat-light-theme($primary-primary, $primary-accent, $primary-warn);
 @include angular-material-theme($primary-light-theme);
 
