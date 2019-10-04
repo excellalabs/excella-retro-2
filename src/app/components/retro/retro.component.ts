@@ -17,7 +17,7 @@ import { ChildComponentService } from '../../services/child-component.service';
 import { ChildComponentDirective } from '../../directives/child-component-directive';
 import { WindowService } from '../../services/window.service';
 import { ObservableMedia, MediaChange } from '@angular/flex-layout/';
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-retro',

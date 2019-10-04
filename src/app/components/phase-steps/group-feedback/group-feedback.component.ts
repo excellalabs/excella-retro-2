@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, OnDestroy} from '@angular/core';
 import { AngularFire, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2';
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription } from 'rxjs';
 import { Retro } from '../../../models/retro';
 import { Group } from '../../../models/group';
 import { Message } from '../../../models/message';

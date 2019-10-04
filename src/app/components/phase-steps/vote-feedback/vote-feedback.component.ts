@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, Input, Pipe, PipeTransform } from '@angular/core';
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription } from 'rxjs';
 import { Message } from '../../../models/message';
 import { Retro } from '../../../models/retro';
 import { Group } from '../../../models/group';
