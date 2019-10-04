@@ -1,6 +1,6 @@
 <mat-card style="padding:0px">
   <mat-toolbar color="accent">
-    <span><b>{{(currentPhaseObservable | async)?.name}}:</b> Vote</span>
+    <span>Vote</span>
   </mat-toolbar>
   <mat-card-content style="padding:0 24px 8px">
     <div fxLayout>
@@ -19,6 +19,7 @@
               </mat-card-content>
               <mat-card-actions style="padding: 0px">
                 <button mat-raised-button color="primary" (click)="addVote(group)" [disabled]="votesRemaining <= 0">VOTE</button>
+                <button mat-raised-button color="secondary" (click)="removeVote(group)" [disabled]="getVoteCount(group) <= 0">TAKE BACK VOTE</button>
               </mat-card-actions>
             </mat-card>
           </div>
