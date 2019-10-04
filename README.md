@@ -1,8 +1,6 @@
-# Excella Retro 2.0
+# Excella Retro 2.0 [![Build Status](https://travis-ci.org/excellalabs/excella-retro-2.svg?branch=master)](https://travis-ci.org/excellalabs/excella-retro-2)
 
 https://retro.excella.com/
-
-[![Build Status](https://travis-ci.org/excellalabs/excella-retro-2.svg?branch=master)](https://travis-ci.org/excellalabs/excella-retro-2)
 
 This project was generated with [angular-cli](https://github.com/angular/angular-cli).
 
