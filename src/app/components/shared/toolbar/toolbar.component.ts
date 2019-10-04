@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { LocalStorageService } from 'angular-2-local-storage';
 import { AngularFire } from 'angularfire2';
 import { Router } from '@angular/router';
@@ -36,6 +36,10 @@ export class ToolbarComponent implements OnInit {
         this.user = null;
       }
     });
+  }
+
+  toggleSidenav(){
+
   }
 
   checkDarkMode() {

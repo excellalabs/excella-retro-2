@@ -1,4 +1,15 @@
-<mat-sidenav-container *ngIf="!loadingScreen" fxLayout="column" [style.height]="formattedWindowHeight">
+<div  *ngIf="!loadingScreen && !media.isActive('xs')" fxLayout="row" [style.height]="formattedWindowHeight">
+  <div *ngIf="showAdminToolbar" fxFlex="20%" class="admin-toolbar-container">
+    <div class="admin-toolbar">
+      <app-admin-toolbar [retroObservable]="retroObservable"></app-admin-toolbar>
+    </div>
+  </div>
+  <div fxFlex="auto">
+    <ng-template appChildComponent></ng-template>
+  </div>
+</div>
+
+<mat-sidenav-container fxShow="false" fxShow.xs="true" *ngIf="!loadingScreen && media.isActive('xs')" fxLayout="column" [style.height]="formattedWindowHeight">
     <div class="floating-fab">
       <span *ngIf="showAdminToolbar">
         <button mat-fab (click)="sidenav.toggle()">

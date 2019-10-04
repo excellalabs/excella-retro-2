@@ -1,4 +1,9 @@
 <mat-toolbar color="primary" class="mat-elevation-z4">
+  <button mat-icon-button *ngIf="user" fxShow="false" fxShow.xs="true">
+    <mat-icon mat-button (click)="toggleSidnav()">
+      menu
+    </mat-icon>
+  </button>
   <h1><a href='' id="header-primary-white">EXCELLA<span id="header-primary-accent">RETRO</span></a></h1>
   <span class="spacer"></span>
   <button *ngIf="user" mat-icon-button>
@@ -13,7 +18,7 @@
   <button mat-button *ngIf="!user" fxShow="false" fxShow.xs="true" (click)="login()">
   <mat-icon mat-button (click)="login()">
     fingerprint
-  </mat-icon> 
+  </mat-icon>
  </button>
   <a mat-icon-button href="https://github.com/excellalabs/excella-retro-2" target="_blank">
     <img src="../../../../assets/github-logo-white.svg" id="github-icon"/>
