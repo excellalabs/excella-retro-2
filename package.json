@@ -1,6 +1,9 @@
 {
   "name": "excella-retro",
   "version": "2.1.0",
+  "repository": {
+    "url": "https://github.com/excellalabs/excella-retro-2"
+  },
   "license": "MIT",
   "homepage": "https://retro.excella.com",
   "imageRepo": "090999229429.dkr.ecr.us-east-1.amazonaws.com/excella-retro-ui",
@@ -55,7 +58,7 @@
     "ngx-clipboard": "^12.2.1",
     "rxjs": "^6.5.3",
     "webpack": "^4.41.0",
-    "zone.js": "^0.10.2"
+    "zone.js": "^0.9.1"
   },
   "devDependencies": {
     "@angular/cli": "8.3.8",
