@@ -1,14 +1,13 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from '@angular/core'
 
 @Injectable()
 export class WindowService {
-
-  constructor() { }
+  constructor() {}
 
   public setResponsiveWindowHeight(windowRef: Window) {
-    const windowHeight = windowRef.innerHeight;
-    const divHeight = windowHeight - 64;
+    const windowHeight = windowRef.innerHeight
+    const divHeight = windowHeight - 64
 
-    return divHeight + 'px';
+    return divHeight + 'px'
   }
 }

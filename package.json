@@ -1,17 +1,19 @@
 {
   "name": "excella-retro",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "repository": {
     "url": "https://github.com/excellalabs/excella-retro-2"
   },
   "license": "MIT",
   "homepage": "https://retro.excella.com",
-  "imageRepo": "090999229429.dkr.ecr.us-east-1.amazonaws.com/excella-retro-ui",
-  "imageName": "excella-retro-ui",
-  "imagePort": "8080",
-  "awsRegion": "us-east-1",
-  "awsEcsCluster": "excella-prod-ecs-cluster",
-  "awsService": "excella-retro-prod",
+  "config": {
+    "imageRepo": "090999229429.dkr.ecr.us-east-1.amazonaws.com/excella-retro-ui",
+    "imageName": "excella-retro-ui",
+    "imagePort": "8080",
+    "awsRegion": "us-east-1",
+    "awsEcsCluster": "excella-prod-ecs-cluster",
+    "awsService": "excella-retro-prod"
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -19,18 +21,20 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "docker:build": "npm run build -- --prod && with-package docker image build . -t pkg.imageRepo:latest",
+    "standardize": "import-sort --write \"**/*.ts\" && prettier --write \"**/*.ts\" && js-beautify --editorconfig \"src/**/*.html\"",
+    "docker:build": "npm run build -- --prod && cross-conf-env docker image build . -t $npm_package_config_imageRepo:latest",
     "docker:run": "npm run docker:clean && npm run docker:runHelper",
-    "docker:runHelper": "with-package docker run --name pkg.imageName -d -p pkg.imagePort:3000 pkg.imageRepo",
-    "docker:publish": "with-package docker image push pkg.imageRepo:latest",
-    "docker:clean": "with-package docker rm -f pkg.imageName || true",
-    "docker:taillogs": "with-package docker logs -f pkg.imageName",
-    "docker:debug": "npm run docker:build -- --file Dockerfile.dev && npm run docker:run && sleep 1 && with-package open 'http://localhost:pkg.imagePort' && npm run docker:taillogs",
-    "aws:login": "with-package aws ecr get-login --no-include-email --region pkg.awsRegion",
-    "aws:deploy": "with-package docker run --env-file ./.env silintl/ecs-deploy -c pkg.awsEcsCluster -n pkg.awsService -i pkg.imageRepo:latest -r pkg.awsRegion --timeout 1000",
+    "docker:runHelper": "cross-conf-env docker run --name $npm_package_config_imageName -d -p $npm_package_config_imagePort:3000 $npm_package_config_imageRepo",
+    "docker:publish": "cross-conf-env docker image push $npm_package_config_imageRepo:latest",
+    "docker:clean": "cross-conf-env docker rm -f $npm_package_config_imageName || true",
+    "docker:taillogs": "cross-conf-env docker logs -f $npm_package_config_imageName",
+    "docker:debug": "npm run docker:build -- --file Dockerfile.dev && npm run docker:run && sleep 1 && cross-conf-env open 'http://localhost:$npm_package_config_imagePort' && npm run docker:taillogs",
+    "aws:login": "cross-conf-env aws ecr get-login --no-include-email --region $npm_package_config_awsRegion",
+    "aws:deploy": "cross-conf-env docker run --env-file ./.env silintl/ecs-deploy -c $npm_package_config_awsEcsCluster -n $npm_package_config_awsService -i $npm_package_config_imageRepo:latest -r $npm_package_config_awsRegion --timeout 1000",
     "aws:release": "npm run aws:login && npm run docker:publish && npm run aws:deploy"
   },
   "dependencies": {
+    "@angular-devkit/build-angular": "^0.803.8",
     "@angular-devkit/build-optimizer": "0.803.8",
     "@angular-devkit/core": "8.3.8",
     "@angular-devkit/schematics": "8.3.8",
@@ -51,9 +55,8 @@
     "@schematics/angular": "^8.3.8",
     "@schematics/schematics": "0.803.8",
     "angular-2-local-storage": "^3.0.2",
-    "angularfire2": "5.2.1",
     "core-js": "^3.2.1",
-    "firebase": "^7.1.0",
+    "firebase": "^6.6.2",
     "hammerjs": "^2.0.8",
     "nanoid": "^2.1.2",
     "ngx-clipboard": "^12.2.1",
@@ -69,24 +72,47 @@
     "@types/jasmine": "3.4.2",
     "@types/node": "^12.7.11",
     "codelyzer": "~5.1.2",
+    "cross-conf-env": "^1.1.2",
+    "import-sort": "^6.0.0",
+    "import-sort-cli": "^6.0.0",
+    "import-sort-parser-typescript": "^6.0.0",
+    "import-sort-style-module": "^6.0.0",
     "jasmine-core": "~3.5.0",
     "jasmine-spec-reporter": "~4.2.1",
+    "js-beautify": "^1.10.2",
     "karma": "~4.3.0",
     "karma-chrome-launcher": "~3.1.0",
     "karma-cli": "~2.0.0",
     "karma-coverage-istanbul-reporter": "^2.1.0",
     "karma-jasmine": "~2.0.1",
     "karma-jasmine-html-reporter": "^1.4.2",
+    "prettier": "^1.18.2",
+    "prettier-tslint": "^0.4.2",
     "protractor": "~5.4.2",
     "ts-node": "8.4.1",
     "tslint": "^5.20.0",
-    "typescript": "^3.5.3",
-    "with-package": "^1.0.2"
+    "typescript": "^3.5.3"
   },
   "authors": [
     "Sam Blissard<sam.blissard@excella.com>",
     "Alex Hoffman<alex.hoffman@excella.com>",
     "Cameron Ivey<cameron.ivey@excella.com>",
-    "Brendan Sawyer<brendan.sawyer@excella.com>"
-  ]
+    "Brendan Sawyer<brendan.sawyer@excella.com>",
+    "Doguhan Uluca<doguhan.uluca@excella.com"
+  ],
+  "importSort": {
+    ".ts, .tsx": {
+      "parser": "typescript",
+      "style": "module",
+      "options": {}
+    }
+  },
+  "prettier": {
+    "printWidth": 90,
+    "semi": false,
+    "singleQuote": true,
+    "trailingComma": "es5",
+    "parser": "typescript",
+    "jsxBracketSameLine": true
+  }
 }

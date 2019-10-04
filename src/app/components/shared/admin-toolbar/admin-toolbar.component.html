@@ -1,7 +1,8 @@
 <div>
   <h3>SCRUM MASTER TOOLS</h3>
   <mat-form-field>
-    <input matInput placeholder="Retro ID" readonly value="{{(retroObservable | async)?.$key}}" #retroIdInput>
+    <input matInput placeholder="Retro ID" readonly
+      value="{{(retroObservable | async)?.$key}}" #retroIdInput>
   </mat-form-field>
   <div>
     <!--<span matTooltip="Email Retro ID">
@@ -11,13 +12,17 @@
       <button mat-mini-fab disabled><mat-icon>link</mat-icon></button>
     </span>-->
     <span matTooltip="Copy Retro ID">
-      <button mat-mini-fab [ngxClipboard]="retroIdInput" (click)="copyTextSuccessful()"><mat-icon>content_copy</mat-icon></button>
+      <button mat-mini-fab [ngxClipboard]="retroIdInput" (click)="copyTextSuccessful()">
+        <mat-icon>content_copy</mat-icon>
+      </button>
     </span>
   </div>
   <div class="section">
     <span matTooltip="{{endPhaseStepButtonTooltipText}}">
-      <button mat-raised-button color="primary" (click)="endStep()" class="end-button">END STEP</button>
+      <button mat-raised-button color="primary" (click)="endStep()" class="end-button">END
+        STEP</button>
     </span>
-    <button mat-raised-button color="warn" (click)="showEndRetroDialog()" class="end-button">END RETRO</button>
+    <button mat-raised-button color="warn" (click)="showEndRetroDialog()"
+      class="end-button">END RETRO</button>
   </div>
 </div>

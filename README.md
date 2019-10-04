@@ -12,7 +12,7 @@ This project was generated with [angular-cli](https://github.com/angular/angular
   - TypeScript 2.3.3
 - Firebase
   - Firebase 3.6.10
-  - AngularFire2 2.0.0-beta.8
+  - @angular/fire 2.0.0-beta.8
 
 ## Instructions
 

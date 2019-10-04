@@ -1,68 +1,68 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { LocalStorageService } from 'angular-2-local-storage';
-import { AngularFire } from 'angularfire2';
-import { Router } from '@angular/router';
+import { Component, Input, OnInit } from '@angular/core'
+import { AngularFire } from '@angular/fire'
+import { Router } from '@angular/router'
+import { LocalStorageService } from 'angular-2-local-storage'
 
 @Component({
   selector: 'app-toolbar',
   templateUrl: './toolbar.component.html',
-  styleUrls: ['./toolbar.component.scss']
+  styleUrls: ['./toolbar.component.scss'],
 })
 export class ToolbarComponent implements OnInit {
-  isDarkMode: boolean;
-  user;
-  body = document.getElementsByTagName('body')[0];
-  darkModeClass = 'app-dark-theme';
+  isDarkMode: boolean
+  user
+  body = document.getElementsByTagName('body')[0]
+  darkModeClass = 'app-dark-theme'
 
-  constructor(private localStorageService: LocalStorageService,
+  constructor(
+    private localStorageService: LocalStorageService,
     private af: AngularFire,
-    private router: Router) { }
+    private router: Router
+  ) {}
 
   login() {
-      this.af.auth.login();
-    }
+    this.af.auth.login()
+  }
 
   logout() {
-    this.af.auth.logout();
-    this.router.navigateByUrl('');
+    this.af.auth.logout()
+    this.router.navigateByUrl('')
   }
 
   ngOnInit() {
-    this.checkDarkMode();
+    this.checkDarkMode()
     this.af.auth.subscribe(user => {
       if (user) {
-        this.user = user;
+        this.user = user
       } else {
-        this.user = null;
+        this.user = null
       }
-    });
+    })
   }
 
-  toggleSidenav(){
-
-  }
+  toggleSidenav() {}
 
   checkDarkMode() {
-    this.isDarkMode = JSON.parse(localStorage.getItem('isDarkMode'));
-    this.isDarkMode === true ? this.addDarkModeClass() : this.removeDarkModeClass();
+    this.isDarkMode = JSON.parse(localStorage.getItem('isDarkMode'))
+    this.isDarkMode === true ? this.addDarkModeClass() : this.removeDarkModeClass()
   }
 
   toggleDarkMode() {
-    this.isDarkMode = JSON.parse(localStorage.getItem('isDarkMode'));
+    this.isDarkMode = JSON.parse(localStorage.getItem('isDarkMode'))
     if (this.isDarkMode === true) {
-      localStorage.setItem('isDarkMode', 'false');
-      this.removeDarkModeClass();
+      localStorage.setItem('isDarkMode', 'false')
+      this.removeDarkModeClass()
     } else {
-      localStorage.setItem('isDarkMode', 'true');
-      this.addDarkModeClass();
+      localStorage.setItem('isDarkMode', 'true')
+      this.addDarkModeClass()
     }
   }
 
   addDarkModeClass() {
-    this.body.classList.add(this.darkModeClass);
+    this.body.classList.add(this.darkModeClass)
   }
 
   removeDarkModeClass() {
-    this.body.classList.remove(this.darkModeClass);
+    this.body.classList.remove(this.darkModeClass)
   }
 }

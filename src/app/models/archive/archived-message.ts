@@ -1,8 +1,7 @@
 export class ArchivedMessage {
-  messageId: string;
-  text: string;
-  groupId: string;
+  messageId: string
+  text: string
+  groupId: string
 
-  constructor() {
-  }
+  constructor() {}
 }

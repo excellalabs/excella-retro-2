@@ -1,4 +1,5 @@
-<div  *ngIf="!loadingScreen && !media.isActive('xs')" fxLayout="row" [style.height]="formattedWindowHeight">
+<div *ngIf="!loadingScreen && !media.isActive('xs')" fxLayout="row"
+  [style.height]="formattedWindowHeight">
   <div *ngIf="showAdminToolbar" fxFlex="20%" class="admin-toolbar-container">
     <div class="admin-toolbar">
       <app-admin-toolbar [retroObservable]="retroObservable"></app-admin-toolbar>
@@ -9,24 +10,27 @@
   </div>
 </div>
 
-<mat-sidenav-container fxShow="false" fxShow.xs="true" *ngIf="!loadingScreen && media.isActive('xs')" fxLayout="column" [style.height]="formattedWindowHeight">
-    <div class="floating-fab">
-      <span *ngIf="showAdminToolbar">
-        <button mat-fab (click)="sidenav.toggle()">
-          <mat-icon>settings</mat-icon>
-        </button>
-      </span>
+<mat-sidenav-container fxShow="false" fxShow.xs="true"
+  *ngIf="!loadingScreen && media.isActive('xs')" fxLayout="column"
+  [style.height]="formattedWindowHeight">
+  <div class="floating-fab">
+    <span *ngIf="showAdminToolbar">
+      <button mat-fab (click)="sidenav.toggle()">
+        <mat-icon>settings</mat-icon>
+      </button>
+    </span>
+  </div>
+  <mat-sidenav fxFlex #sidenav mode="over" opened="false" align="end">
+    <div class="admin-toolbar">
+      <app-admin-toolbar [retroObservable]="retroObservable"></app-admin-toolbar>
     </div>
-    <mat-sidenav fxFlex #sidenav mode="over" opened="false" align="end">
-      <div class="admin-toolbar">
-        <app-admin-toolbar [retroObservable]="retroObservable"></app-admin-toolbar>
-      </div>
-    </mat-sidenav>
-    <div class="phase-progress">
-      <h2>{{(currentPhaseObservable | async)?.name}}</h2>
-      <mat-progress-bar [mode]="determinate" [value]="getCurrentPhaseProgressPercentage(currentPhaseNumber)"></mat-progress-bar>
-    </div>
-    <ng-template appChildComponent></ng-template>
+  </mat-sidenav>
+  <div class="phase-progress">
+    <h2>{{(currentPhaseObservable | async)?.name}}</h2>
+    <mat-progress-bar [mode]="determinate"
+      [value]="getCurrentPhaseProgressPercentage(currentPhaseNumber)"></mat-progress-bar>
+  </div>
+  <ng-template appChildComponent></ng-template>
 </mat-sidenav-container>
 
 <div *ngIf="loadingScreen">

@@ -4,19 +4,25 @@
       <div fxLayout>
         <h4 *ngIf="!editMode" fxFlex="90%">{{groupName}}</h4>
         <mat-form-field *ngIf="editMode && allowAdminFunctions" fxFlex="90%">
-          <textarea matInput [(ngModel)]="groupName" name="groupNameInput" style="resize: vertical"></textarea>
+          <textarea matInput [(ngModel)]="groupName" name="groupNameInput"
+            style="resize: vertical"></textarea>
         </mat-form-field>
-        <button mat-icon-button *ngIf="allowAdminFunctions &&((!enabledGroup) || (enabledGroup === groupId && !editMode))" (click)="toggleEditing(groupName)" fxFlex="10%">
+        <button mat-icon-button
+          *ngIf="allowAdminFunctions &&((!enabledGroup) || (enabledGroup === groupId && !editMode))"
+          (click)="toggleEditing(groupName)" fxFlex="10%">
           <mat-icon>edit</mat-icon>
         </button>
-        <button mat-icon-button *ngIf="allowAdminFunctions && enabledGroup === groupId" (click)="toggleEditing(groupName)" fxFlex="10%">
+        <button mat-icon-button *ngIf="allowAdminFunctions && enabledGroup === groupId"
+          (click)="toggleEditing(groupName)" fxFlex="10%">
           <mat-icon>check</mat-icon>
         </button>
       </div>
     </mat-card-title>
     <mat-card-content>
       <app-feedback-container>
-        <app-feedback-card *ngFor="let feedback of messages | groupedMessagesPipe: groupId" [feedback]="feedback" [enabledGroup]="enabledGroup"></app-feedback-card>
+        <app-feedback-card
+          *ngFor="let feedback of messages | groupedMessagesPipe: groupId"
+          [feedback]="feedback" [enabledGroup]="enabledGroup"></app-feedback-card>
       </app-feedback-container>
     </mat-card-content>
   </mat-card>

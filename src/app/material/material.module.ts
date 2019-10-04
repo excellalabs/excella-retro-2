@@ -1,20 +1,53 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule } from '@angular/common'
+import { NgModule } from '@angular/core'
 import {
-  MatButtonModule, MatCheckboxModule, MatToolbarModule, MatCardModule, MatTooltipModule, MatDialogModule, MatSnackBarModule,
-  MatInputModule, MatIconModule, MatSidenavModule, MatProgressSpinnerModule, MatStepperModule, MatProgressBarModule
-} from '@angular/material';
+  MatButtonModule,
+  MatCardModule,
+  MatCheckboxModule,
+  MatDialogModule,
+  MatIconModule,
+  MatInputModule,
+  MatProgressBarModule,
+  MatProgressSpinnerModule,
+  MatSidenavModule,
+  MatSnackBarModule,
+  MatStepperModule,
+  MatToolbarModule,
+  MatTooltipModule,
+} from '@angular/material'
 
 @NgModule({
   imports: [
     CommonModule,
-    MatButtonModule, MatCheckboxModule, MatToolbarModule, MatCardModule, MatTooltipModule, MatDialogModule, MatSnackBarModule,
-    MatInputModule, MatIconModule, MatSidenavModule, MatProgressSpinnerModule, MatStepperModule, MatProgressBarModule
+    MatButtonModule,
+    MatCheckboxModule,
+    MatToolbarModule,
+    MatCardModule,
+    MatTooltipModule,
+    MatDialogModule,
+    MatSnackBarModule,
+    MatInputModule,
+    MatIconModule,
+    MatSidenavModule,
+    MatProgressSpinnerModule,
+    MatStepperModule,
+    MatProgressBarModule,
   ],
   exports: [
-    MatButtonModule, MatCheckboxModule, MatToolbarModule, MatCardModule, MatTooltipModule, MatDialogModule, MatSnackBarModule,
-    MatInputModule, MatIconModule, MatSidenavModule, MatProgressSpinnerModule, MatStepperModule, MatProgressBarModule
+    MatButtonModule,
+    MatCheckboxModule,
+    MatToolbarModule,
+    MatCardModule,
+    MatTooltipModule,
+    MatDialogModule,
+    MatSnackBarModule,
+    MatInputModule,
+    MatIconModule,
+    MatSidenavModule,
+    MatProgressSpinnerModule,
+    MatStepperModule,
+    MatProgressBarModule,
   ],
-  declarations: []
+  declarations: [],
 })
-export class MaterialModule { }
+export class MaterialModule {}

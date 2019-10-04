@@ -4,7 +4,8 @@
       menu
     </mat-icon>
   </button>
-  <h1><a href='' id="header-primary-white">EXCELLA<span id="header-primary-accent">RETRO</span></a></h1>
+  <h1><a href='' id="header-primary-white">EXCELLA<span
+        id="header-primary-accent">RETRO</span></a></h1>
   <span class="spacer"></span>
   <button *ngIf="user" mat-icon-button>
     <img class="mat-card-avatar" id="custom-avatar" src="{{user.auth.photoURL}}">
@@ -16,11 +17,12 @@
     SCRUM MASTER LOGIN
   </button>
   <button mat-button *ngIf="!user" fxShow="false" fxShow.xs="true" (click)="login()">
-  <mat-icon mat-button (click)="login()">
-    fingerprint
-  </mat-icon>
- </button>
-  <a mat-icon-button href="https://github.com/excellalabs/excella-retro-2" target="_blank">
-    <img src="../../../../assets/github-logo-white.svg" id="github-icon"/>
+    <mat-icon mat-button (click)="login()">
+      fingerprint
+    </mat-icon>
+  </button>
+  <a mat-icon-button href="https://github.com/excellalabs/excella-retro-2"
+    target="_blank">
+    <img src="../../../../assets/github-logo-white.svg" id="github-icon" />
   </a>
 </mat-toolbar>

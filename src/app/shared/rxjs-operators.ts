@@ -1,12 +1,3 @@
 // Statics
 
-
 // Operators
-
-
-
-
-
-
-
-
