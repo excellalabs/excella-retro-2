@@ -5,12 +5,14 @@ import { HttpClientModule } from '@angular/common/http'
 import { NgModule } from '@angular/core'
 import { AngularFireModule } from '@angular/fire'
 import { AngularFireAuthModule } from '@angular/fire/auth'
+import { AngularFireDatabaseModule } from '@angular/fire/database'
 import { FlexLayoutModule } from '@angular/flex-layout'
 import { FormsModule } from '@angular/forms'
 import { BrowserModule } from '@angular/platform-browser'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { LocalStorageModule } from 'angular-2-local-storage'
 import { ClipboardModule } from 'ngx-clipboard'
+import { environment } from 'src/environments/environment'
 
 import { AppComponent } from './app.component'
 import { CreateRetroFormComponent } from './components/create-retro-form/create-retro-form.component'
@@ -38,25 +40,6 @@ import { AppRoutingModule } from './routing/app-routing.module'
 import { ChildComponentService } from './services/child-component.service'
 import { RetroArchiveService } from './services/retro-archive.service'
 import { WindowService } from './services/window.service'
-
-// Dev Environment
-// export const firebaseConfig = {
-//   apiKey: 'AIzaSyAjMVQvUS9_E_ckc_yT7siUhQKOnEgD8bs',
-//   authDomain: 'excella-retro-2.firebaseapp.com',
-//   databaseURL: 'https://excella-retro-2.firebaseio.com',
-//   storageBucket: 'excella-retro-2.appspot.com',
-//   messagingSenderId: '419643079193'
-// };
-
-// Prod Envioronment
-export const firebaseConfig: FirebaseOptions = {
-  apiKey: 'AIzaSyC5r_KGRp4iDO8yS8kdYYnHa2HtMhxUYSI',
-  authDomain: 'excella-retro.firebaseapp.com',
-  databaseURL: 'https://excella-retro.firebaseio.com',
-  projectId: 'excella-retro',
-  storageBucket: 'excella-retro.appspot.com',
-  messagingSenderId: '181908731323',
-}
 
 @NgModule({
   declarations: [
@@ -100,7 +83,9 @@ export const firebaseConfig: FirebaseOptions = {
     FormsModule,
     HttpClientModule,
     AppRoutingModule,
-    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireModule.initializeApp(environment.firebaseConfig, 'excella-retro'),
+    AngularFireAuthModule,
+    AngularFireDatabaseModule,
     FlexLayoutModule,
     LocalStorageModule.forRoot({
       prefix: 'excella-retro-2',

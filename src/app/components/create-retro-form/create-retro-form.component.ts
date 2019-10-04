@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
-import { AngularFire, FirebaseListObservable } from '@angular/fire'
+import { AngularFireAuth } from '@angular/fire/auth'
+import { AngularFireDatabase } from '@angular/fire/database'
 import { MatDialogRef, MatSelect } from '@angular/material'
 import { Router } from '@angular/router'
 import { Subscription } from 'rxjs'
@@ -22,7 +23,8 @@ export class CreateRetroFormComponent implements OnInit, OnDestroy {
   user
 
   constructor(
-    private af: AngularFire,
+    private afDatabase: AngularFireDatabase,
+    private afAuth: AngularFireAuth,
     private router: Router,
     private dialogRef: MatDialogRef<CreateRetroFormComponent>
   ) {}
@@ -32,7 +34,7 @@ export class CreateRetroFormComponent implements OnInit, OnDestroy {
     this.addPhase(1, 'What Went Wrong?')
     this.addPhase(2, 'Action Items')
 
-    this.userSubscription = this.af.auth.subscribe(user => {
+    this.userSubscription = this.afAuth.authState.subscribe(user => {
       if (user) {
         this.user = user
       } else {
@@ -82,23 +84,25 @@ export class CreateRetroFormComponent implements OnInit, OnDestroy {
       this.numberOfVotes,
       this.user.auth.uid
     )
-    const retrosList = this.af.database.list('retros')
-    const allPhasesList = this.af.database.list('phases')
+    const retrosList = this.afDatabase.database.list('retros')
+    const allPhasesList = this.afDatabase.database.list('phases')
 
-    var randomId = this.generateRandomId()
+    const randomId = this.generateRandomId()
 
-    this.af.database
+    this.afDatabase.database
       .object('retros/' + randomId)
       .set(retro)
       .then(() => {
-        let retroObservable = this.af.database.object('retros/' + randomId)
+        const retroObservable = this.afDatabase
+          .object('retros/' + randomId)
+          .valueChanges()
         this.retroSubscription = retroObservable.subscribe(pushedRetro => {
           for (let x = 0; x < that.phases.length; x++) {
             that.phases[x].retroId = pushedRetro.$key
             allPhasesList.push(that.phases[x])
           }
 
-          const phasesObservable = this.af.database.list('phases', {
+          const phasesObservable = this.afDatabase.database.list('phases', {
             query: {
               orderByChild: 'retroId',
               equalTo: pushedRetro.$key,
@@ -111,7 +115,7 @@ export class CreateRetroFormComponent implements OnInit, OnDestroy {
 
             const currentUserId = localStorage.getItem('currentUserId')
             if (currentUserId == null) {
-              const newUser = this.af.database.list('users').push({
+              const newUser = this.afDatabase.database.list('users').push({
                 retroId: pushedRetro.$key,
               })
 
@@ -126,14 +130,14 @@ export class CreateRetroFormComponent implements OnInit, OnDestroy {
   }
 
   retroWithIdExists(id: string) {
-    this.af.database.object('retros/' + id).subscribe(retroVal => {
+    this.afDatabase.database.object('retros/' + id).subscribe(retroVal => {
       return !(retroVal.hasOwnProperty('$value') && !retroVal['$value'])
     })
   }
 
   generateRandomId() {
-    var generate = require('nanoid/generate')
-    var randomId = generate('1234567890ABCDEF', 6)
+    const generate = require('nanoid/generate')
+    const randomId = generate('1234567890ABCDEF', 6)
     while (this.retroWithIdExists(randomId)) {
       randomId = generate('1234567890ABCDEF', 6)
     }

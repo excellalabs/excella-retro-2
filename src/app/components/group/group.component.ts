@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
-import { AngularFire, FirebaseObjectObservable } from '@angular/fire'
+import { AngularFireDatabase } from '@angular/fire/database'
+import { Observable } from 'rxjs'
 
 import { Group } from '../../models/group'
 import { Message } from '../../models/message'
@@ -14,17 +15,19 @@ export class GroupComponent implements OnInit {
   @Input() groupId: string
   @Input() messages: Message[]
   @Input() enabledGroup: string
-  @Input() allowAdminFunctions: boolean = false
+  @Input() allowAdminFunctions = false
   @Output() editingNotifier: EventEmitter<string> = new EventEmitter<string>()
   group: Group
-  groupObjectObservable: FirebaseObjectObservable<Group>
+  groupObjectObservable: Observable<Group>
   editMode: boolean
 
-  constructor(private af: AngularFire) {}
+  constructor(private afDatabase: AngularFireDatabase) {}
 
   ngOnInit() {
     const self = this
-    this.groupObjectObservable = this.af.database.object('/groups/' + this.groupId)
+    this.groupObjectObservable = this.afDatabase.database.object(
+      '/groups/' + this.groupId
+    )
     this.groupObjectObservable.subscribe(group => (self.group = group))
   }
 
