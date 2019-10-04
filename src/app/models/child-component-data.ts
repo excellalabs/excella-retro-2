@@ -1,3 +1,4 @@
+//TODO: change to observables
 import { FirebaseObjectObservable } from '@angular/fire'
 
 import { Phase } from './phase'
