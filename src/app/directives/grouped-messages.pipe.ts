@@ -1,12 +1,12 @@
-import { Pipe, PipeTransform } from '@angular/core';
-import { Message } from '../models/message';
+import { Pipe, PipeTransform } from '@angular/core'
+
+import { Message } from '../models/message'
 
 @Pipe({
-    name: 'groupedMessagesPipe'
+  name: 'groupedMessagesPipe',
 })
-
 export class GroupedMessagesPipe implements PipeTransform {
-    transform(messages: Message[], groupId: string): Message[] {
-        return messages.filter(message => message.groupId === groupId);
-    }
+  transform(messages: Message[], groupId: string): Message[] {
+    return messages.filter(message => message.groupId === groupId)
+  }
 }

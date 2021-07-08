@@ -2,15 +2,18 @@
   <app-phase-step-header color="accent">
     <span>Retro Summary: {{archivedRetroId}}</span>
   </app-phase-step-header>
-  <app-phase-step-content *ngFor="let archivedPhase of archivedPhases" class="card-bottom-padding">
+  <app-phase-step-content *ngFor="let archivedPhase of archivedPhases"
+    class="card-bottom-padding">
     <mat-toolbar color="primary">
-     <span>Phase: {{archivedPhase.name}}</span>
+      <span>Phase: {{archivedPhase.name}}</span>
     </mat-toolbar>
-    <mat-card *ngFor="let archivedGroup of archivedPhase.archivedGroups" class="card-bottom-padding">
+    <mat-card *ngFor="let archivedGroup of archivedPhase.archivedGroups"
+      class="card-bottom-padding">
       <mat-toolbar>
         <span>{{archivedGroup.name}} (Votes: {{archivedGroup.numOfVotes}})</span>
       </mat-toolbar>
-      <mat-card *ngFor="let archivedMessage of archivedGroup.archivedMessages" class="card-content-padding">
+      <mat-card *ngFor="let archivedMessage of archivedGroup.archivedMessages"
+        class="card-content-padding">
         <span>{{archivedMessage.text}}</span>
       </mat-card>
     </mat-card>

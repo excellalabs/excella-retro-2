@@ -1,10 +1,9 @@
-import { ArchivedPhase } from '../archive/archived-phase';
+import { ArchivedPhase } from '../archive/archived-phase'
 
 export class ArchivedRetro {
-  retroId: string;
-  adminId: string;
-  archivedPhases: ArchivedPhase[];
+  retroId: string
+  adminId: string
+  archivedPhases: ArchivedPhase[]
 
-  constructor() {
-  }
+  constructor() {}
 }

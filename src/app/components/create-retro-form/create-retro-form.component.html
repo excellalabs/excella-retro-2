@@ -2,12 +2,14 @@
   <form #createRetroForm="ngForm">
     <div>
       <mat-form-field>
-        <input matInput placeholder="Retro Name" [(ngModel)]="retroName" name="retroNameInput" required/>
+        <input matInput placeholder="Retro Name" [(ngModel)]="retroName"
+          name="retroNameInput" required />
       </mat-form-field>
     </div>
     <div>
       <mat-form-field>
-        <input matInput type="number" placeholder="Number of Votes" [(ngModel)]="numberOfVotes" name="numberOfVotesInput" required>
+        <input matInput type="number" placeholder="Number of Votes"
+          [(ngModel)]="numberOfVotes" name="numberOfVotesInput" required>
       </mat-form-field>
     </div>
     <div *ngFor="let phase of phases; let i = index">
@@ -18,13 +20,16 @@
         <button mat-icon-button (click)="addPhase(i+1)" tabindex="-1">
           <mat-icon>add_circle</mat-icon>
         </button>
-        <button mat-icon-button (click)="removePhase(i)" [disabled]="phases.length <= 1" tabindex="-1">
+        <button mat-icon-button (click)="removePhase(i)" [disabled]="phases.length <= 1"
+          tabindex="-1">
           <mat-icon>remove_circle</mat-icon>
         </button>
       </div>
     </div>
     <div style="text-align: center">
-      <button type="submit" mat-raised-button color="primary" style="width: 100%" (click)="createRetro(retroName)" [disabled]="!createRetroForm.form.valid">CREATE</button>
+      <button type="submit" mat-raised-button color="primary" style="width: 100%"
+        (click)="createRetro(retroName)"
+        [disabled]="!createRetroForm.form.valid">CREATE</button>
     </div>
   </form>
 </div>

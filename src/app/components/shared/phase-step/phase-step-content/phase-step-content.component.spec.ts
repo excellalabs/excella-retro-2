@@ -1,25 +1,24 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, async } from '@angular/core/testing'
 
-import { PhaseStepContentComponent } from './phase-step-content.component';
+import { PhaseStepContentComponent } from './phase-step-content.component'
 
 describe('PhaseStepContentComponent', () => {
-  let component: PhaseStepContentComponent;
-  let fixture: ComponentFixture<PhaseStepContentComponent>;
+  let component: PhaseStepContentComponent
+  let fixture: ComponentFixture<PhaseStepContentComponent>
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PhaseStepContentComponent ]
-    })
-    .compileComponents();
-  }));
+      declarations: [PhaseStepContentComponent],
+    }).compileComponents()
+  }))
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PhaseStepContentComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    fixture = TestBed.createComponent(PhaseStepContentComponent)
+    component = fixture.componentInstance
+    fixture.detectChanges()
+  })
 
   it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+    expect(component).toBeTruthy()
+  })
+})

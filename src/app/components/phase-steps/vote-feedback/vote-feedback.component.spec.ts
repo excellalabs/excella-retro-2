@@ -1,28 +1,27 @@
+import { DebugElement } from '@angular/core'
 /* tslint:disable:no-unused-variable */
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
+import { ComponentFixture, TestBed, async } from '@angular/core/testing'
+import { By } from '@angular/platform-browser'
 
-import { VoteFeedbackComponent } from './vote-feedback.component';
+import { VoteFeedbackComponent } from './vote-feedback.component'
 
 describe('VoteFeedbackComponent', () => {
-  let component: VoteFeedbackComponent;
-  let fixture: ComponentFixture<VoteFeedbackComponent>;
+  let component: VoteFeedbackComponent
+  let fixture: ComponentFixture<VoteFeedbackComponent>
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ VoteFeedbackComponent ]
-    })
-    .compileComponents();
-  }));
+      declarations: [VoteFeedbackComponent],
+    }).compileComponents()
+  }))
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(VoteFeedbackComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    fixture = TestBed.createComponent(VoteFeedbackComponent)
+    component = fixture.componentInstance
+    fixture.detectChanges()
+  })
 
   it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+    expect(component).toBeTruthy()
+  })
+})

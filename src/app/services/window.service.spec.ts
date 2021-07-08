@@ -1,15 +1,15 @@
-import { TestBed, inject } from '@angular/core/testing';
+import { TestBed, inject } from '@angular/core/testing'
 
-import { WindowService } from './window.service';
+import { WindowService } from './window.service'
 
 describe('WindowService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [WindowService]
-    });
-  });
+      providers: [WindowService],
+    })
+  })
 
   it('should ...', inject([WindowService], (service: WindowService) => {
-    expect(service).toBeTruthy();
-  }));
-});
+    expect(service).toBeTruthy()
+  }))
+})

@@ -2,5 +2,3 @@ FROM duluca/minimal-node-web-server:lts-alpine
 
 WORKDIR /usr/src/app
 COPY dist public
-
-ENV ENFORCE_HTTPS=xProto

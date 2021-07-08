@@ -1,25 +1,24 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, async } from '@angular/core/testing'
 
-import { EndRetroComponent } from './end-retro.component';
+import { EndRetroComponent } from './end-retro.component'
 
 describe('EndRetroComponent', () => {
-  let component: EndRetroComponent;
-  let fixture: ComponentFixture<EndRetroComponent>;
+  let component: EndRetroComponent
+  let fixture: ComponentFixture<EndRetroComponent>
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EndRetroComponent ]
-    })
-    .compileComponents();
-  }));
+      declarations: [EndRetroComponent],
+    }).compileComponents()
+  }))
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(EndRetroComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    fixture = TestBed.createComponent(EndRetroComponent)
+    component = fixture.componentInstance
+    fixture.detectChanges()
+  })
 
   it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+    expect(component).toBeTruthy()
+  })
+})

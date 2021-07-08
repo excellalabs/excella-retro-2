@@ -5,14 +5,19 @@
       <div fxFlex="50%">
         <h3>Groups</h3>
         <mat-form-field *ngIf="allowAdminFunctions" style="width: 85%">
-          <input matInput placeholder="Enter a new group name" [(ngModel)]="newGroupName" name="newGroupNameInput" />
+          <input matInput placeholder="Enter a new group name" [(ngModel)]="newGroupName"
+            name="newGroupNameInput" />
         </mat-form-field>
-        <button mat-icon-button *ngIf="allowAdminFunctions" (click)="createNewGroup(newGroupName)" width="15%">
+        <button mat-icon-button *ngIf="allowAdminFunctions"
+          (click)="createNewGroup(newGroupName)" width="15%">
           <mat-icon>add_box</mat-icon>
         </button>
         <div style="max-height: 60vh; overflow-y: auto">
           <div *ngFor="let groupItem of groups">
-            <group (editingNotifier)="onNotify($event)"[groupName]="groupItem.name" [groupId]="groupItem.$key" [messages]="feedbackMessages" [enabledGroup]="enabledGroup" [allowAdminFunctions]="allowAdminFunctions"></group>
+            <group (editingNotifier)="onNotify($event)" [groupName]="groupItem.name"
+              [groupId]="groupItem.$key" [messages]="feedbackMessages"
+              [enabledGroup]="enabledGroup" [allowAdminFunctions]="allowAdminFunctions">
+            </group>
           </div>
         </div>
       </div>
@@ -20,7 +25,8 @@
         <h3>Ungrouped Feedback</h3>
         <div style="max-height: 70vh; overflow-y: auto">
           <app-feedback-container>
-            <app-feedback-card *ngFor="let feedback of ungroupedFeedbackMessages" [feedback]="feedback" [enabledGroup]="enabledGroup"></app-feedback-card>
+            <app-feedback-card *ngFor="let feedback of ungroupedFeedbackMessages"
+              [feedback]="feedback" [enabledGroup]="enabledGroup"></app-feedback-card>
           </app-feedback-container>
         </div>
       </div>

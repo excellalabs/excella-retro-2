@@ -1,10 +1,15 @@
 <mat-card fxFlex class="feedback-card">
   <div fxLayout>
-    <p fxFlex="90%" style="display: inline-block; white-space: pre-wrap; word-break: keep-all">{{feedback.text}}</p>
-    <button mat-icon-button *ngIf='enabledGroup !== "" && enabledGroup !== undefined && !inGroup' (click)="addToGroup()" fxFlex="10%" style="display: inline-block">
+    <p fxFlex="90%"
+      style="display: inline-block; white-space: pre-wrap; word-break: keep-all">
+      {{feedback.text}}</p>
+    <button mat-icon-button
+      *ngIf='enabledGroup !== "" && enabledGroup !== undefined && !inGroup'
+      (click)="addToGroup()" fxFlex="10%" style="display: inline-block">
       <mat-icon>add</mat-icon>
     </button>
-    <button mat-icon-button *ngIf='enabledGroup === feedback.groupId && inGroup' (click)="removeFromGroup()" fxFlex="10%">
+    <button mat-icon-button *ngIf='enabledGroup === feedback.groupId && inGroup'
+      (click)="removeFromGroup()" fxFlex="10%">
       <mat-icon>remove</mat-icon>
     </button>
   </div>
